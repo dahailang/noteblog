@@ -3,7 +3,8 @@ package com.pursuit.noteblog.entity;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="notebooks")
-public class Notebook extends BaseEntity {
+public class Notebook extends BaseEntity{
+	private static final long serialVersionUID = 1L;
 	private String userId;
 	private String title;
 	private String urlTitle;
@@ -11,6 +12,7 @@ public class Notebook extends BaseEntity {
 	private int seq;// -1
 	private boolean isDeleted;// -1
 	private int usn;// 3
+	
 	public String getUserId() {
 		return userId;
 	}

@@ -1517,6 +1517,7 @@ function getTopInfoSrc (callback) {
 // note.html调用
 // 实始化页面
 function initPage() {
+	//嵌入iframe 时候执行
 	initLeanoteIfrPlugin();
 	if (LEA.topInfo) {
 		getTopInfoSrc(function (src) {

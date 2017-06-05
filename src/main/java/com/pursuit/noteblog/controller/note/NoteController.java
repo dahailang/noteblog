@@ -32,7 +32,6 @@ public class NoteController extends BaseController{
 	}
 	@RequestMapping("/{noteId}")
 	public ModelAndView note(HttpServletRequest request, HttpServletResponse response,Model model,@PathVariable("noteId")String noteId){
-		System.out.println(noteId);
 		model.addAttribute("title", "Leanote, "+getMessage("moto"));
 		User user = (User) request.getAttribute("userInfo");
 		WebResult noteResut = noteService.index(user,noteId);

@@ -147,6 +147,7 @@ public class NoteServiceImpl implements NoteService {
 //			return c.RenderTemplate("note/note.html")
 //		}
 		map.put("noteContent", noteContent);
+		map.put("notebooks", notebooks);
 		return WebResult.ok(map);
 	}
 	
