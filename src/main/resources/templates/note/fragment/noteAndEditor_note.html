@@ -1,0 +1,236 @@
+
+<div id="note" class="read-only-editor" th:fragment="note">
+
+	<!-- 遮罩, 为了resize3Columns用 -->
+	<div id="noteMask" class="note-mask"></div>
+	<!-- for loading -->
+	<div id="noteMaskForLoading" class="note-mask">
+		<!-- z-index: 11 -->
+		<img src="/images/loading-24.gif" /> <br /> loading...
+	</div>
+	<!-- for tips -->
+	<div id="editorMask">
+		<!-- z-index: 10 -->
+		<span th:text="#{noNoteNewNoteTips}">noNoteNewNoteTips</span> <br /> <br />
+		<div id="editorMaskBtns">
+			<a class="note" th:text="#{newNote}">newNote</a> 
+			<a class="markdown" th:text="#{newMarkdownNote}">newMarkdownNote</a>
+		</div>
+		<div id="editorMaskBtnsEmpty" th:text="#{canntNewNoteTips}">canntNewNoteTips</div>
+	</div>
+	<div id="batchMask" class="note-mask">
+		<!-- z-index: 99 -->
+		<div class="batch-ctn" id="batchCtn"></div>
+		<div class="batch-info" >
+			<span th:text="#{notes_selected}">notes selected</span>
+			<p>
+				<i class="fa fa-cog"></i>
+			</p>
+		</div>
+	</div>
+
+	<div id="noteTop">
+		<!-- 左侧放tag, 右侧放按钮, 比如save, info, move, delete -->
+		<div id="tool" class="clearfix">
+
+			<div class="pull-left" id="tag">
+				<div id="tags" style="display: inline-block; line-height: 25px;">
+				</div>
+				<div class="dropdown" style="display: inline-block" id="tagDropdown">
+					<i class="fa fa-bookmark-o"></i> <a class="metro-a dropdown-toggle"
+						data-toggle="dropdown" id="addTagTrigger"
+						style="cursor: text; padding-left: 0"> <span
+						class="add-tag-text" th:text="#{clickAddTag}">clickAddTag</span>
+					</a> <input type="text" id="addTagInput" />
+					<ul class="dropdown-menu" role="menu" id="tagColor">
+						<li role="presentation"><span class="label label-red" th:text="#{red}">red</span></li>
+						<li role="presentation"><span class="label label-blue" th:text="#{blue}">blue</span></li>
+						<li role="presentation"><span class="label label-yellow" th:text="#{yellow}">yellow</span></li> 
+						<li role="presentation"><span class="label label-green" th:text="#{green}">green</span></li>
+					</ul>
+				</div>
+			</div>
+
+			<ul class="pull-right" id="editorTool">
+				<li><a class="ios7-a " id="editBtn" data-toggle="dropdown"
+					title="" th:title="'ctrl/cmd+e '+#{Toggle Modify with Readonly}">
+						<span class="fa"></span>
+				</a></li>
+				<li><a class="ios7-a " id="saveBtn" data-toggle="dropdown"
+					title="" th:title="'ctrl/cmd+s '+#{save}"> <span
+						class="fa fa-save"></span></a></li>
+				<li class="dropdown" id="noteInfoDropdown"><a
+					class="ios7-a dropdown-toggle" data-toggle="dropdown" title=""
+					th:title="#{Information}"> <span class="fa fa-info"></span>
+				</a>
+					<div class="dropdown-menu" id="noteInfo"></div></li>
+				<li class="dropdown" id="attachDropdown"><a
+					class="ios7-a dropdown-toggle" data-toggle="dropdown"
+					id="showAttach" title="" th:title="#{attachments}"> <span
+						class="fa fa-paperclip"></span> <span id="attachNum"></span>
+				</a>
+					<div class="dropdown-menu" id="attachMenu">
+						<ul id="attachList">
+						</ul>
+						<form id="uploadAttach" method="post"
+							action="/attach/UploadAttach" enctype="multipart/form-data">
+							<div id="dropAttach" class="dropzone">
+								<a class="btn btn-success btn-choose-file"> <i
+									class="fa fa-upload"></i> <span th:text="#{Choose_File}">Choose File</span>
+								</a> <a class="btn btn-default" id="downloadAllBtn"> <i
+									class="fa fa-download"></i> <span th:text="#{Download_All}">Download All</span>
+								</a> <input type="file" name="file" multiple="multiple" />
+							</div>
+							<div id="attachUploadMsg"></div>
+						</form>
+					</div></li>
+
+				<li><a class="ios7-a " id="contentHistory"
+					data-toggle="dropdown" title="" th:title="#{history}"> <span
+						class="fa fa-history"></span></a></li>
+				<li><a class="ios7-a " id="tipsBtn" data-toggle="dropdown"
+					title="" th:title="#{editorTips}"> <span class="fa fa-question"></span></a></li>
+			</ul>
+		</div>
+		<div id="noteTitleDiv">
+			<input name="noteTitle" id="noteTitle" value="" placeholder=""
+				th:placeholder="#{unTitled}" tabindex="1" />
+		</div>
+
+		<!-- 只读时 -->
+		<div id="noteReadTop">
+			<h2 id="noteReadTitle"></h2>
+			<div class="clearfix" id="noteReadInfo">
+				<i class="fa fa-bookmark-o"></i> <span id="noteReadTags"></span>
+
+				<!-- 修改时间 -->
+				<i class="fa fa-clock-o"></i>
+				<span  th:text="#{update}" id="noteReadUpdatedTime">update</span>
+
+				<!-- 修改时间 -->
+				<i class="fa fa-clock-o"></i>
+				<span  th:text="#{create}" id="noteReadCreatedTime">create</span>
+			</div>
+		</div>
+	</div>
+
+	<div id="editor" class="read-only">
+		<!-- 编辑器 -->
+		<div id="mceToolbar">
+			<div id="mceToolbarContainer">
+				<div id="popularToolbar" style="position: absolute; right: 30px; left: 0"></div>
+				<a id="moreBtn"> <i class="fa more-fa"></i></a>
+			</div>
+			<!-- 查看信息 -->
+			<div id="infoToolbar" class="info-toolbar invisible">
+				<span class="lang" th:text="#{created}">created</span>: 
+				<span class="created-time"></span> 
+				<span class="lang" th:text="#{updated}">updated</span> :
+				<span class="updated-time"></span>
+			</div>
+		</div>
+		<div class="editorBg"></div>
+		<div id="leanoteNav" class="leanoteNav">
+			<h1>
+				<i class="fa fa-align-justify" title="" th:title="#{nav}"></i> 
+				<span th:text="#{nav}">nav</span>
+			</h1>
+			<div id="leanoteNavContent" class="leanoteNavContent"></div>
+		</div>
+
+		<!-- leaui image drop image to editor-->
+		<form id="upload" method="post" action="/file/uploadImageLeaui"
+			enctype="multipart/form-data" style="margin-top: 5px;">
+			<div id="drop">
+				<span th:text="#{Drop_images_to_here}">Drop images to here</span>
+				<input type="file" name="file" multiple="multiple" style="display: none" />
+			</div>
+			<ul id="uploadMsg">
+			</ul>
+		</form>
+
+		<!-- 由此可以算高度 -->
+		<div id="editorContent" name="editorContent" tabindex="2" /> </div>
+	
+	<div id="mdEditor" class="read-only" >
+		<div class="layout-wrapper-l1">
+			<div class="layout-wrapper-l2">
+				<div class="navbar navbar-default">
+					<div class="navbar-inner" id="wmd-button-bar">
+						<div id="mdInfoToolbar" class="info-toolbar invisible">
+							<span class="lang" th:text="#{created}">created</span>: 
+							<span class="created-time"></span>
+							<span class="lang" th:text="#{updated}">updated</span>: 
+							<span class="updated-time"></span>
+						</div>
+
+						<div class="wmd-button-bar-inner clearfix">
+							<ul class="nav left-buttons">
+								<li class="wmd-button-group1 btn-group"></li>
+							</ul>
+							<ul class="nav left-buttons">
+								<li class="wmd-button-group2 btn-group"></li>
+							</ul>
+							<ul class="nav left-buttons">
+								<li class="wmd-button-group3 btn-group"></li>
+							</ul>
+							<ul class="nav left-buttons">
+								<li class="wmd-button-group4 btn-group"></li>
+							</ul>
+							<!-- 帮助 -->
+							<ul class="nav left-buttons">
+								<li class="wmd-button-group6 btn-group">
+								<li class="wmd-button btn btn-success" id="wmd-help-button"
+									title="" th:title="#{Markdown syntax}"
+									style="left: 0px; display: none;"><span
+									style="display: none; background-position: 0px 0px;"></span><i
+									class="fa fa-question-circle"></i></li>
+								</li>
+							</ul>
+
+						</div>
+					</div>
+					<div class="editorBg"></div>
+				</div>
+				<div class="layout-wrapper-l3">
+					<div id="left-column">
+						<pre id="wmd-input" class="form-control">
+							<div class="editor-content mousetrap" contenteditable="true"></div>
+							<div class="editor-margin"></div>
+						</pre>
+						<!-- v2 markdown lightmode需要 -->
+						<div class="textarea-helper"></div>
+					</div>
+					<div id="right-column">
+						<div class="preview-panel panel-open" id="preview-panel">
+							<div id="mdSplitter2"
+								class="layout-resizer layout-resizer-preview open"
+								style="-webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); touch-action: none;"></div>
+							<div
+								class="layout-toggler layout-toggler-preview btn btn-info open"
+								title="Toggle preview" data-open="1">
+								<i class="fa fa-angle-right"></i>
+							</div>
+							<div class="preview-container">
+								<div id="preview-contents">
+									<div id="wmd-preview" class="preview-content"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="extension-preview-buttons">
+					<div id="leanoteNavMd" class="leanoteNav">
+						<h1>
+							<i class="fa fa-align-justify" title="" th:title="#{nav}"></i>
+							<span th:text="#{nav}">nav</span>
+						</h1>
+						<div id="leanoteNavContentMd"
+							class="leanoteNavContent table-of-contents"></div>
+					</div>
+				</div>
+			</div>
+			<div id="wmd-button-bar" class="hide"></div>
+		</div>
+	</div>	
+</div>

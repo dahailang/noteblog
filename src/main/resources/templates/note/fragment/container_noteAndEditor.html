@@ -1,0 +1,9 @@
+	<div th:fragment="noteAndEditor" id="noteAndEditor" >
+		<div id="noteAndEditorMask">
+			<img src="/images/loading-24.gif" /> <br /> loading...
+		</div>
+		<div th:replace="/note/fragment/noteAndEditor_noteList :: noteList"></div>
+		<div class="noteSplit" id="noteSplitter"></div>
+
+		<div th:replace="/note/fragment/noteAndEditor_note :: note"></div>
+	</div>

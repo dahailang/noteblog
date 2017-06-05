@@ -1,0 +1,36 @@
+<div th:fragment="setThemeDialog" >
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title modalTitle" th:text="#{Theme}">theme</h4>
+			</div>
+			<div class="modal-body">
+				<table id="themeForm">
+					<tr>
+						<td>
+							<label>
+								<img src="/images/slider/all.gif" 	height="100px" /> <br />
+								<input type="radio" name="theme" value="default" /> 
+								<span th:text="#{default}"></span>
+							</label>
+						</td>
+						<td>
+							<label>
+								<img src="/images/slider/all-simple.gif" height="100px" /> <br />
+								<input type="radio" name="theme" value="simple" /> 
+								<span th:text="#{simple}">simple</span>
+							</label>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" th:text="#{close}">close</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

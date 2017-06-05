@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh">
+<div th:replace="/common/fragment :: header"></div>
+<style>
+html, body {
+	height: 100%;
+}
+</style>
+<body id="boxBody">
+
+<section id="box" class="animated fadeInUp">
+	<div>
+		<h1 id="logo"></h1>
+		<div id="boxForm">
+			<div id="boxHeader" th:text="#{register}">Sign up</div>
+			<form>
+				<div class="alert alert-danger" id="loginMsg"></div> 
+				<input id="from" type="hidden" value="" th:value="${from}" />
+				<div class="form-group"> 
+					<label class="control-label" for="email" th:text="#{email}">Email</label>
+					<input type="text" class="form-control" id="email" name="email" /> 
+				</div>
+				<div class="form-group"> 
+					<label class="control-label" for="pwd" th:text="#{password}">Password</label>
+					<input type="password" class="form-control" id="pwd" name="pwd" />
+					<span th:text="#{passwordTips}">The length is at least 6</span>
+				</div>
+				<div class="form-group"> 
+					<label class="control-label" for="pwd2" th:text="#{password2}">Confirm your password</label>
+					<input type="password" class="form-control" id="pwd2" name="pwd2" />
+				</div>
+				
+				<button id="registerBtn" class="btn btn-success" th:text="#{register}">Sign up</button>
+				
+				<div class="line line-dashed"></div>
+				
+				<p class="text-muted text-center"><small  th:text="#{hadAcount}">Already have an account?</small></p>
+				
+				<a id="loginBtn" href="/login" class="btn btn-default btn-block" th:text="#{login}">Sign in</a>
+			</form>		
+		</div>
+    </div>
+</section>
+
+<div id="boxFooter">
+	<p>
+		<a href="/index" th:text="#{home}">Home</a>
+	</p>
+	<p>
+		© <a href="https://leanote.com">Leanote</a>
+	</p>
+</div>
+
+<script src="/js/jquery-1.9.0.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+
+<!-- <script type="text/javascript" th:src="'/js/home/register_'+${locale}+'.js'"></script> -->
+<script th:inline="javascript">
+/*<![CDATA[*/
+$(function() {
+	$("#email").focus();
+	
+	function showMsg(msg, id) {
+		$("#loginMsg").html(msg).show();
+		if(id) {
+			$("#" + id).focus();
+		}
+	}
+	function hideMsg() {
+		$("#loginMsg").hide();
+	}
+	$("#registerBtn").click(function(e){
+		e.preventDefault();
+		var email = $("#email").val();
+		var pwd = $("#pwd").val();
+		var pwd2 = $("#pwd2").val();
+		if(!email) {
+			showMsg("[[#{inputEmail}]]", "email");
+			return;
+		} else {
+			var myreg = /^([a-zA-Z0-9]+[_|\_|\.|\-]?)*[a-zA-Z0-9\-_]+@([a-zA-Z0-9\-]+[_|\_|\.|\-]?)*[a-zA-Z0-9\-]+\.[0-9a-zA-Z]{2,6}$/;
+			if(!myreg.test(email)) {
+				showMsg("[[#{wrongEmail}]]", "email");
+				return;
+			}
+		}
+		if(!pwd) {
+			showMsg("[[#{inputPassword}]]", "pwd");
+			return;
+		} else {
+			var notGoodPassword = [[#{notGoodPassword}]];
+			if(eval([['pwd.length < 6']])) {
+				showMsg(notGoodPassword, "pwd");
+				return;
+			}
+		}
+		if(!pwd2) {
+			showMsg([[#{inputPassword2}]], "pwd2");
+			return;
+		} else {
+			if(eval([['pwd != pwd2']])) {
+				showMsg([[#{confirmPassword}]], "pwd2");
+				return;
+			}
+		}
+		
+		$("#registerBtn").html([[#{ing}]]).addClass("disabled");
+		
+		var iu = "[[${iu}]]";
+		
+		$.post("/auth/doRegister", {email: email, pwd: pwd, iu: iu}, function(e) {
+			$("#registerBtn").html([[#{register}]]).removeClass("disabled");
+			if(e.ok) {
+				$("#registerBtn").html([[#{registerSuccessAndRdirectToNote}]]);
+				var from = $("#from").val() || [[${noteUrl}]] || "/note";
+				location.href = from;
+			} else {
+				showMsg(e.msg, "email");
+			}
+		});
+		
+	});
+});
+	
+/*]]>*/
+</script>
+
+</body>
+</html>
