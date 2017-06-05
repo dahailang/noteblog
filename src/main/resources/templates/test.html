@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<div th:replace="/common/fragment :: header"></div>
+<body> 
+heder
+<script th:inline="javascript">
+var name = "[[#{inputPassword}]]";
+console.log(name);
+</script>
+</body>
+</html>
