@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="has_share_notes")
 public class HasShareNote extends BaseEntity {
+	private static final long serialVersionUID = 1L;
 	private String userId;
 	private String toUserId;
 	private int seq; // 以后还可以用户排序

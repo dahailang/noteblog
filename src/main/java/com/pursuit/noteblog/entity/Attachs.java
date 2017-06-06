@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection="attachs")
 public class Attachs extends BaseEntity {
+	private static final long serialVersionUID = 1L;
 	private String noteId;
 	private String uploadUserId;
 	private String name;

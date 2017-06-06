@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "note_contents")
 public class NoteContent extends BaseEntity {
+	private static final long serialVersionUID = 1L;
 	private String userId;
 	private boolean isBlog;// 为了搜索博客
 	private String content;

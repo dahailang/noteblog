@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection="blog_comments")
 public class BlogComments extends BaseEntity {
+	private static final long serialVersionUID = 1L;
 	private String noteId;
 	private String userId;// UserId回复ToUserId
 	private String content;// 评论内容

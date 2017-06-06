@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="groups")
 public class Groups extends BaseEntity {
+	private static final long serialVersionUID = 1L;
 	public String groupId;// 谁的
 	public String userId;// 所有者Id
 	public String title;// 标题

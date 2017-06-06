@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="notes")
 public class Note extends BaseEntity {
+	private static final long serialVersionUID = 1L;
 	private String userId;
 	private String notebookId;
 	private String title;			// 标题

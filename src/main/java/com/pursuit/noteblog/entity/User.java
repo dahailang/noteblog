@@ -7,17 +7,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="users")
 public class User extends BaseEntity{
 	
-	public Date createdTime;
+	private static final long serialVersionUID = 1L;
+	
 	public String email;
-	public boolean leftIsMin;
-	public int noteListWidth;
-	public int notebookWidth;
+	public String username;
 	public String pwd;
+	
+	
+	public Date createdTime;
+	public boolean leftIsMin;
+	public int noteListWidth=200;
+	public int notebookWidth=200;
 	public String theme;
+	
+	
 	public int thirdType;
 	public String thirdUserId;
 	public String thirdUsername;
-	public String username;
+
 	public String usernameRaw;
 	public boolean verified;
 	public int mdEditorWidth;

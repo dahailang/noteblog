@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="find_pwds")
 public class FindPwd extends BaseEntity {
+	private static final long serialVersionUID = 1L;
 	public String email;
 	public String token;
 	public Date createdTime;

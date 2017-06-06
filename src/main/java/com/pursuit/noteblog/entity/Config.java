@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="configs")
 public class Config extends BaseEntity{
-	
+	private static final long serialVersionUID = 1L;
 	public String key;
 	public String value;
 	public int status; // 0 失效 1 有效

@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection="albums")
 public class Albums extends BaseEntity {
+	private static final long serialVersionUID = 1L;
 	private String userId;
 	private String name;
 	private int type;

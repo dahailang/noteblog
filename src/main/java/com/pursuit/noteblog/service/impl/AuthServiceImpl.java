@@ -8,14 +8,10 @@ import com.pursuit.noteblog.entity.Notebook;
 import com.pursuit.noteblog.entity.User;
 import com.pursuit.noteblog.entity.UserBlog;
 import com.pursuit.noteblog.service.AuthService;
-import com.pursuit.noteblog.service.BlogService;
-import com.pursuit.noteblog.service.ConfigService;
 import com.pursuit.noteblog.service.NotebookService;
-import com.pursuit.noteblog.service.ShareService;
 import com.pursuit.noteblog.service.UserService;
 import com.pursuit.noteblog.util.ConstUtils;
 import com.pursuit.noteblog.web.WebResult;
-import com.pursuit.noteblog.web.conversation.UserLoginStatusService;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -24,12 +20,12 @@ public class AuthServiceImpl implements AuthService {
 	private UserService userService;
 	@Autowired
 	private NotebookService notebookService;
-	@Autowired
-	private ConfigService configService;
-	@Autowired
-	private ShareService shareService;
-	@Autowired
-	private BlogService blogService;
+//	@Autowired
+//	private ConfigService configService;
+//	@Autowired
+//	private ShareService shareService;
+//	@Autowired
+//	private BlogService blogService;
     
 	@Override
 	public String doLogin(String email, String pwd) {
@@ -55,7 +51,6 @@ public class AuthServiceImpl implements AuthService {
     	user.setPwd(pwd);
 		user.setUsername(email);//默认用户名为邮箱
 		User userinfo = userService.save(user);
-		
 		//添加默认笔记本
 		for(String title:ConstUtils.DEFAULT_INIT_NOTEBOOK){
 			Notebook notebook = new Notebook();

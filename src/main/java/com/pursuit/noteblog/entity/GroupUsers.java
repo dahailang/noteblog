@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="group_users")
 public class GroupUsers extends BaseEntity {
+	private static final long serialVersionUID = 1L;
 	public String groupId;
 	public String userId;
 	public Date createdTime;

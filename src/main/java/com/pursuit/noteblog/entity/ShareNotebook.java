@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="share_notebooks")
 public class ShareNotebook extends BaseEntity {
+	private static final long serialVersionUID = 1L;
 	private String userId;
 	private String toUserId;
 	//private String toGroupId       bson.ObjectId `bson:"ToGroupId,omitempty"` // 分享给的用户组
