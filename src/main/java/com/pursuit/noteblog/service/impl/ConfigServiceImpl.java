@@ -18,13 +18,13 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import com.pursuit.noteblog.entity.Config;
+import com.pursuit.noteblog.entity.SystemConfig;
 import com.pursuit.noteblog.enums.SuccessEnum;
 import com.pursuit.noteblog.repository.ConfigRepository;
-import com.pursuit.noteblog.service.ConfigService;
+import com.pursuit.noteblog.service.SystemConfigService;
 import com.pursuit.noteblog.util.ConstUtils;
 @Service
-public class ConfigServiceImpl extends BaseServiceImpl<Config> implements ConfigService{
+public class ConfigServiceImpl extends BaseServiceImpl<SystemConfig> implements SystemConfigService{
 
     private Logger logger = LoggerFactory.getLogger(ConfigServiceImpl.class);
     
@@ -65,9 +65,9 @@ public class ConfigServiceImpl extends BaseServiceImpl<Config> implements Config
             String configKey = entry.getKey();
             String configValue = entry.getValue();
             try {
-            	Config config = configRepository.findByKey(configKey);
+            	SystemConfig config = configRepository.findByKey(configKey);
             	mongoTemplate.updateFirst(new Query(Criteria.where("id").is(config.getId())), new Update().set("key", configKey)
-            			.set("value", configValue), Config.class);
+            			.set("value", configValue), SystemConfig.class);
             } catch (Exception e) {
                 logger.error("key {} value {} update faily" + e.getMessage(), configKey, configValue, e);
                 return SuccessEnum.FAIL;
@@ -77,7 +77,7 @@ public class ConfigServiceImpl extends BaseServiceImpl<Config> implements Config
 	}
 
 	@Override
-	public List<Config> getConfigList(int status) {
+	public List<SystemConfig> getConfigList(int status) {
         try {
             return configRepository.findByStatus(status);
         } catch (Exception e) {
@@ -92,13 +92,13 @@ public class ConfigServiceImpl extends BaseServiceImpl<Config> implements Config
      */
     private Map<String, String> getConfigMap() {
         Map<String, String> configMap = new LinkedHashMap<String, String>();
-        Config config2 = new Config();
+        SystemConfig config2 = new SystemConfig();
         config2.setKey("test1");
         config2.setValue("test1");
         config2.setStatus(1);
         configRepository.save(config2);
-        List<Config> configList = configRepository.findByStatus(1);
-        for (Config config : configList) {
+        List<SystemConfig> configList = configRepository.findByStatus(1);
+        for (SystemConfig config : configList) {
             configMap.put(config.getKey(), config.getValue());
         }
         return configMap;

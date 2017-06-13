@@ -23,8 +23,8 @@
     <mvc:resources mapping="/assets/flash/**" location="/resources/assets/flash/"/>
     -->
 
-    <mvc:interceptors>
-        <!-- 前台验证 -->
+   <!--  <mvc:interceptors>
+        前台验证
         <mvc:interceptor>
             <mvc:mapping path="/admin/app/*"/>
             <mvc:mapping path="/admin/instance/*"/>
@@ -32,7 +32,7 @@
             <mvc:mapping path="/server/*"/>
             <bean class="com.sohu.cache.interceptor.FrontUserLoginInterceptor"/>
         </mvc:interceptor>
-        <!-- 后台管理员验证 -->
+        后台管理员验证
         <mvc:interceptor>
             <mvc:mapping path="/manage/app/*"/>
             <mvc:mapping path="/manage/instance/*"/>
@@ -48,13 +48,13 @@
             <mvc:mapping path="/manage/instanceAlert/*"/>
             <bean class="com.sohu.cache.interceptor.ManageUserLoginInterceptor"/>
         </mvc:interceptor>
-        <!-- 应用和实例权限验证 -->
+        应用和实例权限验证
         <mvc:interceptor>
             <mvc:mapping path="/admin/app/*"/>
             <mvc:mapping path="/admin/instance/*"/>
             <bean class="com.sohu.cache.interceptor.AppAndInstanceAuthorityInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors> -->
 
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="order" value="1"/>
@@ -85,8 +85,5 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <context:component-scan base-package="com.sohu.cache.client.heartbeat,com.sohu.cache.web.controller"/>
-
-
-
+    <!-- <context:component-scan base-package="com.sohu.cache.client.heartbeat,com.sohu.cache.web.controller"/> -->
 </beans>

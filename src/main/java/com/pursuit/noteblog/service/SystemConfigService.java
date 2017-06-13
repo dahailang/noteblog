@@ -3,10 +3,10 @@ package com.pursuit.noteblog.service;
 import java.util.List;
 import java.util.Map;
 
-import com.pursuit.noteblog.entity.Config;
+import com.pursuit.noteblog.entity.SystemConfig;
 import com.pursuit.noteblog.enums.SuccessEnum;
 
-public interface ConfigService {
+public interface SystemConfigService {
 	  /**
      * 加载配置
      */
@@ -24,7 +24,7 @@ public interface ConfigService {
      * @param status
      * @return
      */
-    List<Config> getConfigList(int status);
+    List<SystemConfig> getConfigList(int status);
     
     String getGlobalStringConfig(String key);
     List<String> getGlobalArrayConfig(String key);

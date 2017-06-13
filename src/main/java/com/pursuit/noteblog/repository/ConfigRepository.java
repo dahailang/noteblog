@@ -2,10 +2,11 @@ package com.pursuit.noteblog.repository;
 
 import java.util.List;
 
-import com.pursuit.noteblog.entity.Config;
+import com.pursuit.noteblog.entity.SystemConfig;
 
-public interface ConfigRepository extends BaseRepository<Config> {
-    public Config findByKey(String key);
-    public Config findByValue(String value);
-    public List<Config> findByStatus(int status);
+
+public interface ConfigRepository extends BaseRepository<SystemConfig> {
+    public SystemConfig findByKey(String key);
+    public SystemConfig findByValue(String value);
+    public List<SystemConfig> findByStatus(int status);
 }
