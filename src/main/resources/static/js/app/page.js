@@ -45,6 +45,7 @@ editorMode.prototype.init = function() {
 	this.changeMode(this.isWritingMode);
 	var self = this;
 	$(".toggle-editor-mode").click(function(e) {
+		//阻止默认动作
 		e.preventDefault();
 		saveBookmark();
 		var $a = $(this).find("a");
@@ -673,7 +674,7 @@ function hideMask () {
 
 //--------------
 // 调用之
-// $(function() {
+$(function() {
 	LEA.s3 = new Date();
 	console.log('initing...');
 	
@@ -883,7 +884,7 @@ function hideMask () {
 	
 	// 手机端?
 	Mobile.init();
-//});
+});
 
 //------------
 // pjax
