@@ -19,7 +19,7 @@
 <!-- mdeditor -->
 <link href="../../static/md/themes/default.css" th:href="@{/md/themes/default.css}" rel="stylesheet" />
 <!-- context-menu -->
-<link rel="stylesheet" href="../../static/js/contextmenu/css/contextmenu-min.css"  th:href="@{/js/contextmenu/css/contextmenu-min.css}" type="text/css" />
+<link rel="stylesheet" href="../../static/js/contextmenu/css/contextmenu.css"  th:href="@{/js/contextmenu/css/contextmenu-min.css}" type="text/css" />
 <!-- 主题配置css -->
 <link rel="stylesheet" href="../../static/css/theme/writting-overwrite.css" th:href="@{/css/theme/writting-overwrite.css}" type="text/css" id="themeLink" />
 <script>
@@ -30,8 +30,7 @@ function log(o) {
 </script>
 </head>
 
-<body class="leanote-plugin lang-zh_CN"
-	th:class="'leanote-plugin lang-'+${locale}">
+<body class="leanote-plugin lang-zh_CN"  th:class="'leanote-plugin lang-'+${locale}">
 	<div id="page">
 		<div id="pageInner">
 			<!-- 主内容 header -->
@@ -796,6 +795,7 @@ function log(o) {
 		<script src="../../static/js/app/notebook.js"></script>
 		<script src="../../static/js/app/share.js"></script>
 		<script src="../../static/js/app-new/page-new.js?t=1"></script>
+		<!-- <script src="../../static/js/app/page.js?t=1"></script> -->
 
 		<script th:inline="javascript">
 	/*<![CDATA[*/
