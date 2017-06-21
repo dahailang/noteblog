@@ -28,7 +28,7 @@ public class NoteController extends BaseController{
 		User user = (User) request.getAttribute("userInfo");
 		WebResult noteResut = noteService.index(user,noteId);
 		model.addAllAttributes(noteResut.getAttributes());
-		return new ModelAndView("/note/note");
+		return new ModelAndView("/note/note-new");
 	}
 	@RequestMapping("/{noteId}")
 	public ModelAndView note(HttpServletRequest request, HttpServletResponse response,Model model,@PathVariable("noteId")String noteId){
@@ -36,6 +36,6 @@ public class NoteController extends BaseController{
 		User user = (User) request.getAttribute("userInfo");
 		WebResult noteResut = noteService.index(user,noteId);
 		model.addAllAttributes(noteResut.getAttributes());
-		return new ModelAndView("/note/note");
+		return new ModelAndView("/note/note-new");
 	}
 }

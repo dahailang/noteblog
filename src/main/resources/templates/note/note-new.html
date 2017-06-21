@@ -10,18 +10,18 @@
 <meta name="keywords" content="leanote,leanote.com,蚂蚁笔记" />
 <meta name="description" content="Leanote, 蚂蚁笔记" />
 <title th:text="${title}">title</title>
-<link href="../../static/css/bootstrap-min.css" th:href="@{/css/bootstrap-min.css}"   rel="stylesheet" />
+<link href="/static/css/bootstrap-min.css" th:href="@{/css/bootstrap-min.css}"   rel="stylesheet" />
 <!-- 先加载, 没有样式, 宽度不定 -->
-<link href="../../static/css/tinymce/skin.min.css" th:href="@{/css/tinymce/skin.min.css}" rel="stylesheet"/>
+<link href="/static/css/tinymce/skin.min.css" th:href="@{/css/tinymce/skin.min.css}" rel="stylesheet"/>
 <!-- leanote css -->
-<link href="../../static/css/font-awesome-4.2.0/css/font-awesome-min.css" th:href="@{/css/font-awesome-4.2.0/css/font-awesome-min.css}" rel="stylesheet" />
-<link href="../../static/css/zTreeStyle/zTreeStyle-min.css" th:href="@{/css/zTreeStyle/zTreeStyle-min.css}" rel="stylesheet" />
+<link href="/static/css/font-awesome-4.2.0/css/font-awesome-min.css" th:href="@{/css/font-awesome-4.2.0/css/font-awesome-min.css}" rel="stylesheet" />
+<link href="/static/css/zTreeStyle/zTreeStyle-min.css" th:href="@{/css/zTreeStyle/zTreeStyle-min.css}" rel="stylesheet" />
 <!-- mdeditor -->
-<link href="../../static/md/themes/default.css" th:href="@{/md/themes/default.css}" rel="stylesheet" />
+<link href="/static/md/themes/default.css" th:href="@{/md/themes/default.css}" rel="stylesheet" />
 <!-- context-menu -->
-<link rel="stylesheet" href="../../static/js/contextmenu/css/contextmenu.css"  th:href="@{/js/contextmenu/css/contextmenu-min.css}" type="text/css" />
+<link rel="stylesheet" href="/static/js/contextmenu/css/contextmenu.css"  th:href="@{/js/contextmenu/css/contextmenu-min.css}" type="text/css" />
 <!-- 主题配置css -->
-<link rel="stylesheet" href="../../static/css/theme/writting-overwrite.css" th:href="@{/css/theme/writting-overwrite.css}" type="text/css" id="themeLink" />
+<link rel="stylesheet" href="/static/css/theme/writting-overwrite.css" th:href="@{/css/theme/writting-overwrite.css}" type="text/css" id="themeLink" />
 <script>
 function log(o) {
 	//非开发模式 要注释掉
@@ -89,13 +89,13 @@ function log(o) {
 							<!-- 头像图片 -->
 							<img id="myAvatar"  alt="" th:alt="${userInfo.username}" th:title="${userInfo.username}" title=""
 								th:src="  ${userInfo.logo==null?'':userInfo.logo}+'/images/blog/default_avatar.png'"
-								src="../../static/images/blog/default_avatar.png"/>
+								src="/static/images/blog/default_avatar.png"/>
 							<span class="username" th:text="${userInfo.username}"> </span> <i
 							class="fa fa-angle-down"></i>
 						</a>
 						<ul class="dropdown-menu li-a" role="menu">
 							<li role="presentation">
-								<a href="../../static/member" target="_blank">
+								<a href="/static/member" target="_blank">
 									<i class="fa fa-user"></i><span th:text="#{memberCenter}"></span>
 								</a>
 							</li>
@@ -105,7 +105,7 @@ function log(o) {
 							</a></li>
 
 							<li role="presentation" class="divider"></li>
-							<li role="presentation"><a href="../../static/member/blog/index"
+							<li role="presentation"><a href="/static/member/blog/index"
 								target="_blank"> <i class="fa fa-bold"></i> 
 								<span th:text="#{blogSet}"></span>
 							</a></li>
@@ -158,7 +158,7 @@ function log(o) {
 
 			<div id="mainContainer" class="clearfix">
 				<div id="mainMask">
-					<img src="../../static/images/loading-30.gif" /> <br /> <br /> loading...
+					<img src="/static/images/loading-30.gif" th:src="@{/images/loading-30.gif}"/> <br /> <br /> loading...
 				</div>
 				<!-- 左侧导航栏 -->
 				<div id="leftNotebook" th:fragment="leftNotebook"  style="width: 170px;">
@@ -233,7 +233,7 @@ function log(o) {
 
 				<div th:fragment="noteAndEditor" id="noteAndEditor" >
 					<div id="noteAndEditorMask">
-						<img src="../../static/images/loading-24.gif" /> <br /> loading...
+						<img src="/static/images/loading-24.gif" th:src="@{/images/loading-24.gif}"/> <br /> loading...
 					</div>
 					
 					<div id="noteList" th:fragment="noteList">
@@ -336,7 +336,7 @@ function log(o) {
 						<!-- for loading -->
 						<div id="noteMaskForLoading" class="note-mask">
 							<!-- z-index: 11 -->
-							<img src="../../static/images/loading-24.gif" /> <br /> loading...
+							<img src="/static/images/loading-24.gif" th:src="@{/images/loading-24.gif}"/> <br /> loading...
 						</div>
 						<!-- for tips -->
 						<div id="editorMask">
@@ -706,14 +706,14 @@ function log(o) {
 									<tr>
 										<td>
 											<label>
-												<img src="../../static/images/slider/all.gif" th:src="@{/images/slider/all.gif}"	height="100px" /> <br />
+												<img src="/static/images/slider/all.gif" th:src="@{/images/slider/all.gif}"	height="100px" /> <br />
 												<input type="radio" name="theme" value="default" /> 
 												<span th:text="#{default}"></span>
 											</label>
 										</td>
 										<td>
 											<label>
-												<img src="../../static/images/slider/all-simple.gif"  th:src="@{/images/slider/all-simple.gif}" height="100px" /> <br />
+												<img src="/static/images/slider/all-simple.gif"  th:src="@{/images/slider/all-simple.gif}" height="100px" /> <br />
 												<input type="radio" name="theme" value="simple" /> 
 												<span th:text="#{simple}">simple</span>
 											</label>
@@ -742,7 +742,14 @@ function log(o) {
 		</div>
 		<script th:inline="javascript">
 	/*<![CDATA[*/
-	var LEA = {sPath: '../../static/'};
+	//var LEA = {sPath: '/static/'};
+	var LEA = {sPath: ''};
+	try{
+		LEA.locale = [[${locale}]];
+	} catch(e) {
+		LEA.sPath ='/static/';
+	}
+	
 	//LEA.locale = [[${locale}]];
 	//var UrlPrefix = [[${siteUrl}]];
 	//var UserInfo = [[${userInfo}]];
@@ -761,9 +768,8 @@ function log(o) {
 	//var tinyMCEPreInit = {base: '/tinymce', suffix: '.min'};
 	
 	
-	
-
-	var UserInfo = {"UserId":"591d3d9ca484cb07d8000024","Email":"testu@163.com","Verified":false,"Username":"testu@163.com","UsernameRaw":"","CreatedTime":"2017-05-18T14:22:20.358+08:00","Logo":"../../static/images/blog/default_avatar.png","Theme":"","NotebookWidth":200,"NoteListWidth":200,"MdEditorWidth":0,"LeftIsMin":false,"ThirdUserId":"","ThirdUsername":"","ThirdType":0,"FromUserId":"","Usn":5,"FullSyncBefore":"0001-01-01T00:00:00Z","BlogUrl":"/blog/testu@163.com","PostUrl":"/blog/post/testu@163.com"};
+	var UrlPrefix = 'http:\/\/localhost:9000';
+	var UserInfo = {"UserId":"591d3d9ca484cb07d8000024","Email":"testu@163.com","Verified":false,"Username":"testu@163.com","UsernameRaw":"","CreatedTime":"2017-05-18T14:22:20.358+08:00","Logo":"/static/images/blog/default_avatar.png","Theme":"","NotebookWidth":200,"NoteListWidth":200,"MdEditorWidth":0,"LeftIsMin":false,"ThirdUserId":"","ThirdUsername":"","ThirdType":0,"FromUserId":"","Usn":5,"FullSyncBefore":"0001-01-01T00:00:00Z","BlogUrl":"/blog/testu@163.com","PostUrl":"/blog/post/testu@163.com"};
 	var notebooks = [{"NotebookId":"591d3d9ca484cb07d8000025","UserId":"591d3d9ca484cb07d8000024","ParentNotebookId":"","Seq":-1,"Title":"life","UrlTitle":"","NumberNotes":1,"IsTrash":false,"IsBlog":false,"CreatedTime":"0001-01-01T00:00:00Z","UpdatedTime":"0001-01-01T00:00:00Z","Usn":0,"IsDeleted":false,"Subs":[]},{"NotebookId":"591d3d9ca484cb07d8000026","UserId":"591d3d9ca484cb07d8000024","ParentNotebookId":"","Seq":-1,"Title":"study","UrlTitle":"","NumberNotes":0,"IsTrash":false,"IsBlog":false,"CreatedTime":"0001-01-01T00:00:00Z","UpdatedTime":"0001-01-01T00:00:00Z","Usn":0,"IsDeleted":false,"Subs":[]},{"NotebookId":"591d3d9ca484cb07d8000027","UserId":"591d3d9ca484cb07d8000024","ParentNotebookId":"","Seq":-1,"Title":"work","UrlTitle":"","NumberNotes":1,"IsTrash":false,"IsBlog":false,"CreatedTime":"0001-01-01T00:00:00Z","UpdatedTime":"0001-01-01T00:00:00Z","Usn":0,"IsDeleted":false,"Subs":[]}];
 	// 得到共享给我的笔记本
 	var shareNotebooks = null;
@@ -780,27 +786,27 @@ function log(o) {
 	var GlobalConfigs = {"uploadAttachSize":10,"uploadAvatarSize":1,"uploadBlogLogoSize":1,"uploadImageSize":1};
 	/*]]>*/
 	</script>
-		<script src="../../static/js/i18n/msg.en_US.js" th:src="'/js/i18n/msg.'+${locale}+'.js'"></script>
-		<script src="../../static/js/jquery-1.9.0.min.js"></script>
-		<script src="../../static/js/jquery.ztree.all-3.5.js"></script>
-		<script src="../../static/js/object_id.js"></script>
-		<script src="../../static/tinymce/tinymce.js"></script>
-		<script src="../../static/libs/ace/ace.js"></script>
-		<script src="../../static/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js"></script>
-		<script src="../../static/js/contextmenu/jquery.contextmenu.js"></script>
-		<script src="../../static/js/common.js"></script>
-		<script src="../../static/js/bootstrap-min.js"></script>
-		<script src="../../static/js/app/note.js"></script>
-		<script src="../../static/js/app/tag.js"></script>
-		<script src="../../static/js/app/notebook.js"></script>
-		<script src="../../static/js/app/share.js"></script>
-		<script src="../../static/js/app-new/page-new.js?t=1"></script>
-		<!-- <script src="../../static/js/app/page.js?t=1"></script> -->
+		<script src="/static/js/i18n/msg.en_US.js"   th:src="'/js/i18n/msg.'+${locale}+'.js'"></script>
+		<script src="/static/js/jquery-1.9.0.min.js" th:src="@{/js/jquery-1.9.0.min.js}"></script>
+		<script src="/static/js/jquery.ztree.all-3.5.js" th:src="@{/js/jquery.ztree.all-3.5.js}"></script>
+		<script src="/static/js/object_id.js" th:src="@{/js/object_id.js}"></script>
+		<script src="/static/tinymce/tinymce.js" th:src="@{/tinymce/tinymce.js}"></script>
+		<script src="/static/libs/ace/ace.js" th:src="@{/libs/ace/ace.js}"></script>
+		<script src="/static/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js" th:src="@{/js/jQuery-slimScroll-1.3.0/jquery.slimscroll.js}"></script>
+		<script src="/static/js/contextmenu/jquery.contextmenu.js" th:src="@{/js/contextmenu/jquery.contextmenu.js}"></script>
+		<script src="/static/js/common.js" th:src="@{/js/common.js}" ></script>
+		<script src="/static/js/bootstrap-min.js"  th:src="@{/js/bootstrap-min.js}"></script>
+		<script src="/static/js/app/note.js" th:src="@{/js/app/note.js}"></script>
+		<script src="/static/js/app/tag.js" th:src="@{/js/app/tag.js}"></script>
+		<script src="/static/js/app/notebook.js" th:src="@{/js/app/notebook.js}"></script>
+		<script src="/static/js/app/share.js" th:src="@{/js/app/share.js}"></script>
+		<script src="/static/js/app-new/page-new.js?t=1" th:src="@{/js/app-new/page-new.js?t=1}"></script>
+		<!-- <script src="/static/js/app/page.js?t=1"></script> -->
 
 		<script th:inline="javascript">
 	/*<![CDATA[*/
 	
-	//initPage();
+	initPage();
 	// 当tinymce.dev.js时, 请注释require
 	window.require = {
 	    baseUrl: '/',
@@ -810,14 +816,14 @@ function log(o) {
 	
 	<script th:inline="javascript">
 	$(document).ready(function(){
-		hideMask();
+		//hideMask();
 	});
 	
 	</script>
 	
-	<!-- <script src="../../static/js/require.js"></script>
-	<script src="../../static/md/main-v2.min.js"></script>
-	<script src="../../static/js/plugins/main.js"></script> -->
+	<script src="/static/js/require.js" th:src="@{/js/require.js}"></script>
+	<script src="/static/md/main-v2.min.js"  th:src="@{/md/main-v2.min.js}"></script>
+	<script src="/static/js/plugins/main.js"  th:src="@{/js/plugins/main.js}"></script>
 
 	</div>
 </body>
