@@ -11,6 +11,7 @@ public class NoteblogApplicationTests {
 
 	@Test
 	public void usertest() {
+		new Thread(){ public void run(){ System.out.println("test");} }.start();
 	}
 
 }

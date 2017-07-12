@@ -27,3 +27,24 @@ LOCK TABLES `tb_content` WRITE;
 INSERT INTO `tb_content` VALUES (28,89,'标题2','标题3','标题1','http://www.jd.com','http://192.168.128.128:8080/group1/M00/00/00/wKiAgFY-FTqAGIxLAAov-qfdCPQ072.png','http://192.168.128.128:8080/group1/M00/00/00/wKiAgFY-Fb6Aeu-MAAE8I3uYZpQ989.jpg','标题1',NULL,'2016-07-08 21:54:52'),(29,89,'ad2','ad2','ad2','http://www.baidu.com','http://192.168.128.128:8080/group1/M00/00/00/wKiAgFY-FfWAPWr9AAI1uIcWLf0213.jpg','http://192.168.128.128:8080/group1/M00/00/00/wKiAgFY-Ff2ANeMFAATGV4DTU9g335.jpg','ad2',NULL,'2016-07-08 21:55:44'),(30,89,'ad32','ad32','ad311','http://www.sina.com.cn','http://192.168.128.128:8080/group1/M00/00/00/wKiAgFY-FhaANoJ2AAG8JA4HWDM570.jpg','http://192.168.128.128:8080/group1/M00/00/00/wKiAgFY-FhyAKXKbAAE8I3uYZpQ991.jpg','这是一个非常大的文章',NULL,'2016-07-08 22:11:48'),(31,89,'22123方式','2131','1231从','1232','http://192.168.128.128:8080/group1/M00/00/00/wKiAgFeAkpSAH2ogAATGV4DTU9g198.jpg','','1232','2016-07-09 20:47:43','2016-07-09 20:47:43'),(32,89,'12313','12','1发','1212','http://192.168.128.128:8080/group1/M00/00/00/wKiAgFeAkt6AQRxJAAG8JA4HWDM932.jpg','','123','2016-07-09 20:48:57','2016-07-09 20:48:57'),(33,90,'123123','121','1水电费','222','http://192.168.128.128:8080/group1/M00/00/00/wKiAgFeAkxaAYUqKAATGV4DTU9g558.jpg','','如法v','2016-07-09 20:49:45','2016-07-09 20:49:45'),(34,90,'123123','121','1水电费','222','http://192.168.128.128:8080/group1/M00/00/00/wKiAgFeAkxaAYUqKAATGV4DTU9g558.jpg','','如法v','2016-07-09 20:58:40','2016-07-09 20:58:40');
 /*!40000 ALTER TABLE `tb_content` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+
+
+
+
+create table hrmanager.hr_admin (
+id     int(6) zerofill primary key auto_increment, /** zerofill 不满6位0填充；primary主键--非空，唯一 ；auto_increment 自增长**/
+username varchar(30) unique, /** unique 对null 不起作用 **/
+password varchar(100)/** 用户密码 **/
+);
+
+create table hrmanager.t_employee (
+id     int(6) zerofill primary key auto_increment, 
+username varchar(30) unique, /** unique 对null 不起作用 **/
+dept_id  int not null 
+);
+create table hrmanager.hr_dept(
+id     int(6) zerofill primary key auto_increment, /** zerofill 不满6位0填充；primary主键--非空，唯一 ；auto_increment 自增长**/
+deptname varchar(30)  /** 部门名称  **/
+);

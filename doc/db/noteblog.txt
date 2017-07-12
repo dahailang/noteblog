@@ -33,7 +33,7 @@ UNLOCK TABLES;
 
 
 CREATE TABLE `users` (
-  `id` varchar(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(40) NOT NULL AUTO_INCREMENT,
   `category_id` bigint(20) NOT NULL COMMENT '内容类目ID',
   `title` varchar(200) DEFAULT NULL COMMENT '内容标题',
   `sub_title` varchar(100) DEFAULT NULL COMMENT '子标题',
@@ -49,6 +49,18 @@ CREATE TABLE `users` (
   KEY `updated` (`updated`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE `user` (
+	`uid` varchar(40) NOT NULL ,
+	`email`  varchar(255) NOT NULL COMMENT '邮箱'  ,
+	`password`  varchar(255) NOT NULL COMMENT '密码' ,
+	`nickname`  varchar(255) NOT NULL COMMENT '昵称' ,
+	`createtime`  datetime NOT NULL COMMENT '创建时间' ,
+	`type`  varchar(255)  DEFAULT 'USER' COMMENT '用户类型 user admin' ,
+	`avatar`  varchar(255) NOT NULL COMMENT '用户头像' ,
+	`status`  varchar(255) NOT NULL COMMENT '用户状态' ,
+	PRIMARY KEY (`uid`)
+);
 
 
 
