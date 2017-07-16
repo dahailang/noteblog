@@ -2,9 +2,6 @@ package com.pursuit.noteblog.enums;
 
 /**
  * 成功失败状态
- * 
- * @author leifu
- * @Time 2014年10月16日
  */
 public enum SuccessEnum {
     SUCCESS(1),

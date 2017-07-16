@@ -1,8 +1,5 @@
 package com.pursuit.noteblog.entity;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection="configs")
 public class SystemConfig extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 	public String key;

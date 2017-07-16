@@ -36,7 +36,7 @@ public class BaseController {
      * 是否登录
      */
     public boolean hasLogin(HttpServletRequest request) {
-    	return getUserInfo(request).getId()!=null;
+    	return getUserInfo(request).getUid()!=null;
     }
     
     /**

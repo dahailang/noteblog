@@ -31,7 +31,7 @@ public class AuthController extends BaseController{
     	User user = new User();
     	
     	user.setEmail(email.toLowerCase());//转为小写存储
-    	user.setPwd(pwd);
+    	user.setPassword(pwd);
     	WebResult registerResult = authService.register(email,pwd, fromUserId);
     	if(!registerResult.isOk()){
     		return registerResult;

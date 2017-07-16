@@ -19,7 +19,6 @@ import com.pursuit.noteblog.enums.SuccessEnum;
 import com.pursuit.noteblog.service.NoteService;
 import com.pursuit.noteblog.service.NotebookService;
 import com.pursuit.noteblog.web.WebResult;
-@Service
 public class NoteServiceImpl implements NoteService {
 	@Autowired
 	NotebookService notebookService;

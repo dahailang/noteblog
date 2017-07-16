@@ -2,13 +2,10 @@ package com.pursuit.noteblog.entity;
 
 import java.util.Date;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 /**
  * @author wangjn_bj
  * @desc: 与note id 一样
  */
-@Document(collection = "note_tags")
 public class NoteTags {
 	private String userId;// 谁的
 	private String tag; // UserId, Tag是唯一索引

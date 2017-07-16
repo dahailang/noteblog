@@ -1,8 +1,5 @@
 package com.pursuit.noteblog.entity;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection="user_bolgs")
 public class UserBlog extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	private String userId;

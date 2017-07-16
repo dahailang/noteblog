@@ -15,7 +15,6 @@ import com.pursuit.noteblog.entity.UserBlog;
 import com.pursuit.noteblog.enums.SuccessEnum;
 import com.pursuit.noteblog.service.BlogService;
 
-@Service
 public class BlogServiceImpl implements BlogService {
 	
 	@Autowired

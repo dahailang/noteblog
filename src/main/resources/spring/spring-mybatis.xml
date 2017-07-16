@@ -22,7 +22,7 @@
         <property name="preferredTestQuery" value="${jdbc.validationQuery}"/>
     </bean>
 
-    <bean id="mysqlSessionFactory" class="com.sohu.cache.app.AliasesResourceSqlSessionFactoryBean">
+    <bean id="mysqlSessionFactory" class="com.pursuit.noteblog.AliasesResourceSqlSessionFactoryBean">
         <property name="dataSource" ref="noteBlogDB"/>
         <!-- mybatis配置文件的位置 -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>

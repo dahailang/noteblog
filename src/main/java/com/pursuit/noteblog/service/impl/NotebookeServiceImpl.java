@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.pursuit.noteblog.entity.Notebook;
 import com.pursuit.noteblog.repository.NotebookRepository;
 import com.pursuit.noteblog.service.NotebookService;
-@Service
 public class NotebookeServiceImpl implements NotebookService {
 	@Autowired
 	NotebookRepository notebookRepository;

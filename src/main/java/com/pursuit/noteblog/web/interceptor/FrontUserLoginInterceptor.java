@@ -37,7 +37,7 @@ public class FrontUserLoginInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
         request.setAttribute("userInfo", user);
-        request.setAttribute("isAdmin", user.getUsername()==ConstUtils.ADMIN_USERNAME);
+        request.setAttribute("isAdmin", user.getNickname()==ConstUtils.ADMIN_USERNAME);
         return true;
     }
 

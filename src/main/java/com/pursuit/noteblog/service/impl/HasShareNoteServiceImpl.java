@@ -10,7 +10,6 @@ import com.pursuit.noteblog.enums.SuccessEnum;
 import com.pursuit.noteblog.repository.HasShareNotesRepository;
 import com.pursuit.noteblog.service.HasShareNoteService;
 
-@Service
 public class HasShareNoteServiceImpl implements HasShareNoteService {
 	@Autowired
 	HasShareNotesRepository hasShareNotesRepository;

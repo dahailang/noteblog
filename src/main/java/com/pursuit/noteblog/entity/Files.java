@@ -2,9 +2,6 @@ package com.pursuit.noteblog.entity;
 
 import java.util.Date;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection="files")
 public class Files {
 	public String fileId;
 	public String userId;

@@ -2,9 +2,6 @@ package com.pursuit.noteblog.entity;
 
 import java.util.Date;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection="blog_singles")
 public class BlogSingles extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	private String noteId;

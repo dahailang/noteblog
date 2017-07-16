@@ -16,7 +16,6 @@ import com.pursuit.noteblog.entity.ShareNotes;
 import com.pursuit.noteblog.enums.SuccessEnum;
 import com.pursuit.noteblog.service.HasShareNoteService;
 import com.pursuit.noteblog.service.ShareService;
-@Service
 public class ShareServiceImpl implements ShareService {
 	@Autowired
 	HasShareNoteService hasShareNoteService;

@@ -2,13 +2,6 @@ package com.pursuit.noteblog.entity;
 
 import java.util.Date;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-/**
- * @author wangjn_bj
- * @desc:附件
- */
-@Document(collection="attachs")
 public class Attachs extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	private String noteId;

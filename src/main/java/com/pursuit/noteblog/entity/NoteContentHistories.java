@@ -1,16 +1,13 @@
 package com.pursuit.noteblog.entity;
 
 import java.util.Date;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 
 /**
  * @author wangjn_bj
  * @desc:id 和note id 共享
  */
-@Document(collection="note_content_histories")
 public class NoteContentHistories{
-	@Id
 	private String noteId;
 	private String userId;
 	private EachHistory[] histories;
