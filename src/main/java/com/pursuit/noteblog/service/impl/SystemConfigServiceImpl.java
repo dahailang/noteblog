@@ -1,6 +1,5 @@
 package com.pursuit.noteblog.service.impl;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,22 +12,18 @@ import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Service;
 
+import com.pursuit.noteblog.dao.SystemConfigDao;
 import com.pursuit.noteblog.entity.SystemConfig;
 import com.pursuit.noteblog.enums.SuccessEnum;
-import com.pursuit.noteblog.repository.ConfigRepository;
 import com.pursuit.noteblog.service.SystemConfigService;
 import com.pursuit.noteblog.util.ConstUtils;
-public class ConfigServiceImpl extends BaseServiceImpl<SystemConfig> implements SystemConfigService{
+public class SystemConfigServiceImpl  implements SystemConfigService{
 
-    private Logger logger = LoggerFactory.getLogger(ConfigServiceImpl.class);
+    private Logger logger = LoggerFactory.getLogger(SystemConfigServiceImpl.class);
     
     @Autowired
-    private ConfigRepository configRepository;
+    private SystemConfigDao systemConfigDao;
     @PostConstruct  //初始化方法的注解方式  等同:init-method=init  
     public void init() {
         reloadSystemConfig();
@@ -64,9 +59,7 @@ public class ConfigServiceImpl extends BaseServiceImpl<SystemConfig> implements 
             String configKey = entry.getKey();
             String configValue = entry.getValue();
             try {
-            	SystemConfig config = configRepository.findByKey(configKey);
-            	mongoTemplate.updateFirst(new Query(Criteria.where("id").is(config.getId())), new Update().set("key", configKey)
-            			.set("value", configValue), SystemConfig.class);
+            	systemConfigDao.update(configKey, configValue);
             } catch (Exception e) {
                 logger.error("key {} value {} update faily" + e.getMessage(), configKey, configValue, e);
                 return SuccessEnum.FAIL;
@@ -74,34 +67,26 @@ public class ConfigServiceImpl extends BaseServiceImpl<SystemConfig> implements 
         }
         return SuccessEnum.SUCCESS;
 	}
-
-	@Override
-	public List<SystemConfig> getConfigList(int status) {
-        try {
-            return configRepository.findByStatus(status);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            return Collections.emptyList();
-        }
-	}
-	
 	
     /**
      * 获取所有配置的key-value
      */
     private Map<String, String> getConfigMap() {
         Map<String, String> configMap = new LinkedHashMap<String, String>();
-        SystemConfig config2 = new SystemConfig();
-        config2.setKey("test1");
-        config2.setValue("test1");
-        config2.setStatus(1);
-        configRepository.save(config2);
-        List<SystemConfig> configList = configRepository.findByStatus(1);
+        List<SystemConfig> configList = systemConfigDao.getALLConfigByStatus(1);
         for (SystemConfig config : configList) {
-            configMap.put(config.getKey(), config.getValue());
+            configMap.put(config.getConfigKey(), config.getConfigValue());
         }
         return configMap;
     }
+    @Override
+    public List<SystemConfig> getConfigList(int status) {
+    	return systemConfigDao.getALLConfigByStatus(status);
+    }
+    
+    
+    
+    
 //	this.GlobalAllConfigs = map[string]interface{}{}
 //	this.GlobalStringConfigs = map[string]string{}
 //	this.GlobalArrayConfigs = map[string][]string{}
@@ -127,5 +112,4 @@ public class ConfigServiceImpl extends BaseServiceImpl<SystemConfig> implements 
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 }

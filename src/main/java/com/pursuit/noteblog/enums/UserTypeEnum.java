@@ -18,7 +18,7 @@ public enum UserTypeEnum {
         this.value = value;
     }
 
-    public Integer value() {
+    public int getUserType() {
         return value;
     }
 

@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.pursuit.noteblog.dao.UserDao;
 import com.pursuit.noteblog.entity.User;
+import com.pursuit.noteblog.enums.UserStatusEnum;
+import com.pursuit.noteblog.enums.UserTypeEnum;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class NoteblogApplicationTests {
@@ -24,8 +26,8 @@ public class NoteblogApplicationTests {
 		user.setCreatetime(new Date());
 		user.setEmail("12131");
 		user.setPassword("212");
-		user.setStatus("12");
-		user.setType("12");
+		user.setStatus(UserStatusEnum.USER_RUNNING.getUserStatus());
+		user.setType(UserTypeEnum.REGULAR_USER.getUserType());
 		user.setNickname("jingnan");
 		userDao.addUser(user);
 	}
@@ -37,8 +39,8 @@ public class NoteblogApplicationTests {
 		user.setCreatetime(new Date());
 		user.setEmail("12131");
 		user.setPassword("212");
-		user.setStatus("12");
-		user.setType("12");
+		user.setStatus(UserStatusEnum.USER_RUNNING.getUserStatus());
+		user.setType(UserTypeEnum.REGULAR_USER.getUserType());
 		user.setNickname("jingnan");
 		userDao.deleteUser(user);
 	}

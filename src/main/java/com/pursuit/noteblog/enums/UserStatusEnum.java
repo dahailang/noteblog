@@ -10,7 +10,9 @@ public enum UserStatusEnum {
     private UserStatusEnum(int value) {
 		this.value = value;
 	}
-    public int
+    public int getUserStatus(){
+    	return value;
+    }
 
 	
 	

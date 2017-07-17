@@ -11,7 +11,7 @@ public interface UserDao {
 	
 	public User getUserById(String uid);
     public List<User> getAllUser();
-    public List<User> getUserByCondition();
+    public List<User> getUserByCondition(User user);
     public void addUser(User user);
     public void updateUser(User user);
     public void deleteUserById(String uid);

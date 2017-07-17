@@ -14,20 +14,11 @@ public interface UserService {
      */
     public User getByEmail(String email);
 
-    /**
-     * 通过用户名查询
-     */
-    public User getByUsername(String username);
-    
-    /**
-     * 通过用户名邮箱查询
-     */
-    public User findByUsernameOrEmail(String username,String email);
 
     /**
      * 保存用户
      */
-    public User save(User user);
+    public User addUser(User user);
 
     /**
      * 更新用户

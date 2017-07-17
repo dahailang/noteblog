@@ -1,7 +1,10 @@
 package com.pursuit.noteblog.entity;
 
-public class Notebook extends BaseEntity{
+import java.io.Serializable;
+
+public class NoteBook implements Serializable{
 	private static final long serialVersionUID = 1L;
+	private String noteBookid;
 	private String userId;
 	private String title;
 	private String urlTitle;
@@ -10,6 +13,12 @@ public class Notebook extends BaseEntity{
 	private boolean isDeleted;// -1
 	private int usn;// 3
 	
+	public String getNoteBookid() {
+		return noteBookid;
+	}
+	public void setNoteBookid(String noteBookid) {
+		this.noteBookid = noteBookid;
+	}
 	public String getUserId() {
 		return userId;
 	}

@@ -10,14 +10,19 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class IdGenerator {
-
-    private static Logger log = LoggerFactory.getLogger(IdGenerator.class);
+public enum IdGenerator {
+	UID(1),
+	NOTEID(7);
+	
+    private IdGenerator(int sessionIdLength) {
+		this.sessionIdLength = sessionIdLength;
+	}
+	private static Logger log = LoggerFactory.getLogger(IdGenerator.class);
     //id长度
     private int sessionIdLength = 16;
     private Queue<SecureRandom> randoms = new ConcurrentLinkedQueue<SecureRandom>();
     private String secureRandomAlgorithm = "SHA1PRNG";
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
     public void setSessionIdLength(int sessionIdLength) {
         this.sessionIdLength = sessionIdLength;
     }
@@ -83,7 +88,7 @@ public class IdGenerator {
     }
     public static void main(String[] args) {
     	for (int i = 0; i < 20; i++) {
-			System.out.println(new IdGenerator().generateSessionId());
+			System.out.println(IdGenerator.UID.generateSessionId().length());
 		}
 	}
 }
