@@ -14,7 +14,6 @@ public class ShareServiceImpl implements ShareService {
 	@Autowired
 	HasShareNoteService hasShareNoteService;
 	
-	
 	// 第三方注册时没有email
 	@Override
 	public void  addShareNotebookToUserId(String notebookId,int perm,String userId,String toUserId ){

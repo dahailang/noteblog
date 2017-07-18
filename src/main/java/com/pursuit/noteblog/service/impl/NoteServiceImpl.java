@@ -1,21 +1,22 @@
 package com.pursuit.noteblog.service.impl;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 import com.pursuit.noteblog.dao.NoteContentDao;
 import com.pursuit.noteblog.dao.NoteDao;
 import com.pursuit.noteblog.entity.Note;
 import com.pursuit.noteblog.entity.NoteBook;
 import com.pursuit.noteblog.entity.NoteContent;
 import com.pursuit.noteblog.entity.User;
-import com.pursuit.noteblog.enums.SuccessEnum;
 import com.pursuit.noteblog.service.NoteBookService;
 import com.pursuit.noteblog.service.NoteService;
 import com.pursuit.noteblog.web.WebResult;
+
+@Service
 public class NoteServiceImpl implements NoteService {
 	@Autowired
 	NoteDao noteDao;

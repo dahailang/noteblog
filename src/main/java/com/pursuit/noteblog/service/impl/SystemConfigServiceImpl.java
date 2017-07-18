@@ -12,12 +12,14 @@ import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pursuit.noteblog.dao.SystemConfigDao;
 import com.pursuit.noteblog.entity.SystemConfig;
 import com.pursuit.noteblog.enums.SuccessEnum;
 import com.pursuit.noteblog.service.SystemConfigService;
 import com.pursuit.noteblog.util.ConstUtils;
+@Service
 public class SystemConfigServiceImpl  implements SystemConfigService{
 
     private Logger logger = LoggerFactory.getLogger(SystemConfigServiceImpl.class);

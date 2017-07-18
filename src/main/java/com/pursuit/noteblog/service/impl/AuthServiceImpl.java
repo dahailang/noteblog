@@ -1,26 +1,17 @@
 package com.pursuit.noteblog.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.pursuit.noteblog.entity.User;
 import com.pursuit.noteblog.service.AuthService;
 import com.pursuit.noteblog.service.UserService;
 import com.pursuit.noteblog.util.IdGenerator;
 import com.pursuit.noteblog.web.WebResult;
-@Service
-public class AuthServiceImpl implements AuthService {
+
+public class AuthServiceImpl implements AuthService{
 	
 	@Autowired
 	private UserService userService;
-	@Autowired
-	//private NotebookService notebookService;
-//	@Autowired
-//	private ConfigService configService;
-//	@Autowired
-//	private ShareService shareService;
-//	@Autowired
-//	private BlogService blogService;
     
 	@Override
 	public String doLogin(String email, String pwd) {
