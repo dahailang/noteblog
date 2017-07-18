@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class NoteContent extends BaseEntity {
 	private static final long serialVersionUID = 1L;
+	private String noteid;
 	private String userId;
 	private boolean isBlog;// 为了搜索博客
 	private String content;

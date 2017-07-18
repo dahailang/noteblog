@@ -48,3 +48,8 @@ create table hrmanager.hr_dept(
 id     int(6) zerofill primary key auto_increment, /** zerofill 不满6位0填充；primary主键--非空，唯一 ；auto_increment 自增长**/
 deptname varchar(30)  /** 部门名称  **/
 );
+
+
+
+
+

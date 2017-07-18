@@ -65,5 +65,41 @@ CREATE TABLE `user` (
 
 
 
+CREATE TABLE `note` (
+  `note_id` char(12) NOT NULL,
+  `userId` varchar(200) DEFAULT NULL,
+	`title` varchar(200) DEFAULT NULL,
+  `desc` varchar(200) DEFAULT NULL,
+  `imgSrc` varchar(200) DEFAULT NULL,
+  `abstracts` varchar(200) DEFAULT NULL,
+	`tags` varchar(200) DEFAULT NULL,
+  `updatedUserId` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`note_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `note_content` (
+  `note_id` char(12) NOT NULL,
+	`title` varchar(200) DEFAULT NULL,
+  `desc` varchar(200) DEFAULT NULL,
+  `imgSrc` varchar(200) DEFAULT NULL,
+  `content` longtext,
+  `createdTime` datetime DEFAULT NULL,
+  `updatedTime` datetime DEFAULT NULL,
+  `parentId` char(12) DEFAULT NULL,
+  PRIMARY KEY (`note_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `notebook` (
+  `note_book_id` char(12) NOT NULL,
+  `userId` varchar(200) DEFAULT NULL,
+	`title` varchar(200) DEFAULT NULL,
+  `urlTitle` varchar(200) DEFAULT NULL,
+  `seq` int(11) DEFAULT '100',
+  `isDeleted` varchar(200) DEFAULT 'false',
+  `lastUpdateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`note_book_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 
 
