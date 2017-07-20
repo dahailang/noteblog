@@ -16,7 +16,6 @@ import com.pursuit.noteblog.service.NoteBookService;
 import com.pursuit.noteblog.service.NoteService;
 import com.pursuit.noteblog.web.WebResult;
 
-@Service
 public class NoteServiceImpl implements NoteService {
 	@Autowired
 	NoteDao noteDao;

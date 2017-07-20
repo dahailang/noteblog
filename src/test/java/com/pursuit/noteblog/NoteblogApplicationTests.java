@@ -21,7 +21,7 @@ public class NoteblogApplicationTests {
 	@Test
 	public void addusertest() {
 		User user = new User();
-		user.setUid("2");
+		user.setUid("3");
 		user.setAvatar("1231");
 		user.setCreatetime(new Date());
 		user.setEmail("12131");

@@ -19,7 +19,7 @@ import com.pursuit.noteblog.entity.SystemConfig;
 import com.pursuit.noteblog.enums.SuccessEnum;
 import com.pursuit.noteblog.service.SystemConfigService;
 import com.pursuit.noteblog.util.ConstUtils;
-@Service
+
 public class SystemConfigServiceImpl  implements SystemConfigService{
 
     private Logger logger = LoggerFactory.getLogger(SystemConfigServiceImpl.class);

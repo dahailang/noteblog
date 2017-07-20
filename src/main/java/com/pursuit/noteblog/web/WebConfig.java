@@ -13,7 +13,7 @@ import com.pursuit.noteblog.web.interceptor.FrontUserLoginInterceptor;
 public class WebConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("redirect:/index");
+		registry.addViewController("/").setViewName("redirect:/index.html");
 	}
 	@Bean
 	public FrontUserLoginInterceptor frontUserLoginInterceptor(){
@@ -30,6 +30,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 			addPathPatterns("/**").
 			excludePathPatterns("/").
 			excludePathPatterns("/index").
+			excludePathPatterns("/index.html").
 			excludePathPatterns("/login").
 			excludePathPatterns("/auth/doLogin").
 			excludePathPatterns("/auth/doRegister").
