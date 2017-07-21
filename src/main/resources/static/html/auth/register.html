@@ -23,7 +23,10 @@
             </div>
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3 main">
-                    <div class="title"><div class="center">注册页面</div></div> 
+                    <div class="title">
+                    	<div  class="">注册页面</div>
+                    </div> 
+                    <div  id="registerErrorMsg" class="error none"></div>
                     <form class="form-signin">
                         <label for="inputEmail">Email 地址</label>
                         <input type="email" id="inputEmail" class="form-control" placeholder="Email 地址" required autofocus>
@@ -34,7 +37,7 @@
                         <input type="password" id="confirmPassword" class="form-control" placeholder="确认密码" required>
 
                         <div class="">
-                            <button class="btn btn-default btn-primary" type="submit">注册</button>
+                            <button id="registerBtn" class="btn btn-default btn-primary" type="submit">注册</button>
                         </div>
                         <div class="line line-dashed"></div>
                         <p class="text-muted text-center"><small>已有帐户</small></p>
@@ -43,18 +46,79 @@
                 </div>
             </div>
             <div class="row">
-
             </div>
-
-
-
         </div>
 
 
     </body>
     <script src="../../libs/jquery/jquery.min.js"></script>
     <script src="../../libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../js/msg/msg_zh.js"></script>
     <script type="text/javascript">
 
-    </script>
+ 
+$(function() {
+	$("#inputEmail").focus();
+	
+	function showMsg(msg, id) {
+		$("#registerErrorMsg").html(msg).show();
+		if(id) {
+			$("#" + id).focus();
+		}
+	}
+	function hideMsg() {
+		$("#loginMsg").hide();
+	}
+	$("#registerBtn").click(function(e){
+		e.preventDefault();
+		var email = $("#inputEmail").val();
+		var pwd = $("#inputPassword").val();
+		var pwd2 = $("#confirmPassword").val();
+		if(!email) {
+			showMsg(getMsg("inputEmail"), "email");
+			return;
+		} else {
+			var myreg = /^([a-zA-Z0-9]+[_|\_|\.|\-]?)*[a-zA-Z0-9\-_]+@([a-zA-Z0-9\-]+[_|\_|\.|\-]?)*[a-zA-Z0-9\-]+\.[0-9a-zA-Z]{2,6}$/;
+			if(!myreg.test(email)) {
+				showMsg(getMsg("wrongEmail"), "email");
+				return;
+			}
+		}
+		if(!pwd) {
+			showMsg(getMsg("inputPassword"), "pwd");
+			return;
+		} else {
+			if(pwd.length < 6) {
+				showMsg(getMsg("notGoodPassword"), "pwd");
+				return;
+			}
+		}
+		if(!pwd2) {
+			showMsg(getMsg("inputPassword2"), "pwd2");
+			return;
+		} else {
+			if(eval([['pwd != pwd2']])) {
+				showMsg(getMsg("confirmPassword"), "pwd2");
+				return;
+			}
+		}
+		
+		$("#registerBtn").html(getMsg("ing")).addClass("disabled");
+		
+		var iu = "token";
+		
+		$.post("/auth/doRegister", {email: email, pwd: pwd, iu: iu}, function(e) {
+			$("#registerBtn").html(getMsg("register")).removeClass("disabled");
+			if(e.ok) {
+				$("#registerBtn").html(getMsg("registerSuccessAndRdirectToNote"));
+				var from = $("#from").val() ||  "/note";
+				location.href = from;
+			} else {
+				showMsg(e.msg, "email");
+			}
+		});
+		
+	});
+});
+</script>
 </html>
