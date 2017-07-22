@@ -26,7 +26,7 @@ public class AuthController extends BaseController{
     @Autowired
     private UserLoginStatusService userLoginStatusService;
 
-    @RequestMapping(value = "/doRegister", method = RequestMethod.POST)
+    @RequestMapping(value = "/doregister", method = RequestMethod.POST)
     public WebResult doRegister(HttpServletRequest request,HttpServletResponse response,@RequestParam("email") String email,@RequestParam("pwd") String pwd,@RequestParam("iu")String fromUserId) {
     	User user = new User();
     	

@@ -7,7 +7,6 @@ import com.pursuit.noteblog.service.AuthService;
 import com.pursuit.noteblog.service.UserService;
 import com.pursuit.noteblog.util.IdGenerator;
 import com.pursuit.noteblog.web.WebResult;
-
 public class AuthServiceImpl implements AuthService{
 	
 	@Autowired

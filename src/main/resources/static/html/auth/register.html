@@ -17,7 +17,7 @@
         <div class="container">
             <div class="row">
                 <div class="logo">
-                    <h1>NOTEBLOG LOGIN</h1>
+                    <h1>NOTEBLOG REGISTER</h1>
                 </div>
 
             </div>
@@ -97,7 +97,7 @@ $(function() {
 			showMsg(getMsg("inputPassword2"), "pwd2");
 			return;
 		} else {
-			if(eval([['pwd != pwd2']])) {
+			if(pwd != pwd2) {
 				showMsg(getMsg("confirmPassword"), "pwd2");
 				return;
 			}
@@ -107,7 +107,7 @@ $(function() {
 		
 		var iu = "token";
 		
-		$.post("/auth/doRegister", {email: email, pwd: pwd, iu: iu}, function(e) {
+		$.post("/auth/doregister", {email: email, pwd: pwd, iu: iu}, function(e) {
 			$("#registerBtn").html(getMsg("register")).removeClass("disabled");
 			if(e.ok) {
 				$("#registerBtn").html(getMsg("registerSuccessAndRdirectToNote"));

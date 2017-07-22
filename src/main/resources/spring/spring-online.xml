@@ -7,8 +7,8 @@
     <import resource="classpath:spring/spring-config.xml"/>
     <import resource="classpath:spring/spring-mybatis.xml"/>
     <import resource="classpath:spring/spring-mvc.xml"/>
-    <!-- <import resource="classpath:spring/spring-service.xml"/>
-    <import resource="classpath:spring/spring-data.xml"/>
+    <import resource="classpath:spring/spring-service.xml"/>
+    <!-- <import resource="classpath:spring/spring-data.xml"/>
     <import resource="classpath:spring/spring-manage.xml"/>
 	<import resource="classpath:spring/spring-jmx.xml"/>
 	<import resource="classpath:spring/spring-alert.xml"/>
