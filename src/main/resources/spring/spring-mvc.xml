@@ -11,6 +11,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd" default-autowire="byName">
 
     <mvc:annotation-driven/>
+    <context:component-scan base-package="com.pursuit.noteblog.service.impl"></context:component-scan>
 	<!-- 
     <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"/>
     <mvc:resources mapping="/assets/flash/**" location="/WEB-INF/resources/assets/flash/"/>

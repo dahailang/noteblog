@@ -8,11 +8,12 @@
     <!-- 用户管理接口 -->
     <bean id="authService" class="com.pursuit.noteblog.service.impl.AuthServiceImpl"/>
     <bean id="userService" class="com.pursuit.noteblog.service.impl.UserServiceImpl"/>
+    <bean id="userLoginStatusService" class="com.pursuit.noteblog.web.conversation.impl.UserLoginStatusCookieServiceImpl"/>
     <!-- <bean id="adminService" class="com.sohu.cache.redis.impl.RedisCenterImpl"/> -->
 
     <!-- 笔记管理接口 -->
-    <!-- <bean id="noteService" class="com.sohu.cache.machine.impl.MachineCenterImpl" /> -->
-
+    <bean id="noteService" class="com.pursuit.noteblog.service.impl.NoteServiceImpl" />
+    <bean id="noteBookService" class="com.pursuit.noteblog.service.impl.NotebookeServiceImpl" />
     <!-- 博客遍历接口-->
     <!-- <bean id="blogService" class="com.sohu.cache.schedule.impl.SchedulerCenterImpl" /> -->
 

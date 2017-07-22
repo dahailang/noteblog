@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.pursuit.noteblog.dao.NoteContentDao;
 import com.pursuit.noteblog.dao.NoteDao;
 import com.pursuit.noteblog.entity.Note;
@@ -18,11 +17,11 @@ import com.pursuit.noteblog.web.WebResult;
 
 public class NoteServiceImpl implements NoteService {
 	@Autowired
+	NoteBookService noteBookService;
+	@Autowired
 	NoteDao noteDao;
 	@Autowired
 	NoteContentDao noteContentDao;
-	@Autowired
-	NoteBookService noteBookService;
 	
 	@Override
 	public WebResult index(User user,String noteId) {

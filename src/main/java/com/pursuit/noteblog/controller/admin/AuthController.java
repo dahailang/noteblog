@@ -42,7 +42,7 @@ public class AuthController extends BaseController{
         //注册成功即登录
         return WebResult.ok();
     }
-    @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/dologin", method = RequestMethod.POST)
     public WebResult doLogin(HttpServletRequest request,HttpServletResponse response,String email,String pwd,String captcha) {
     	String userid = authService.doLogin(email, pwd);
     	if(!LoginEnum.LOGIN_WRONG_USER_OR_PASSWORD.value().equals(userid)){

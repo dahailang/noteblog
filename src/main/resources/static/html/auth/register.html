@@ -116,6 +116,9 @@ $(function() {
 			} else {
 				showMsg(e.msg, "email");
 			}
+		}).error(function(e){
+			alert("回调失败");
+			
 		});
 		
 	});

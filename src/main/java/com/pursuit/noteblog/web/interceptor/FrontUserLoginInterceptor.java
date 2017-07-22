@@ -28,7 +28,7 @@ public class FrontUserLoginInterceptor extends HandlerInterceptorAdapter {
                              HttpServletResponse response, Object handler) throws Exception {
 
         String userId = userLoginStatusService.getUserIdFromLoginStatus(request);
-        User user = userService.get(userId);
+        User user = userService.getUserByUid(userId);
         
         if (user == null) {
         	logger.info("用户未登录，重定向到登录页面");

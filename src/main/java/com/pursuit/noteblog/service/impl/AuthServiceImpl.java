@@ -1,14 +1,19 @@
 package com.pursuit.noteblog.service.impl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pursuit.noteblog.entity.User;
+import com.pursuit.noteblog.enums.UserStatusEnum;
+import com.pursuit.noteblog.enums.UserTypeEnum;
 import com.pursuit.noteblog.service.AuthService;
 import com.pursuit.noteblog.service.UserService;
 import com.pursuit.noteblog.util.IdGenerator;
 import com.pursuit.noteblog.web.WebResult;
+@Service
 public class AuthServiceImpl implements AuthService{
-	
 	@Autowired
 	private UserService userService;
     
@@ -35,6 +40,10 @@ public class AuthServiceImpl implements AuthService{
     	user.setEmail(email);//转为小写存储
     	user.setPassword(pwd);
 		user.setNickname(email);//默认用户名为邮箱
+		user.setAvatar("/imgs");
+		user.setCreatetime(new Date());
+		user.setType(UserTypeEnum.REGULAR_USER.getUserType());
+		user.setStatus(UserStatusEnum.USER_RUNNING.getUserStatus());
 		User userinfo = userService.addUser(user);
 		//添加默认笔记本
 //		for(String title:ConstUtils.DEFAULT_INIT_NOTEBOOK){

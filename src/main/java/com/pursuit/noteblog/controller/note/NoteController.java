@@ -15,27 +15,20 @@ import com.pursuit.noteblog.entity.User;
 import com.pursuit.noteblog.service.NoteService;
 import com.pursuit.noteblog.web.WebResult;
 @Controller
-@RequestMapping("/note")
 public class NoteController extends BaseController{
 	
 	@Autowired
 	private NoteService noteService;
-	
-	@RequestMapping("")
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response,Model model,String noteId){
-    	
-		model.addAttribute("title", "Leanote, "+getMessage("moto"));
-		User user = (User) request.getAttribute("userInfo");
-		WebResult noteResut = noteService.index(user,noteId);
-		model.addAllAttributes(noteResut.getAttributes());
-		return new ModelAndView("/note/note");
+	@RequestMapping("/note")
+	public ModelAndView index(HttpServletRequest request){
+		return new ModelAndView("forward:/note/"+getUid(request));
 	}
-	@RequestMapping("/{noteId}")
+	@RequestMapping("/note/{noteId}")
 	public ModelAndView note(HttpServletRequest request, HttpServletResponse response,Model model,@PathVariable("noteId")String noteId){
 		model.addAttribute("title", "Leanote, "+getMessage("moto"));
 		User user = (User) request.getAttribute("userInfo");
-		WebResult noteResut = noteService.index(user,noteId);
-		model.addAllAttributes(noteResut.getAttributes());
-		return new ModelAndView("/note/note");
+		//WebResult noteResut = noteService.index(user,noteId);
+		//model.addAllAttributes(noteResut.getAttributes());
+		return new ModelAndView("redirect:/html/note/note.html?noteId="+noteId);
 	}
 }

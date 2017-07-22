@@ -7,7 +7,7 @@ public interface UserService {
 	 /**
      * 通过id获取用户
      */
-    User get(String userId);
+    User getUserByUid(String userId);
 
     /**
      * 通过邮箱查询
