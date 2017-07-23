@@ -1,21 +1,50 @@
-var curMenu = null, zTree_Menu = null;
-var setting = {
-	view: {
-		showLine: false,
-		showIcon: false,
-		selectedMulti: false,
-		dblClickExpand: false,
-		addDiyDom: addDiyDom
-	},
-	data: {
-		simpleData: {
-			enable: true
+var leftTree = (function(zNodes,treeObj) {
+	//var curMenu = null;
+	//var zTree_Menu = null;
+	this.zNodes = zNodes,
+	this.treeObj = $("#"+treeObj),
+	
+	var setting = {
+		view: {
+			showLine: false,
+			showIcon: false,
+			selectedMulti: false,
+			dblClickExpand: false,
+			addDiyDom: addDiyDom
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			beforeClick: beforeClick
 		}
-	},
-	callback: {
-		beforeClick: beforeClick
+	 };
+	function addDiyDom(treeId, treeNode) {
+		var spaceWidth = 5;
+		var switchObj = $("#" + treeNode.tId + "_switch"),
+		icoObj = $("#" + treeNode.tId + "_ico");
+		switchObj.remove();
+		icoObj.before(switchObj);
+
+		if (treeNode.level > 1) {
+			var spaceStr = "<span style='display: inline-block;width:" + (spaceWidth * treeNode.level)+ "px'></span>";
+			switchObj.before(spaceStr);
+		}
 	}
-};
+	function beforeClick(treeId, treeNode) {
+		if (treeNode.level == 0 ) {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			zTree.expandNode(treeNode);
+			return false;
+		}
+		return true;
+	}
+	
+});
+
+
 
 var zNodes =[
 	{ id:1, pId:0, name:"文件夹", open:true},
@@ -33,27 +62,9 @@ var zNodes =[
 	{ id:32, pId:3, name:"照片"}
 ];
 
-function addDiyDom(treeId, treeNode) {
-	var spaceWidth = 5;
-	var switchObj = $("#" + treeNode.tId + "_switch"),
-	icoObj = $("#" + treeNode.tId + "_ico");
-	switchObj.remove();
-	icoObj.before(switchObj);
 
-	if (treeNode.level > 1) {
-		var spaceStr = "<span style='display: inline-block;width:" + (spaceWidth * treeNode.level)+ "px'></span>";
-		switchObj.before(spaceStr);
-	}
-}
 
-function beforeClick(treeId, treeNode) {
-	if (treeNode.level == 0 ) {
-		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-		zTree.expandNode(treeNode);
-		return false;
-	}
-	return true;
-}
+
 
 $(document).ready(function(){
 	var treeObj = $("#treeDemo");
