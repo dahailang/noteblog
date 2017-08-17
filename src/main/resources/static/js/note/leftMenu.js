@@ -93,31 +93,31 @@ var addCount = 1;
 function addTreeNode() {
 	hideRMenu();
 	var newNode = { name:"增加" + (addCount++)};
-	if (zTree.getSelectedNodes()[0]) {
-		newNode.checked = zTree.getSelectedNodes()[0].checked;
-		zTree.addNodes(zTree.getSelectedNodes()[0], newNode);
+	if (zTree_Menu.getSelectedNodes()[0]) {
+		newNode.checked = zTree_Menu.getSelectedNodes()[0].checked;
+		zTree_Menu.addNodes(zTree_Menu.getSelectedNodes()[0], newNode);
 	} else {
-		zTree.addNodes(null, newNode);
+		zTree_Menu.addNodes(null, newNode);
 	}
 }
 function removeTreeNode() {
 	hideRMenu();
-	var nodes = zTree.getSelectedNodes();
+	var nodes = zTree_Menu.getSelectedNodes();
 	if (nodes && nodes.length>0) {
 		if (nodes[0].children && nodes[0].children.length > 0) {
 			var msg = "要删除的节点是父节点，如果删除将连同子节点一起删掉。\n\n请确认！";
 			if (confirm(msg)==true){
-				zTree.removeNode(nodes[0]);
+				zTree_Menu.removeNode(nodes[0]);
 			}
 		} else {
-			zTree.removeNode(nodes[0]);
+			zTree_Menu.removeNode(nodes[0]);
 		}
 	}
 }
 function checkTreeNode(checked) {
 	var nodes = zTree.getSelectedNodes();
 	if (nodes && nodes.length>0) {
-		zTree.checkNode(nodes[0], checked, true);
+		zTree_Menu.checkNode(nodes[0], checked, true);
 	}
 	hideRMenu();
 }

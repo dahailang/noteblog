@@ -11,7 +11,9 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="../../libs/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../editormd/css/editormd.css" />  
+    <link rel="stylesheet" href="../../libs/ztree/css/zTreeStyle.css" >
     <link rel="stylesheet" href="../../css/note.css" />  
+    <link rel="stylesheet" href="../../css/leftmenu.css" />  
     
   </head>
   <body>	
@@ -48,10 +50,16 @@
         <div class="col-sm-3 block">
             <div class="row">
               <div class="col-sm-6 block">
-                <ul>
-                  <li>笔记本</li>
-                  <li>共享</li>
-                </ul>
+              		<ul id="treeDemo" class="ztree"></ul>
+					<div id="rMenu">
+						<ul>
+							<li id="m_add" onclick="addTreeNode();">增加节点</li>
+							<li id="m_del" onclick="removeTreeNode();">删除节点</li>
+							<li id="m_check" onclick="checkTreeNode(true);">Check节点</li>
+							<li id="m_unCheck" onclick="checkTreeNode(false);">unCheck节点</li>
+							<li id="m_reset" onclick="resetTree();">恢复zTree</li>
+						</ul>
+					</div>
               </div>
               <div class="col-sm-6 block"></div>
             </div>
@@ -69,6 +77,8 @@
     <script src="../../libs/jquery/jquery.min.js"></script>
     <script src="../../libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../editormd/editormd.js"></script>   
+    <script src="../../libs/ztree/js/jquery.ztree.all.js"></script>
+   	<script src="../../js/note/leftMenu.js"></script>
     <script type="text/javascript">
    
     $(function(){

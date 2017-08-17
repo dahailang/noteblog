@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>tree</title>
-
-    <link href="../../libs/ztree/css/zTreeStyle.css" rel="stylesheet">
-    
-	<style type="text/css">
+@charset "UTF-8";
 .ztree * {font-size: 10pt;font-family:"Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial}
 .ztree li ul{ margin:0; padding:0}
 .ztree li {line-height:30px;}
@@ -54,24 +43,3 @@ div#rMenu ul li{
 	list-style: none outside none;
 	background-color: #DFDFDF;
 }
-	</style>
-  </head>
-  <body>
-    <h1>你好，世界！</h1>
-	<ul id="treeDemo" class="ztree"></ul>
-	<div id="rMenu">
-		<ul>
-			<li id="m_add" onclick="addTreeNode();">增加节点</li>
-			<li id="m_del" onclick="removeTreeNode();">删除节点</li>
-			<li id="m_check" onclick="checkTreeNode(true);">Check节点</li>
-			<li id="m_unCheck" onclick="checkTreeNode(false);">unCheck节点</li>
-			<li id="m_reset" onclick="resetTree();">恢复zTree</li>
-		</ul>
-	</div>
-	
-   <script src="../../libs/jquery/jquery.min.js"></script>
-   <script src="../../libs/ztree/js/jquery.ztree.all.js"></script>
-   <script src="../../js/note/leftMenu.js"></script>
-   <script type="text/javascript"></script>
-  </body>
-</html>
