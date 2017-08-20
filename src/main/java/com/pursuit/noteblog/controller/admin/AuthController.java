@@ -30,7 +30,7 @@ public class AuthController extends BaseController{
     public WebResult doRegister(HttpServletRequest request,HttpServletResponse response,@RequestParam("email") String email,@RequestParam("pwd") String pwd,@RequestParam("iu")String fromUserId) {
     	User user = new User();
     	
-    	user.setEmail(email.toLowerCase());//转为小写存储
+    	user.setEmail(email.toLowerCase());//转为小写存储test
     	user.setPwd(pwd);
     	WebResult registerResult = authService.register(email,pwd, fromUserId);
     	if(!registerResult.isOk()){
