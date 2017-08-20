@@ -52,7 +52,7 @@ public class IndexController extends BaseController{
     public ModelAndView test(HttpServletRequest request, HttpServletResponse response, Model model,@PathVariable String str){
     	//TODO  主页是否是管理员的博客页
     	model.addAttribute("title", "noteblog");
-    	model.addAttribute("user", getUserInfo(request));
+    	//model.addAttribute("user", getUserInfo(request));
     	model.addAttribute("openRegister", "1");//TODO 取配置表
     	//model.addAttribute("locale", getLocale(request));
     	return new ModelAndView("/note/fragment/"+str);

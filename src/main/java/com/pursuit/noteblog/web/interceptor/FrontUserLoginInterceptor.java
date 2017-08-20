@@ -28,7 +28,7 @@ public class FrontUserLoginInterceptor extends HandlerInterceptorAdapter {
                              HttpServletResponse response, Object handler) throws Exception {
 
         String userId = userLoginStatusService.getUserIdFromLoginStatus(request);
-        User user = userService.get(userId);
+        User user = userService.getUserByUid(userId);
         
         if (user == null) {
         	logger.info("用户未登录，重定向到登录页面");
@@ -37,7 +37,7 @@ public class FrontUserLoginInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
         request.setAttribute("userInfo", user);
-        request.setAttribute("isAdmin", user.getUsername()==ConstUtils.ADMIN_USERNAME);
+        request.setAttribute("isAdmin", user.getNickname()==ConstUtils.ADMIN_USERNAME);
         return true;
     }
 

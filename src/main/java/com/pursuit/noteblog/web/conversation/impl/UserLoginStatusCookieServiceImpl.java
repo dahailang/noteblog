@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.stereotype.Service;
 
 import com.pursuit.noteblog.util.ConstUtils;
 import com.pursuit.noteblog.web.conversation.UserLoginStatusService;
@@ -14,7 +13,7 @@ import com.pursuit.noteblog.web.conversation.UserLoginStatusService;
 /**
  * cookie保护登录状态
  */
-@Service
+
 public class UserLoginStatusCookieServiceImpl implements UserLoginStatusService {
 
     @Override

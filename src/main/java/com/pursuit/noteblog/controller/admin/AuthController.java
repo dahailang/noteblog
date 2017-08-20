@@ -26,12 +26,12 @@ public class AuthController extends BaseController{
     @Autowired
     private UserLoginStatusService userLoginStatusService;
 
-    @RequestMapping(value = "/doRegister", method = RequestMethod.POST)
+    @RequestMapping(value = "/doregister", method = RequestMethod.POST)
     public WebResult doRegister(HttpServletRequest request,HttpServletResponse response,@RequestParam("email") String email,@RequestParam("pwd") String pwd,@RequestParam("iu")String fromUserId) {
     	User user = new User();
     	
     	user.setEmail(email.toLowerCase());//转为小写存储
-    	user.setPwd(pwd);
+    	user.setPassword(pwd);
     	WebResult registerResult = authService.register(email,pwd, fromUserId);
     	if(!registerResult.isOk()){
     		return registerResult;
@@ -42,7 +42,7 @@ public class AuthController extends BaseController{
         //注册成功即登录
         return WebResult.ok();
     }
-    @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/dologin", method = RequestMethod.POST)
     public WebResult doLogin(HttpServletRequest request,HttpServletResponse response,String email,String pwd,String captcha) {
     	String userid = authService.doLogin(email, pwd);
     	if(!LoginEnum.LOGIN_WRONG_USER_OR_PASSWORD.value().equals(userid)){

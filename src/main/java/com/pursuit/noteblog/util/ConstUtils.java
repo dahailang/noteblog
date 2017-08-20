@@ -57,9 +57,20 @@ public class ConstUtils {
 	public static String DEFAULT_ADMIN_PHONES = "13180879819";
 	public static String ADMIN_PHONES;
     
+	
+    /**
+     * http连接和读取超时
+     */
+    public static final int HTTP_CONN_TIMEOUT;
+    public static final int HTTP_SOCKET_TIMEOUT;
+    
     static {
         ResourceBundle applicationResourceBundle = ResourceBundle.getBundle("application");
         IS_DEBUG = "true".equals(applicationResourceBundle.getString("isDebug"));
+        
+        ResourceBundle rb = ResourceBundle.getBundle("noteBlogClient");
+        HTTP_CONN_TIMEOUT = Integer.valueOf(rb.getString("http_conn_timeout"));
+        HTTP_SOCKET_TIMEOUT = Integer.valueOf(rb.getString("http_socket_timeout"));
     }
     
     /**

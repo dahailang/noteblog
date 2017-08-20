@@ -2,9 +2,6 @@ package com.pursuit.noteblog.entity;
 
 import java.util.Date;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection="email_logs")
 public class EmailLogs {
 	public String email;// 发送者
 	public String subject;// 主题

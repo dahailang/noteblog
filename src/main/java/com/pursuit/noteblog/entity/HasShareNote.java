@@ -1,8 +1,5 @@
 package com.pursuit.noteblog.entity;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection="has_share_notes")
 public class HasShareNote extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	private String userId;

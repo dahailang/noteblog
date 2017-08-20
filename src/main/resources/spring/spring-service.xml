@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        " default-autowire="byName">
+
+    <!-- 用户管理接口 -->
+    <bean id="authService" class="com.pursuit.noteblog.service.impl.AuthServiceImpl"/>
+    <bean id="userService" class="com.pursuit.noteblog.service.impl.UserServiceImpl"/>
+    <bean id="userLoginStatusService" class="com.pursuit.noteblog.web.conversation.impl.UserLoginStatusCookieServiceImpl"/>
+    <!-- <bean id="adminService" class="com.sohu.cache.redis.impl.RedisCenterImpl"/> -->
+
+    <!-- 笔记管理接口 -->
+    <bean id="noteService" class="com.pursuit.noteblog.service.impl.NoteServiceImpl" />
+    <bean id="noteBookService" class="com.pursuit.noteblog.service.impl.NotebookeServiceImpl" />
+    <!-- 博客遍历接口-->
+    <!-- <bean id="blogService" class="com.sohu.cache.schedule.impl.SchedulerCenterImpl" /> -->
+
+
+</beans>

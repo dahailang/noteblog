@@ -3,21 +3,27 @@ package com.pursuit.noteblog.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import com.pursuit.noteblog.entity.Notebook;
-import com.pursuit.noteblog.repository.NotebookRepository;
-import com.pursuit.noteblog.service.NotebookService;
-@Service
-public class NotebookeServiceImpl implements NotebookService {
+import com.pursuit.noteblog.dao.NoteBookDao;
+import com.pursuit.noteblog.entity.NoteBook;
+import com.pursuit.noteblog.service.NoteBookService;
+
+public class NotebookeServiceImpl implements NoteBookService {
 	@Autowired
-	NotebookRepository notebookRepository;
+	NoteBookDao noteBookDao;
+
 	@Override
-	public Notebook save(Notebook notebook){
-		return notebookRepository.save(notebook);
+	public NoteBook save(NoteBook notebook) {
+		return noteBookDao.addNoteBook(notebook);
 	}
+
 	@Override
-	public List<Notebook> findByUserid(String userId){
-		return notebookRepository.findByUserId(userId);
+	public NoteBook renameNoteBook(NoteBook notebook) {
+		return noteBookDao.updateNoteBook(notebook);
+	}
+
+	@Override
+	public List<NoteBook> findByUserid(String userId) {
+		return noteBookDao.getNoteBookByUid(userId);
 	}
 }

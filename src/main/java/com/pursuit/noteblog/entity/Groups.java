@@ -2,9 +2,6 @@ package com.pursuit.noteblog.entity;
 
 import java.util.Date;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection="groups")
 public class Groups extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	public String groupId;// 谁的

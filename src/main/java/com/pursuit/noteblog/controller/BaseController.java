@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pursuit.noteblog.entity.User;
 import com.pursuit.noteblog.service.UserService;
+import com.pursuit.noteblog.web.conversation.UserLoginStatusService;
 import com.pursuit.noteblog.web.i18n.LocaleMessageSourceUtil;
 
 /**
@@ -20,23 +21,27 @@ import com.pursuit.noteblog.web.i18n.LocaleMessageSourceUtil;
  */
 public class BaseController {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
-    
-    protected UserService userService;
+    @Autowired
+    private UserLoginStatusService userLoginStatusService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private LocaleMessageSourceUtil messageSourceUtil;
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public String getUid(HttpServletRequest request) {
+    	String userId = userLoginStatusService.getUserIdFromLoginStatus(request);
+    	return userId;
     }
-    public User getUserInfo(HttpServletRequest request) {
-    	//TODO  获取当前已登录用户信息
-        return new User();
+    public User getUserInfo(String userId) {
+    	User user = userService.getUserByUid(userId);
+    	return user;
     }
     /**
      * 是否登录
      */
     public boolean hasLogin(HttpServletRequest request) {
-    	return getUserInfo(request).getId()!=null;
+    	String uid = getUid(request);
+    	return uid!=null&&getUserInfo(uid)!=null;
     }
     
     /**

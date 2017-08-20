@@ -15,7 +15,6 @@ import com.pursuit.noteblog.entity.User;
 import com.pursuit.noteblog.service.NoteService;
 import com.pursuit.noteblog.web.WebResult;
 @Controller
-@RequestMapping("/note")
 public class NoteController extends BaseController{
 	
 	@Autowired
@@ -30,7 +29,9 @@ public class NoteController extends BaseController{
 		model.addAllAttributes(noteResut.getAttributes());
 		return new ModelAndView("/note/note-new");
 	}
-	@RequestMapping("/{noteId}")
+	
+	//进行分支合并操作
+	@RequestMapping("/note/{noteId}")
 	public ModelAndView note(HttpServletRequest request, HttpServletResponse response,Model model,@PathVariable("noteId")String noteId){
 		model.addAttribute("title", "Leanote, "+getMessage("moto"));
 		User user = (User) request.getAttribute("userInfo");

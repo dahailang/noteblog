@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServletResponse;
  * 用户登录状态信息服务
  */
 public interface UserLoginStatusService {
-    public final static String LOGIN_USER_STATUS_NAME = "NOTE_BOLG_USER_STATUS";
+    
+	public final static String LOGIN_USER_STATUS_NAME = "NOTE_BOLG_USER_STATUS";
 
     /**
      * 获取用户登录状态信息

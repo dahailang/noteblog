@@ -1,59 +1,52 @@
 package com.pursuit.noteblog.service.impl;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.stereotype.Service;
-
+import com.pursuit.noteblog.dao.NoteContentDao;
+import com.pursuit.noteblog.dao.NoteDao;
 import com.pursuit.noteblog.entity.Note;
+import com.pursuit.noteblog.entity.NoteBook;
 import com.pursuit.noteblog.entity.NoteContent;
-import com.pursuit.noteblog.entity.Notebook;
 import com.pursuit.noteblog.entity.User;
-import com.pursuit.noteblog.enums.SuccessEnum;
+import com.pursuit.noteblog.service.NoteBookService;
 import com.pursuit.noteblog.service.NoteService;
-import com.pursuit.noteblog.service.NotebookService;
 import com.pursuit.noteblog.web.WebResult;
-@Service
+
 public class NoteServiceImpl implements NoteService {
 	@Autowired
-	NotebookService notebookService;
+	NoteBookService noteBookService;
 	@Autowired
-	NoteService noteService;
-//	@Autowired
-//	ShareService shareService;
+	NoteDao noteDao;
 	@Autowired
-	protected MongoTemplate mongoTemplate;
+	NoteContentDao noteContentDao;
+	
 	@Override
 	public WebResult index(User user,String noteId) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("", "");
-		
 		// 已登录了, 那么得到所有信息
-		List<Notebook> notebooks = notebookService.findByUserid(user.getId());
+		List<NoteBook> notebooks = noteBookService.findByUserid(user.getUid());
 //		shareNotebooks, sharedUserInfos := shareService.GetShareNotebooks(userId)
 		List<Note> notes;
-		NoteContent noteContent = new NoteContent();
+		NoteContent noteContent = new  NoteContent();
 		boolean hasRightNoteId = false;
 		if(notebooks!=null&&notebooks.size()>0){
-			if(null!=noteId&&ObjectId.isValid(noteId)){
-				noteContent = getNoteContent(user.getId(), noteId);
+			if(null!=noteId){
+				noteContent = getNoteContent(noteId);
 			}else{
-				notes = findByUserId(user.getId());
+				notes = findByUserId(user.getUid());
 				
 			}
 			
 			// 没有传入笔记
 			// 那么得到最新笔记
 			if (!hasRightNoteId) {
-				notes = findByUserId(user.getId());
+				notes = findByUserId(user.getUid());
 				if (null!=notes&&notes.size()>0) {
-					noteContent =getNoteContent(user.getId(), noteId);
+					noteContent =getNoteContent(noteId);
 					map.put("curNoteId", notes.get(0).getId());
 				}
 			}
@@ -151,38 +144,13 @@ public class NoteServiceImpl implements NoteService {
 		return WebResult.ok(map);
 	}
 	
-	
 	@Override
 	public List<Note> findByUserId(String userId) {
-		return mongoTemplate.find(new Query(Criteria.where("userId").is(userId)), Note.class,"notes");  
+		return noteDao.getNoteByUid(userId);
 	}
 	@Override
-	public NoteContent getNoteContent(String userId,String noteId) {
-		return mongoTemplate.findOne(new Query(Criteria.where("userId").is(userId)
-				.and("noteId").is(noteId)), NoteContent.class,"notes");  
+	public NoteContent getNoteContent(String noteId) {
+		return noteContentDao.getNoteContentByNoteiId(noteId);
 	}
-	@Override
-	public Note findById(String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Note save(Note e) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public SuccessEnum update(Note e) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public SuccessEnum deleteBy(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	
 
 }

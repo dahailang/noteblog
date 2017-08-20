@@ -1,40 +1,30 @@
 package com.pursuit.noteblog.service.impl;
 
-import org.bson.types.ObjectId;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pursuit.noteblog.entity.Notebook;
 import com.pursuit.noteblog.entity.User;
-import com.pursuit.noteblog.entity.UserBlog;
+import com.pursuit.noteblog.enums.UserStatusEnum;
+import com.pursuit.noteblog.enums.UserTypeEnum;
 import com.pursuit.noteblog.service.AuthService;
-import com.pursuit.noteblog.service.NotebookService;
 import com.pursuit.noteblog.service.UserService;
-import com.pursuit.noteblog.util.ConstUtils;
+import com.pursuit.noteblog.util.IdGenerator;
 import com.pursuit.noteblog.web.WebResult;
-
 @Service
-public class AuthServiceImpl implements AuthService {
-	
+public class AuthServiceImpl implements AuthService{
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private NotebookService notebookService;
-//	@Autowired
-//	private ConfigService configService;
-//	@Autowired
-//	private ShareService shareService;
-//	@Autowired
-//	private BlogService blogService;
     
 	@Override
 	public String doLogin(String email, String pwd) {
 		User user = userService.getByEmail(email);
 		if(user!=null){
-			String password = user.getPwd();
+			String password = user.getPassword();
 			//password 加密处理
 			if(password.equals(pwd)){
-				return user.getId();
+				return user.getUid();
 			}
 		}
 		return "-1";
@@ -46,20 +36,24 @@ public class AuthServiceImpl implements AuthService {
 		//2.密码加密处理
     	User user = new User();
     	email = email.toLowerCase();
-    	user.setId(new ObjectId().toHexString());
+    	user.setUid(IdGenerator.UID.generateSessionId());
     	user.setEmail(email);//转为小写存储
-    	user.setPwd(pwd);
-		user.setUsername(email);//默认用户名为邮箱
-		User userinfo = userService.save(user);
+    	user.setPassword(pwd);
+		user.setNickname(email);//默认用户名为邮箱
+		user.setAvatar("/imgs");
+		user.setCreatetime(new Date());
+		user.setType(UserTypeEnum.REGULAR_USER.getUserType());
+		user.setStatus(UserStatusEnum.USER_RUNNING.getUserStatus());
+		User userinfo = userService.addUser(user);
 		//添加默认笔记本
-		for(String title:ConstUtils.DEFAULT_INIT_NOTEBOOK){
-			Notebook notebook = new Notebook();
-			notebook.setId(new ObjectId().toHexString());
-			notebook.setSeq(-1);
-			notebook.setUserId(userinfo.getId());
-			notebook.setTitle(title);
-			notebookService.save(notebook);
-		}
+//		for(String title:ConstUtils.DEFAULT_INIT_NOTEBOOK){
+//			Notebook notebook = new Notebook();
+//			notebook.setId(new ObjectId().toHexString());
+//			notebook.setSeq(-1);
+//			notebook.setUserId(userinfo.getId());
+//			notebook.setTitle(title);
+//			notebookService.save(notebook);
+//		}
 		// 添加leanote -> 该用户的共享
 //		String registerSharedUserId = configService.getGlobalStringConfig("registerSharedUserId");
 //		if(StringUtils.isNotBlank(registerSharedUserId)){
@@ -90,19 +84,19 @@ public class AuthServiceImpl implements AuthService {
 //		}
 		//---------------
 		// 添加一条userBlog
-		UserBlog userBlog = new UserBlog();
-		userBlog.setId(new ObjectId().toHexString());
-		userBlog.setUserId(user.getId());
-		userBlog.setTitle(user.getUsername() + " 's Blog");
-		userBlog.setSubTitle("Love Leanote!");
-		userBlog.setAboutMe("Hello, I am (^_^)");
-		userBlog.setCanComment(true);
+//		UserBlog userBlog = new UserBlog();
+//		userBlog.setId(new ObjectId().toHexString());
+//		userBlog.setUserId(user.getId());
+//		userBlog.setTitle(user.getUsername() + " 's Blog");
+//		userBlog.setSubTitle("Love Leanote!");
+//		userBlog.setAboutMe("Hello, I am (^_^)");
+//		userBlog.setCanComment(true);
 		//blogService.save(userBlog);
 		// 添加一个单页面
 		//blogService.AddOrUpdateSingle(user.UserId.Hex(), "", "About Me", "Hello, I am (^_^)")
 		
 		//存入登录
-		return WebResult.ok(userinfo.getId());
+		return WebResult.ok(userinfo.getUid());
 	}
 
 	@Override
@@ -119,9 +113,5 @@ public class AuthServiceImpl implements AuthService {
 	public String thirdRegister(String thirdType, String thirdUserId, String thirdUsername) {
 		return null;
 	}
-	public static void main(String[] args) {
-		ObjectId objectId = new ObjectId();
-		System.out.println(objectId);
-		System.out.println(objectId.toHexString());
-	}
+	
 }

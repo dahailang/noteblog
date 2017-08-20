@@ -7,8 +7,8 @@ import com.pursuit.noteblog.entity.NoteContent;
 import com.pursuit.noteblog.entity.User;
 import com.pursuit.noteblog.web.WebResult;
 
-public interface NoteService extends BaseService<Note>{
+public interface NoteService{
 	public WebResult index(User user,String noteId);
 	public List<Note> findByUserId(String userId);
-	public NoteContent getNoteContent(String userId,String noteId);
+	public NoteContent getNoteContent(String noteId);
 }

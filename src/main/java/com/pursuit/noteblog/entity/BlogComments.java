@@ -2,13 +2,10 @@ package com.pursuit.noteblog.entity;
 
 import java.util.Date;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 /**
  * @author wangjn_bj
  * @desc:博客评论
  */
-@Document(collection="blog_comments")
 public class BlogComments extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	private String noteId;
