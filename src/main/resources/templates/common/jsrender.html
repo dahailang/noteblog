@@ -1,9 +1,0 @@
-<div th:fragment="checkcode">
-	<div class="form-group"> 
-		<label class="control-label" th:text="#{captcha}">Captcha</label>
-	    <input type="text" class="form-control" id="captcha" name="captcha" />
-	    <a id="reloadCaptcha" title="Reload Captcha" th:title="#{reloadCaptcha}" onclick="$('#captchaImage').attr('src', '/captcha/get?' + ((new Date()).getTime()))">
-	    	<img src="/captcha/get" id="captchaImage"/>
-	    </a>
-	</div>
-</div>
