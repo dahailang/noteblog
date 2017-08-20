@@ -35,6 +35,9 @@ div#rMenu {
 div#rMenu ul{
 	margin: 0px;
 	padding: 0px;
+	position: absolute;
+    left: -5px;
+    top: -50px;
 }
 div#rMenu ul li{
 	margin: 1px 0;

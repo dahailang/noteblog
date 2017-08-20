@@ -62,22 +62,40 @@ var zNodes =[
 	{ id:32, pId:3, name:"照片"}
 ];
 
-
+function sendAjax(url){
+	$.ajax({
+		type : 'POST',
+		url: url,
+		async : true,
+		dataType : 'json',
+		data:params,
+		timeout:120000,
+		context: document.body, 
+		success: function(result,status,resp){
+			var zNodes = result;
+			var treeObj = $("#treeDemo");
+			$.fn.zTree.init(treeObj, setting, zNodes);
+			zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
+			curMenu = zTree_Menu.getNodes()[0].children[0].children[0];
+			zTree_Menu.selectNode(curMenu);
+			treeObj.hover(function () {
+				if (!treeObj.hasClass("showIcon")) {
+					treeObj.addClass("showIcon");
+				}
+			}, function() {
+				treeObj.removeClass("showIcon");
+			});
+		},
+		error : function(xhrObj, txtStatus, errorThrown) {
+			
+		}
+	}});
+}
 
 
 
 $(document).ready(function(){
 	var treeObj = $("#treeDemo");
-	$.fn.zTree.init(treeObj, setting, zNodes);
-	zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
-	curMenu = zTree_Menu.getNodes()[0].children[0].children[0];
-	zTree_Menu.selectNode(curMenu);
-
-	treeObj.hover(function () {
-		if (!treeObj.hasClass("showIcon")) {
-			treeObj.addClass("showIcon");
-		}
-	}, function() {
-		treeObj.removeClass("showIcon");
-	});
+	//$.fn.zTree.init(treeObj, setting, zNodes);
+	sendAjax("zNodes.json");
 });
