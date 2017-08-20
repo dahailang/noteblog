@@ -32,8 +32,8 @@ public class CPUTest {
      * @param args the command line arguments 
      */  
     public static void main(String[] args) throws InterruptedException {  
-        lineGraph(0.5);  
-        //sinGraph();  
+        //lineGraph(0.5);  
+        sinGraph();  
     }  
       
 }  

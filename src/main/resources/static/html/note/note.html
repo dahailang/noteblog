@@ -67,7 +67,22 @@
         <!-- 主编辑区 -->
         <div class="col-sm-9 block">
           <div class="row">
-            <div class="col-sm-12" style="height:50px;">工具条</div>
+            <!--  <div class="col-sm-12" style="height:50px;">工具条</div> -->
+             <div class="btns">
+                <button id="goto-line-btn">Goto line 90</button>
+                <button id="show-btn">Show editor</button>
+                <button id="hide-btn">Hide editor</button>
+                <button id="get-md-btn">Get Markdown</button>
+                <button id="get-html-btn">Get HTML</button>
+                <button id="watch-btn">Watch</button>
+                <button id="unwatch-btn">Unwatch</button>
+                <button id="preview-btn">Preview HTML (Press Shift + ESC cancel)</button>
+                <button id="fullscreen-btn">Fullscreen (Press ESC cancel)</button>
+                <button id="show-toolbar-btn">Show toolbar</button>
+                <button id="close-toolbar-btn">Hide toolbar</button>
+                <button id="toc-menu-btn">ToC Dropdown menu</button>
+                <button id="toc-default-btn">ToC default</button>
+            </div>
             <div class="col-sm-12" id="editormd"></div>
           </div>
         </div>
@@ -98,9 +113,7 @@
               //previewTheme : "dark",//预览效果
               //editorTheme : "pastel-on-dark",//编辑区主题样式
               markdown : md,//'文档初始化内容'
-               // toolbarIcons : function() {
-               //     return ["undo", "redo", "|", "bold", "hr", "|","fullscreen", "info", "testIcon", "testIcon2", "file", "faicon", "||","preview", "watch", "fullscreen"]
-               // },
+              toolbarIcons : toolbar,
               codeFold : true,
               syncScrolling : "single",
                 saveHTMLToTextarea : true,    // 保存 HTML 到 Textarea
@@ -129,7 +142,80 @@
           });
       });
       
+      function toolbar(){
+    	  return [
+              "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
+              "h1", "h2", "h3", "h4", "h5", "h6", "|", 
+              "list-ul", "list-ol", "hr", "|",
+              "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "emoji", "html-entities", "pagebreak"
+          ];
+      }
     });
+    
+    $("#goto-line-btn").bind("click", function(){
+    	noteEditor.gotoLine(90);
+    });
+    
+    $("#show-btn").bind('click', function(){
+    	noteEditor.show();
+    });
+    
+    $("#hide-btn").bind('click', function(){
+    	noteEditor.hide();
+    });
+    
+    $("#get-md-btn").bind('click', function(){
+        alert(noteEditor.getMarkdown());
+    });
+    
+    $("#get-html-btn").bind('click', function() {
+        alert(noteEditor.getHTML());
+    });                
+    
+    $("#watch-btn").bind('click', function() {
+    	noteEditor.watch();
+    });                 
+    
+    $("#unwatch-btn").bind('click', function() {
+    	noteEditor.unwatch();
+    });              
+    
+    $("#preview-btn").bind('click', function() {
+    	noteEditor.previewing();
+    });
+    
+    $("#fullscreen-btn").bind('click', function() {
+    	noteEditor.fullscreen();
+    });
+    
+    $("#show-toolbar-btn").bind('click', function() {
+    	noteEditor.showToolbar();
+    });
+    
+    $("#close-toolbar-btn").bind('click', function() {
+    	noteEditor.hideToolbar();
+    });
+    
+    $("#toc-menu-btn").click(function(){
+    	noteEditor.config({
+            tocDropdown   : true,
+            tocTitle      : "目录 Table of Contents",
+        });
+    });
+    
+    $("#toc-default-btn").click(function() {
+    	noteEditor.config("tocDropdown", false);
+    });
+    
+    function toolbutton(){
+        return [
+            "undo", "redo", 
+            "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "emoji", "html-entities", "pagebreak", "|",
+            "goto-line", "watch", "preview", //跳到第几行 编辑模式  预览
+            "fullscreen", "clear", "search", "|",//全屏 ，清除 ，搜索
+            "help", "info"
+        ];
+    }
     </script>
   </body>
 </html>
