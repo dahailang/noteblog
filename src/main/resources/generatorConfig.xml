@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    
+    <!-- <classPathEntry
+        location="D:/repository/maven/repo/mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar" /> -->
+    
+    <!-- 一个数据库一个context -->
+    <context id="context1" targetRuntime="MyBatis3">
+        <jdbcConnection 
+        	driverClass="com.mysql.jdbc.Driver"
+            connectionURL="jdbc:mysql://localhost:3306/noteblog?useUnicode=true&amp;characterEncoding=UTF-8"
+            userId="root" 
+            password="123456" />
+        <javaModelGenerator targetPackage="com.pursuit.noteblog.po"
+            targetProject="F:/大海浪/code/src/main/java" />
+        <sqlMapGenerator targetPackage="mapper"
+            targetProject="F:/大海浪/code/src/main/resources" />
+        <javaClientGenerator targetPackage="com.pursuit.noteblog.dao"
+            targetProject="F:/大海浪/code/src/main/java" type="XMLMAPPER" />
+        
+        <table schema="noteblog" tableName="note_user" />
+        <table schema="noteblog" tableName="note_book" />
+        <table schema="noteblog" tableName="note_content" />
+        <table schema="noteblog" tableName="note_summary" />
+        <table schema="noteblog" tableName="note_config" />
+    </context>
+</generatorConfiguration>
