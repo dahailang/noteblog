@@ -1,4 +1,4 @@
-package com.pursuit.noteblog.controller.note;
+package com.pursuit.noteblog.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pursuit.noteblog.controller.BaseController;
 import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.service.NoteContentService;
 import com.pursuit.noteblog.web.WebResult;

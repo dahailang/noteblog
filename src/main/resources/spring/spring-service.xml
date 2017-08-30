@@ -12,8 +12,8 @@
     <!-- <bean id="adminService" class="com.sohu.cache.redis.impl.RedisCenterImpl"/> -->
 
     <!-- 笔记管理接口 -->
-    <bean id="noteService" class="com.pursuit.noteblog.service.impl.NoteServiceImpl" />
-    <bean id="noteBookService" class="com.pursuit.noteblog.service.impl.NotebookeServiceImpl" />
+<!--     <bean id="noteService" class="com.pursuit.noteblog.service.impl.NoteServiceImpl" />
+    <bean id="noteBookService" class="com.pursuit.noteblog.service.impl.NotebookeServiceImpl" /> -->
     <!-- 博客遍历接口-->
     <!-- <bean id="blogService" class="com.sohu.cache.schedule.impl.SchedulerCenterImpl" /> -->
 

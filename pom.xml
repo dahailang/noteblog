@@ -174,16 +174,13 @@
 						<artifactId>mysql-connector-java</artifactId>
 						<version>5.1.41</version>
 					</dependency>
-					<!-- 分页插件 -->
-					<dependency>
-						<groupId>com.xxg</groupId>
-						<artifactId>mybatis-plugins-mysqllimit</artifactId>
-						<version>1.0.0</version>
-					</dependency>
-				</dependencies>
+ 				</dependencies>
                 <configuration>
                     <verbose>true</verbose>
                     <overwrite>true</overwrite>
+                    <configurationFile>  
+                        src/main/resources/generatorConfig.xml
+                    </configurationFile>
                 </configuration>
             </plugin>
 		</plugins>

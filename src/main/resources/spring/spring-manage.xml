@@ -7,9 +7,6 @@
        default-autowire="byName">
 
 
-
-    <bean id="userService" class="com.sohu.cache.web.service.impl.UserServiceImpl"/>
-
 	<!-- 邮件报警 -->
     <bean id="emailComponent" class="com.sohu.cache.web.component.EmailComponentImpl"/>
 

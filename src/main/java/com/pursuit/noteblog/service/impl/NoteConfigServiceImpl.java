@@ -16,11 +16,10 @@ import org.springframework.stereotype.Service;
 
 import com.pursuit.noteblog.dao.NoteConfigMapper;
 import com.pursuit.noteblog.po.NoteConfig;
-import com.pursuit.noteblog.po.NoteConfigExample;
 import com.pursuit.noteblog.service.NoteConfigService;
 import com.pursuit.noteblog.util.ConstUtils;
 
-@Service
+//@Service
 public class NoteConfigServiceImpl  implements NoteConfigService{
 
     private Logger logger = LoggerFactory.getLogger(NoteConfigServiceImpl.class);
@@ -30,7 +29,7 @@ public class NoteConfigServiceImpl  implements NoteConfigService{
    
     @PostConstruct  //初始化方法的注解方式  等同:init-method=init  
     public void init() {
-        reloadSystemConfig();
+       // reloadSystemConfig();
     }
     @PreDestroy //销毁方法的注解方式  等同于 xml:destory-method=destory
     public void destroy(){
@@ -78,7 +77,7 @@ public class NoteConfigServiceImpl  implements NoteConfigService{
      * 获取所有配置的key-value
      */
     private Map<String, String> getConfigMap() {
-    	List<NoteConfig> result = noteConfigMapper.selectByExample(new NoteConfigExample());
+    	List<NoteConfig> result = noteConfigMapper.getAllConfig();
     	Map<String, String> configmap = new HashMap<>();
     	for (NoteConfig config :result ) {
     		configmap.put(config.getConfigKey(), config.getConfigValue());

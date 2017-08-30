@@ -1,4 +1,4 @@
-package com.pursuit.noteblog.controller.admin;
+package com.pursuit.noteblog.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pursuit.noteblog.controller.BaseController;
 import com.pursuit.noteblog.enums.LoginEnum;
 import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.service.NoteUserService;

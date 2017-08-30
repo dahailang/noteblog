@@ -5,18 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.pursuit.noteblog.dao.NoteContentMapper;
 import com.pursuit.noteblog.po.NoteBook;
 import com.pursuit.noteblog.po.NoteContent;
-import com.pursuit.noteblog.po.NoteContentExample;
-import com.pursuit.noteblog.po.NoteContentExample.Criteria;
 import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.service.NoteBookService;
 import com.pursuit.noteblog.service.NoteContentService;
 import com.pursuit.noteblog.web.WebResult;
-@Service
+
 public class NoteContentServiceImpl implements NoteContentService {
 	
 	@Autowired
@@ -59,10 +56,7 @@ public class NoteContentServiceImpl implements NoteContentService {
 
 	@Override
 	public List<NoteContent> findByUserId(String userId) {
-		NoteContentExample example = new NoteContentExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andUidEqualTo(userId);
-		return noteContentMapper.selectByExample(example);
+		return noteContentMapper.selectByUid(userId);
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.pursuit.noteblog.expection.NoteBlogHttpUtilsException;
+import com.pursuit.noteblog.expection.NoteBlogException;
 
 /**
  * http原生工具类
@@ -63,7 +63,7 @@ public final class HttpUtils {
             urlConn.getOutputStream().flush();
             urlConn.getOutputStream().close();
         } catch (Exception e) {
-            throw new NoteBlogHttpUtilsException(e.getMessage(), e);
+            throw new NoteBlogException(e.getMessage(), e);
         }
         return urlConn;
     }
@@ -86,7 +86,7 @@ public final class HttpUtils {
             in.close();
             return responseContent;
         } catch (Exception e) {
-            throw new NoteBlogHttpUtilsException(e.getMessage(), e);
+            throw new NoteBlogException(e.getMessage(), e);
         }
     }
 
@@ -115,7 +115,7 @@ public final class HttpUtils {
             String s = new String(out.toByteArray(), encoding);
             return s;
         } catch (Exception e) {
-            throw new NoteBlogHttpUtilsException(e.getMessage(), e);
+            throw new NoteBlogException(e.getMessage(), e);
         } finally {
             if (conn != null) {
                 conn.disconnect();

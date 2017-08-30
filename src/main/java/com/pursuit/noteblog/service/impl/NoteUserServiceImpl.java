@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.pursuit.noteblog.dao.NoteUserMapper;
 import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.service.NoteUserService;
-@Service
+//@Service
 public class NoteUserServiceImpl implements NoteUserService{
 	@Autowired
 	private NoteUserMapper  noteUserMapper;

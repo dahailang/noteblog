@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pursuit.noteblog.dao.NoteBookMapper;
 import com.pursuit.noteblog.po.NoteBook;
-import com.pursuit.noteblog.po.NoteBookExample;
-import com.pursuit.noteblog.po.NoteBookExample.Criteria;
 import com.pursuit.noteblog.service.NoteBookService;
 
 public class NotebookeServiceImpl implements NoteBookService {
@@ -29,9 +27,6 @@ public class NotebookeServiceImpl implements NoteBookService {
 
 	@Override
 	public List<NoteBook> findByUserid(String userId) {
-		NoteBookExample condition = new NoteBookExample();
-		Criteria criteria = condition.createCriteria(); 
-		criteria.andUidEqualTo(userId);
-		return noteBookMapper.selectByExample(condition);
+		return noteBookMapper.selectByUid(userId);
 	}
 }

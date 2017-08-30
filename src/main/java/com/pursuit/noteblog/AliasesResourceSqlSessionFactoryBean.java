@@ -10,9 +10,6 @@ import org.springframework.util.ClassUtils;
 
 import java.util.ArrayList;
 
-/**
- * 
- */
 public class AliasesResourceSqlSessionFactoryBean extends SqlSessionFactoryBean {
     
 	private static final Log LOGGER = LogFactory.getLog(SqlSessionFactoryBean.class);

@@ -15,8 +15,8 @@
 		
 		<!-- 注释 -->
 		<commentGenerator>
-			<property name="suppressAllComments" value="false" /><!-- 是否取消注释 -->
-			<property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳 -->
+			<property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
+			<property name="suppressDate" value="false" /> <!-- 是否生成注释代时间戳 -->
 		</commentGenerator>
 		<!-- jdbc连接 -->
         <jdbcConnection 
@@ -57,10 +57,45 @@
 			<property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         
-        <table schema="noteblog" tableName="note_user" />
-        <table schema="noteblog" tableName="note_book" />
-        <table schema="noteblog" tableName="note_content" />
-        <table schema="noteblog" tableName="note_summary" />
-        <table schema="noteblog" tableName="note_config" />
+        <table schema="noteblog" tableName="note_user" 
+        	enableCountByExample="false" 
+        	enableUpdateByExample="false" 
+        	enableDeleteByExample="false" 
+        	enableSelectByExample="false" 
+        	selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+		</table>
+        <table schema="noteblog" tableName="note_book" 
+        	enableCountByExample="false" 
+        	enableUpdateByExample="false" 
+        	enableDeleteByExample="false" 
+        	enableSelectByExample="false" 
+        	selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+		</table>
+        <table schema="noteblog" tableName="note_content" 
+        	enableCountByExample="false" 
+        	enableUpdateByExample="false" 
+        	enableDeleteByExample="false" 
+        	enableSelectByExample="false" 
+        	selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+		</table>
+        <table schema="noteblog" tableName="note_summary" 
+        	enableCountByExample="false" 
+        	enableUpdateByExample="false" 
+        	enableDeleteByExample="false" 
+        	enableSelectByExample="false" 
+        	selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+		</table>
+        <table schema="noteblog" tableName="note_config" 
+        	enableCountByExample="false" 
+        	enableUpdateByExample="false" 
+        	enableDeleteByExample="false" 
+        	enableSelectByExample="false" 
+        	selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+		</table>
     </context>
 </generatorConfiguration>
