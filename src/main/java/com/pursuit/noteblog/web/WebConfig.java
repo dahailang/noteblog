@@ -25,21 +25,21 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	public AppInterceptor appInterceptor(){
 		return new AppInterceptor();
 	}
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		HandlerInterceptor interceptor = frontUserLoginInterceptor();
-		registry.addInterceptor(interceptor).
-			addPathPatterns("/**").
-			excludePathPatterns("/").
-			excludePathPatterns("/index").
-			excludePathPatterns("/index.html").
-			excludePathPatterns("/login").
-			excludePathPatterns("/auth/doLogin").
-			excludePathPatterns("/auth/doRegister").
-			excludePathPatterns("/register");
-		//公共过滤器
-		registry.addInterceptor(appInterceptor());
-	}
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		HandlerInterceptor interceptor = frontUserLoginInterceptor();
+//		registry.addInterceptor(interceptor).
+//			addPathPatterns("/**").
+//			excludePathPatterns("/").
+//			excludePathPatterns("/index").
+//			excludePathPatterns("/index.html").
+//			excludePathPatterns("/login").
+//			excludePathPatterns("/auth/doLogin").
+//			excludePathPatterns("/auth/doRegister").
+//			excludePathPatterns("/register");
+//		//公共过滤器
+//		registry.addInterceptor(appInterceptor());
+//	}
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 //		InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();

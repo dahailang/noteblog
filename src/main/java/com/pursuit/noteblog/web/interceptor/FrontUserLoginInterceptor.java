@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.pursuit.noteblog.entity.User;
-import com.pursuit.noteblog.service.UserService;
+import com.pursuit.noteblog.po.NoteUser;
+import com.pursuit.noteblog.service.NoteUserService;
 import com.pursuit.noteblog.util.ConstUtils;
 import com.pursuit.noteblog.web.conversation.UserLoginStatusService;
 
@@ -19,7 +19,7 @@ import com.pursuit.noteblog.web.conversation.UserLoginStatusService;
 public class FrontUserLoginInterceptor extends HandlerInterceptorAdapter {
     private Logger logger = LoggerFactory.getLogger(FrontUserLoginInterceptor.class);
     @Autowired
-    private UserService userService;
+    private NoteUserService noteUserService;
     @Autowired
     private UserLoginStatusService userLoginStatusService;
 
@@ -28,7 +28,7 @@ public class FrontUserLoginInterceptor extends HandlerInterceptorAdapter {
                              HttpServletResponse response, Object handler) throws Exception {
 
         String userId = userLoginStatusService.getUserIdFromLoginStatus(request);
-        User user = userService.getUserByUid(userId);
+        NoteUser user = noteUserService.getUserByUid(userId);
         
         if (user == null) {
         	logger.info("用户未登录，重定向到登录页面");
@@ -41,8 +41,8 @@ public class FrontUserLoginInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setUserService(NoteUserService noteUserService) {
+        this.noteUserService = noteUserService;
     }
 
     public void setUserLoginStatusService(UserLoginStatusService userLoginStatusService) {

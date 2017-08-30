@@ -2,8 +2,7 @@ package com.pursuit.noteblog.alert.impl;
 
 import java.util.List;
 import com.pursuit.noteblog.alert.AppAlertService;
-import com.pursuit.noteblog.entity.InstanceFault;
-
+import com.pursuit.noteblog.vo.InstanceFault;
 /**
  * 应用报警实现
  */

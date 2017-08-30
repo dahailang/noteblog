@@ -4,20 +4,58 @@
     
     <!-- <classPathEntry
         location="D:/repository/maven/repo/mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar" /> -->
-    
+    <!-- 引入配置文件 -->
+	<!-- <properties resource="generator.properties"/> -->
     <!-- 一个数据库一个context -->
-    <context id="context1" targetRuntime="MyBatis3">
+    <context id="context1" targetRuntime="MyBatis3" defaultModelType="flat">
+    	<property name="beginningDelimiter" value="`"/>
+		<property name="endingDelimiter" value="`" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+		
+		<!-- 注释 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="false" /><!-- 是否取消注释 -->
+			<property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳 -->
+		</commentGenerator>
+		<!-- jdbc连接 -->
         <jdbcConnection 
         	driverClass="com.mysql.jdbc.Driver"
             connectionURL="jdbc:mysql://localhost:3306/noteblog?useUnicode=true&amp;characterEncoding=UTF-8"
             userId="root" 
             password="123456" />
+		<!-- <jdbcConnection driverClass="${jdbc_driver}"
+			connectionURL="${jdbc_url}" 
+			userId="${jdbc_user}"
+			password="${jdbc_password}" /> -->
+        <!-- 类型转换 -->
+		<javaTypeResolver>
+			<!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+			<property name="forceBigDecimals" value="true" />
+		</javaTypeResolver>
+		
+		<!-- 生成实体类地址 -->
         <javaModelGenerator targetPackage="com.pursuit.noteblog.po"
-            targetProject="F:/大海浪/code/src/main/java" />
+            targetProject="F:/大海浪/code/src/main/java" >
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+			<property name="enableSubPackages" value="false" />
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		
+		<!-- 生成mapxml文件 -->
         <sqlMapGenerator targetPackage="mapper"
-            targetProject="F:/大海浪/code/src/main/resources" />
+            targetProject="F:/大海浪/code/src/main/resources" >
+        	<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+			<property name="enableSubPackages" value="false" />    
+        </sqlMapGenerator>
+            
+        <!-- 生成mapxml对应client，也就是接口dao -->
         <javaClientGenerator targetPackage="com.pursuit.noteblog.dao"
-            targetProject="F:/大海浪/code/src/main/java" type="XMLMAPPER" />
+            targetProject="F:/大海浪/code/src/main/java" type="XMLMAPPER" >
+        	<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+			<property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
         
         <table schema="noteblog" tableName="note_user" />
         <table schema="noteblog" tableName="note_book" />

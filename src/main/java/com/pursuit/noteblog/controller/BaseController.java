@@ -11,8 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.pursuit.noteblog.entity.User;
-import com.pursuit.noteblog.service.UserService;
+import com.pursuit.noteblog.po.NoteUser;
+import com.pursuit.noteblog.service.NoteUserService;
 import com.pursuit.noteblog.web.conversation.UserLoginStatusService;
 import com.pursuit.noteblog.web.i18n.LocaleMessageSourceUtil;
 
@@ -24,7 +24,7 @@ public class BaseController {
     @Autowired
     private UserLoginStatusService userLoginStatusService;
     @Autowired
-    private UserService userService;
+    private NoteUserService noteUserService;
     @Autowired
     private LocaleMessageSourceUtil messageSourceUtil;
 
@@ -32,8 +32,8 @@ public class BaseController {
     	String userId = userLoginStatusService.getUserIdFromLoginStatus(request);
     	return userId;
     }
-    public User getUserInfo(String userId) {
-    	User user = userService.getUserByUid(userId);
+    public NoteUser getUserInfo(String userId) {
+    	NoteUser user = noteUserService.getUserByUid(userId);
     	return user;
     }
     /**

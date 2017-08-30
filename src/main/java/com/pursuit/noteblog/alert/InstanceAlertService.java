@@ -1,7 +1,8 @@
 package com.pursuit.noteblog.alert;
 import java.util.List;
 
-import com.pursuit.noteblog.entity.InstanceFault;
+import com.pursuit.noteblog.vo.InstanceFault;
+
 
 /**
  * 实例报警检测

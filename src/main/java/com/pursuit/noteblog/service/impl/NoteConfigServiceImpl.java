@@ -1,6 +1,6 @@
 package com.pursuit.noteblog.service.impl;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,18 +14,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pursuit.noteblog.dao.SystemConfigDao;
-import com.pursuit.noteblog.entity.SystemConfig;
-import com.pursuit.noteblog.enums.SuccessEnum;
-import com.pursuit.noteblog.service.SystemConfigService;
+import com.pursuit.noteblog.dao.NoteConfigMapper;
+import com.pursuit.noteblog.po.NoteConfig;
+import com.pursuit.noteblog.po.NoteConfigExample;
+import com.pursuit.noteblog.service.NoteConfigService;
 import com.pursuit.noteblog.util.ConstUtils;
 
-public class SystemConfigServiceImpl  implements SystemConfigService{
+@Service
+public class NoteConfigServiceImpl  implements NoteConfigService{
 
-    private Logger logger = LoggerFactory.getLogger(SystemConfigServiceImpl.class);
+    private Logger logger = LoggerFactory.getLogger(NoteConfigServiceImpl.class);
     
     @Autowired
-    private SystemConfigDao systemConfigDao;
+    private NoteConfigMapper noteConfigMapper;
+   
     @PostConstruct  //初始化方法的注解方式  等同:init-method=init  
     public void init() {
         reloadSystemConfig();
@@ -56,62 +58,36 @@ public class SystemConfigServiceImpl  implements SystemConfigService{
 	}
 
 	@Override
-	public SuccessEnum updateConfig(Map<String, String> configMap) {
+	public String updateConfig(Map<String, String> configMap) {
         for (Entry<String, String> entry : configMap.entrySet()) {
             String configKey = entry.getKey();
             String configValue = entry.getValue();
             try {
-            	systemConfigDao.update(configKey, configValue);
+            	System.out.println("执行更新操作");
             } catch (Exception e) {
                 logger.error("key {} value {} update faily" + e.getMessage(), configKey, configValue, e);
-                return SuccessEnum.FAIL;
+                return "fail";
+                
             }
         }
-        return SuccessEnum.SUCCESS;
+        return "success";
+        		
 	}
 	
     /**
      * 获取所有配置的key-value
      */
     private Map<String, String> getConfigMap() {
-        Map<String, String> configMap = new LinkedHashMap<String, String>();
-        List<SystemConfig> configList = systemConfigDao.getALLConfigByStatus(1);
-        for (SystemConfig config : configList) {
-            configMap.put(config.getConfigKey(), config.getConfigValue());
-        }
-        return configMap;
+    	List<NoteConfig> result = noteConfigMapper.selectByExample(new NoteConfigExample());
+    	Map<String, String> configmap = new HashMap<>();
+    	for (NoteConfig config :result ) {
+    		configmap.put(config.getConfigKey(), config.getConfigValue());
+		}
+        return configmap;
     }
     @Override
-    public List<SystemConfig> getConfigList(int status) {
-    	return systemConfigDao.getALLConfigByStatus(status);
+    public List<NoteConfig> getConfigList(int status) {
+    	return null;
     }
     
-    
-    
-    
-//	this.GlobalAllConfigs = map[string]interface{}{}
-//	this.GlobalStringConfigs = map[string]string{}
-//	this.GlobalArrayConfigs = map[string][]string{}
-//	this.GlobalMapConfigs = map[string]map[string]string{}
-//	this.GlobalArrMapConfigs = map[string][]map[string]string{}
-	@Override
-	public String getGlobalStringConfig(String key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<String> getGlobalArrayConfig(String key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Map<String, String> GlobalMapConfigs(String key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public List<Map<String, String>> getGlobalArrMapConfig(String key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

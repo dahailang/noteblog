@@ -2,7 +2,7 @@ package com.pursuit.noteblog.service;
 
 import java.util.List;
 
-import com.pursuit.noteblog.entity.NoteBook;
+import com.pursuit.noteblog.po.NoteBook;
 
 public interface NoteBookService {
 	

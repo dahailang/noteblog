@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pursuit.noteblog.controller.BaseController;
-import com.pursuit.noteblog.entity.User;
-import com.pursuit.noteblog.service.NoteService;
+import com.pursuit.noteblog.po.NoteUser;
+import com.pursuit.noteblog.service.NoteContentService;
 import com.pursuit.noteblog.web.WebResult;
 @Controller
 public class NoteController extends BaseController{
 	
 	@Autowired
-	private NoteService noteService;
+	private NoteContentService noteContentService;
 	
 	@RequestMapping("")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response,Model model,String noteId){
     	
 		model.addAttribute("title", "Leanote, "+getMessage("moto"));
-		User user = (User) request.getAttribute("userInfo");
-		WebResult noteResut = noteService.index(user,noteId);
+		NoteUser user = (NoteUser) request.getAttribute("userInfo");
+		WebResult noteResut = noteContentService.index(user,noteId);
 		model.addAllAttributes(noteResut.getAttributes());
 		return new ModelAndView("/note/note-new");
 	}
@@ -34,8 +34,8 @@ public class NoteController extends BaseController{
 	@RequestMapping("/note/{noteId}")
 	public ModelAndView note(HttpServletRequest request, HttpServletResponse response,Model model,@PathVariable("noteId")String noteId){
 		model.addAttribute("title", "Leanote, "+getMessage("moto"));
-		User user = (User) request.getAttribute("userInfo");
-		WebResult noteResut = noteService.index(user,noteId);
+		NoteUser user = (NoteUser) request.getAttribute("userInfo");
+		WebResult noteResut = noteContentService.index(user,noteId);
 		model.addAllAttributes(noteResut.getAttributes());
 		return new ModelAndView("/note/note-new");
 	}
