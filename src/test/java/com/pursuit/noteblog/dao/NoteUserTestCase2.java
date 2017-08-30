@@ -3,17 +3,15 @@ package com.pursuit.noteblog.dao;
 import java.util.Date;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.pursuit.noteblog.TestCase;
 import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.util.IdGenerator;
 
 public class NoteUserTestCase2{
 	@Test
 	public void testAddUser(){
-		ClassPathXmlApplicationContext conteext = new ClassPathXmlApplicationContext("classpath:/spring/spring-mybatis.xml");
+		ClassPathXmlApplicationContext conteext = new ClassPathXmlApplicationContext("classpath:/spring/spring-online.xml");
 		NoteUserMapper noteUserMapper = (NoteUserMapper) conteext.getBean("noteUserMapper");
 		
 		System.out.println(noteUserMapper);
