@@ -1,11 +1,14 @@
 package com.pursuit.noteblog.service.impl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pursuit.noteblog.dao.NoteUserMapper;
 import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.service.NoteUserService;
+import com.pursuit.noteblog.util.IdGenerator;
 //@Service
 public class NoteUserServiceImpl implements NoteUserService{
 	@Autowired
@@ -24,7 +27,18 @@ public class NoteUserServiceImpl implements NoteUserService{
 
 	@Override
 	public String register(String email, String pwd, String fromUserId) {
-		return null;
+		NoteUser noteUser = new NoteUser();
+		noteUser.setId(IdGenerator.UID.generateSessionId());
+		noteUser.setEmail(email);
+		noteUser.setPassword(pwd);
+		noteUser.setNickname(email);
+		noteUser.setStatus(1);
+		noteUser.setCreateTime(new Date());
+		noteUser.setLastUpdateTime(new Date());
+		noteUser.setType(1);
+		noteUser.setAvatar("/");
+		noteUserMapper.insert(noteUser);
+		return "ok";
 	}
 
 	@Override

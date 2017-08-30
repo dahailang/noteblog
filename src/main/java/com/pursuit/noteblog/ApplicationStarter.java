@@ -9,16 +9,13 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootApplication
 @ImportResource("classpath:spring/spring.xml")
-@ActiveProfiles("online")
 public class ApplicationStarter {
 
 	public static void main(String[] args) {
 		Logger logger  = LoggerFactory.getLogger(ApplicationStarter.class);
-        
 		SpringApplication app = new SpringApplication(ApplicationStarter.class);
         app.setAdditionalProfiles();
         app.setBannerMode(Banner.Mode.LOG);

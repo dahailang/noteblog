@@ -6,9 +6,15 @@
         " default-autowire="byName">
 
     <!-- 用户管理接口 -->
-    <bean id="authService" class="com.pursuit.noteblog.service.impl.AuthServiceImpl"/>
-    <bean id="userService" class="com.pursuit.noteblog.service.impl.UserServiceImpl"/>
+    <!-- <bean id="authService" class="com.pursuit.noteblog.service.impl.AuthServiceImpl"/> -->
+    <!-- <bean id="userService" class="com.pursuit.noteblog.service.impl.UserServiceImpl"/> -->
     <bean id="userLoginStatusService" class="com.pursuit.noteblog.web.conversation.impl.UserLoginStatusCookieServiceImpl"/>
+    
+    <bean id="noteUserService" class="com.pursuit.noteblog.service.impl.NoteUserServiceImpl"/>
+    <bean id="noteContentService" class="com.pursuit.noteblog.service.impl.NoteContentServiceImpl"/>
+    <bean id="noteConfigService" class="com.pursuit.noteblog.service.impl.NoteConfigServiceImpl"/>
+    <bean id="noteBookService" class="com.pursuit.noteblog.service.impl.NotebookeServiceImpl"/>
+  
     <!-- <bean id="adminService" class="com.sohu.cache.redis.impl.RedisCenterImpl"/> -->
 
     <!-- 笔记管理接口 -->

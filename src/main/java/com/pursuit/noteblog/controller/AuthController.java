@@ -14,8 +14,6 @@ import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.service.NoteUserService;
 import com.pursuit.noteblog.web.WebResult;
 import com.pursuit.noteblog.web.conversation.UserLoginStatusService;
-
-
 @RestController
 @RequestMapping("/auth")
 public class AuthController extends BaseController{

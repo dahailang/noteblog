@@ -34,8 +34,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 			excludePathPatterns("/index").
 			excludePathPatterns("/index.html").
 			excludePathPatterns("/login").
+			excludePathPatterns("/error").
 			excludePathPatterns("/auth/doLogin").
-			excludePathPatterns("/auth/doRegister").
+			excludePathPatterns("/auth/doregister").
 			excludePathPatterns("/register");
 		//公共过滤器
 		registry.addInterceptor(appInterceptor());
