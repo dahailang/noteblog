@@ -14,7 +14,7 @@ public class NotebookeServiceImpl implements NoteBookService {
 	NoteBookMapper noteBookMapper;
 
 	@Override
-	public NoteBook save(NoteBook notebook) {
+	public NoteBook addNoteBook(NoteBook notebook) {
 		noteBookMapper.insert(notebook);
 		return notebook;
 	}

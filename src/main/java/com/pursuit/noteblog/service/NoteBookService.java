@@ -6,7 +6,7 @@ import com.pursuit.noteblog.po.NoteBook;
 
 public interface NoteBookService {
 	
-	public NoteBook save(NoteBook notebook);
+	public NoteBook addNoteBook(NoteBook notebook);
 	public NoteBook renameNoteBook(NoteBook notebook);
 	public List<NoteBook> findByUserid(String userId);
 }

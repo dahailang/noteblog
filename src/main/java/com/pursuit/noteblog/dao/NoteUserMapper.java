@@ -3,7 +3,8 @@ package com.pursuit.noteblog.dao;
 import com.pursuit.noteblog.po.NoteUser;
 
 public interface NoteUserMapper {
-    int deleteByPrimaryKey(String id);
+    
+	int deleteByPrimaryKey(String id);
 
     int insert(NoteUser record);
 

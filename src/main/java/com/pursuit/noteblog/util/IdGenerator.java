@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public enum IdGenerator {
-	UID(1),
+	UID(7),
 	NOTEID(7);
 	
     private IdGenerator(int sessionIdLength) {

@@ -5,7 +5,8 @@ import java.util.List;
 import com.pursuit.noteblog.po.NoteConfig;
 
 public interface NoteConfigMapper {
-    int deleteByPrimaryKey(String id);
+    
+	int deleteByPrimaryKey(String id);
 
     int insert(NoteConfig record);
 

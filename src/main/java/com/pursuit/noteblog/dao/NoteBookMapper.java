@@ -5,9 +5,10 @@ import java.util.List;
 import com.pursuit.noteblog.po.NoteBook;
 
 public interface NoteBookMapper {
-    int deleteByPrimaryKey(String id);
 
-    int insert(NoteBook record);
+	int insert(NoteBook record);
+    
+	int deleteByPrimaryKey(String id);
 
     int insertSelective(NoteBook record);
 

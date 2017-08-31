@@ -12,7 +12,9 @@
     
     <bean id="noteUserService" class="com.pursuit.noteblog.service.impl.NoteUserServiceImpl"/>
     <bean id="noteContentService" class="com.pursuit.noteblog.service.impl.NoteContentServiceImpl"/>
-    <bean id="noteConfigService" class="com.pursuit.noteblog.service.impl.NoteConfigServiceImpl"/>
+    <bean id="noteConfigService" class="com.pursuit.noteblog.service.impl.NoteConfigServiceImpl"  
+    	init-method="init" >
+    </bean>
     <bean id="noteBookService" class="com.pursuit.noteblog.service.impl.NotebookeServiceImpl"/>
   
     <!-- <bean id="adminService" class="com.sohu.cache.redis.impl.RedisCenterImpl"/> -->

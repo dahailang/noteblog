@@ -20,7 +20,7 @@ public class NoteUserTestCase extends TestCase {
 		noteUser.setAvatar("/sdfs/sdfs");
 		noteUser.setCreateTime(new Date());
 		noteUser.setLastUpdateTime(new Date());
-		noteUser.setEmail("watgn");
+		noteUser.setEmail("watgn111");
 		noteUser.setPassword("1231");
 		noteUser.setNickname("dfs");
 		noteUser.setStatus(1);

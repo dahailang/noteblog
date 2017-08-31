@@ -5,21 +5,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
 import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.pursuit.noteblog.dao.NoteConfigMapper;
 import com.pursuit.noteblog.po.NoteConfig;
 import com.pursuit.noteblog.service.NoteConfigService;
 import com.pursuit.noteblog.util.ConstUtils;
 
-//@Service
 public class NoteConfigServiceImpl  implements NoteConfigService{
 
     private Logger logger = LoggerFactory.getLogger(NoteConfigServiceImpl.class);
@@ -27,11 +22,11 @@ public class NoteConfigServiceImpl  implements NoteConfigService{
     @Autowired
     private NoteConfigMapper noteConfigMapper;
    
-    @PostConstruct  //初始化方法的注解方式  等同:init-method=init  
+    //@PostConstruct  //初始化方法的注解方式  等同:init-method=init  
     public void init() {
-       // reloadSystemConfig();
+       reloadSystemConfig();
     }
-    @PreDestroy //销毁方法的注解方式  等同于 xml:destory-method=destory
+    //@PreDestroy //销毁方法的注解方式  等同于 xml:destory-method=destory
     public void destroy(){
     	System.out.println("调用销毁化方法....");  
     }

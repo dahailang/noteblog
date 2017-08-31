@@ -5,7 +5,8 @@ import java.util.List;
 import com.pursuit.noteblog.po.NoteContent;
 
 public interface NoteContentMapper {
-    int deleteByPrimaryKey(String id);
+    
+	int deleteByPrimaryKey(String id);
 
     int insert(NoteContent record);
 
