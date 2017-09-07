@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.service.NoteContentService;
-import com.pursuit.noteblog.web.WebResult;
+import com.pursuit.noteblog.web.NBResult;
 @Controller
 public class NoteController extends BaseController{
 	
@@ -24,7 +24,7 @@ public class NoteController extends BaseController{
     	
 		model.addAttribute("title", "Leanote, "+getMessage("moto"));
 		NoteUser user = (NoteUser) request.getAttribute("userInfo");
-		WebResult noteResut = noteContentService.index(user,noteId);
+		NBResult noteResut = noteContentService.index(user,noteId);
 		model.addAllAttributes(noteResut.getAttributes());
 		return new ModelAndView("/note/note-new");
 	}
@@ -34,7 +34,7 @@ public class NoteController extends BaseController{
 	public ModelAndView note(HttpServletRequest request, HttpServletResponse response,Model model,@PathVariable("noteId")String noteId){
 		model.addAttribute("title", "Leanote, "+getMessage("moto"));
 		NoteUser user = (NoteUser) request.getAttribute("userInfo");
-		WebResult noteResut = noteContentService.index(user,noteId);
+		NBResult noteResut = noteContentService.index(user,noteId);
 		model.addAllAttributes(noteResut.getAttributes());
 		return new ModelAndView("/note/note-new");
 	}

@@ -18,7 +18,7 @@
     from note_config
     where id = #{id,jdbcType=VARCHAR}
   </select>
-    <select id="getAllConfig" resultMap="BaseResultMap" >
+  <select id="getAllConfig" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />
     from note_config

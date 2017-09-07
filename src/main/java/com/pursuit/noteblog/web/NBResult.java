@@ -3,7 +3,7 @@ package com.pursuit.noteblog.web;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WebResult {
+public class  NBResult{
     // 响应业务状态
     private Integer status;
     // 响应业务状态
@@ -13,7 +13,7 @@ public class WebResult {
     
     private Map<String, Object> attributes = null;
 
-    public WebResult() {
+    public NBResult() {
     	
     }
     
@@ -26,24 +26,24 @@ public class WebResult {
     public Map<String, Object> getAttributes(){
     	return attributes;
     }
-    public static WebResult ok() {
-        return new WebResult(200,true,"OK");
+    public static NBResult ok() {
+        return new NBResult(200,true,"OK");
     }
-    public static WebResult ok(String msg) {
-    	return new WebResult(200,true,msg);
+    public static NBResult ok(String msg) {
+    	return new NBResult(200,true,msg);
     }
-    public static WebResult ok(Map<String,Object> map) {
-    	return new WebResult(200,true,"OK",map);
+    public static NBResult ok(Map<String,Object> map) {
+    	return new NBResult(200,true,"OK",map);
     }
-    public static WebResult fail(String msg) {
-    	return new WebResult(500,false,msg);
+    public static NBResult fail(String msg) {
+    	return new NBResult(500,false,msg);
     }
-    public WebResult(Integer status, boolean ok,String msg) {
+    public NBResult(Integer status, boolean ok,String msg) {
         this.status = status;
         this.ok = ok;
         this.msg = msg;
     }
-    public WebResult(Integer status, boolean ok,String msg,Map<String,Object> map) {
+    public NBResult(Integer status, boolean ok,String msg,Map<String,Object> map) {
     	this.status = status;
     	this.ok = ok;
     	this.msg = msg;

@@ -22,11 +22,11 @@ public class NoteConfigServiceImpl  implements NoteConfigService{
     @Autowired
     private NoteConfigMapper noteConfigMapper;
    
-    //@PostConstruct  //初始化方法的注解方式  等同:init-method=init  
+
     public void init() {
        reloadSystemConfig();
     }
-    //@PreDestroy //销毁方法的注解方式  等同于 xml:destory-method=destory
+
     public void destroy(){
     	System.out.println("调用销毁化方法....");  
     }
@@ -44,7 +44,7 @@ public class NoteConfigServiceImpl  implements NoteConfigService{
         logger.info("{}: {}", "ConstUtils.PHONES", ConstUtils.ADMIN_PHONES);
 
         //cookie登录方式所需要的domain
-        ConstUtils.COOKIE_DOMAIN = MapUtils.getString(configMap, "cachecloud.cookie.domain", ConstUtils.DEFAULT_COOKIE_DOMAIN);
+        ConstUtils.COOKIE_DOMAIN = MapUtils.getString(configMap, "noteblog.cookie.domain", ConstUtils.DEFAULT_COOKIE_DOMAIN);
         logger.info("{}: {}", "ConstUtils.COOKIE_DOMAIN", ConstUtils.COOKIE_DOMAIN);
         
         logger.info("===========ConfigServiceImpl reload config end============");

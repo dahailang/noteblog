@@ -39,7 +39,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 			excludePathPatterns("/auth/doregister").
 			excludePathPatterns("/register");
 		//公共过滤器
-		registry.addInterceptor(appInterceptor());
+		//registry.addInterceptor(appInterceptor());
 	}
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {

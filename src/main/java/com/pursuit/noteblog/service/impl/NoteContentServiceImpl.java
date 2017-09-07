@@ -12,7 +12,7 @@ import com.pursuit.noteblog.po.NoteContent;
 import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.service.NoteBookService;
 import com.pursuit.noteblog.service.NoteContentService;
-import com.pursuit.noteblog.web.WebResult;
+import com.pursuit.noteblog.web.NBResult;
 
 public class NoteContentServiceImpl implements NoteContentService {
 	
@@ -24,7 +24,7 @@ public class NoteContentServiceImpl implements NoteContentService {
 	
 	
 	@Override
-	public WebResult index(NoteUser noteUser,String noteId) {
+	public NBResult index(NoteUser noteUser,String noteId) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		// 已登录了, 那么得到所有信息
 		List<NoteBook> notebooks = noteBookService.findByUserid(noteUser.getId());
@@ -51,7 +51,7 @@ public class NoteContentServiceImpl implements NoteContentService {
 		}
 		map.put("noteContent", noteContent);
 		map.put("notebooks", notebooks);
-		return WebResult.ok(map);
+		return NBResult.ok(map);
 	}
 
 	@Override

@@ -3,13 +3,11 @@ package com.pursuit.noteblog.service.impl;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.pursuit.noteblog.dao.NoteUserMapper;
 import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.service.NoteUserService;
 import com.pursuit.noteblog.util.IdGenerator;
-//@Service
 public class NoteUserServiceImpl implements NoteUserService{
 	@Autowired
 	private NoteUserMapper  noteUserMapper;

@@ -5,25 +5,13 @@
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         " default-autowire="byName">
 
-    <!-- 用户管理接口 -->
-    <!-- <bean id="authService" class="com.pursuit.noteblog.service.impl.AuthServiceImpl"/> -->
-    <!-- <bean id="userService" class="com.pursuit.noteblog.service.impl.UserServiceImpl"/> -->
-    <bean id="userLoginStatusService" class="com.pursuit.noteblog.web.conversation.impl.UserLoginStatusCookieServiceImpl"/>
-    
-    <bean id="noteUserService" class="com.pursuit.noteblog.service.impl.NoteUserServiceImpl"/>
+    <bean id="noteUserService" class="com.pursuit.noteblog.service.impl.NoteUserServiceImpl"/> 
     <bean id="noteContentService" class="com.pursuit.noteblog.service.impl.NoteContentServiceImpl"/>
     <bean id="noteConfigService" class="com.pursuit.noteblog.service.impl.NoteConfigServiceImpl"  
-    	init-method="init" >
-    </bean>
+    	init-method="init"  destroy-method="destroy" />
     <bean id="noteBookService" class="com.pursuit.noteblog.service.impl.NotebookeServiceImpl"/>
-  
-    <!-- <bean id="adminService" class="com.sohu.cache.redis.impl.RedisCenterImpl"/> -->
 
-    <!-- 笔记管理接口 -->
-<!--     <bean id="noteService" class="com.pursuit.noteblog.service.impl.NoteServiceImpl" />
-    <bean id="noteBookService" class="com.pursuit.noteblog.service.impl.NotebookeServiceImpl" /> -->
-    <!-- 博客遍历接口-->
-    <!-- <bean id="blogService" class="com.sohu.cache.schedule.impl.SchedulerCenterImpl" /> -->
-
-
+	<!-- 用户session控制 -->
+    <bean id="userLoginStatusService" class="com.pursuit.noteblog.web.conversation.impl.UserLoginStatusCookieServiceImpl"/>
+    
 </beans>
