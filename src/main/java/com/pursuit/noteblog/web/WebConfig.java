@@ -15,7 +15,7 @@ import com.pursuit.noteblog.web.interceptor.FrontUserLoginInterceptor;
 public class WebConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("redirect:/html/index.html");
+		registry.addViewController("/").setViewName("redirect:/html/auth/login.html");
 	}
 	@Bean
 	public FrontUserLoginInterceptor frontUserLoginInterceptor(){

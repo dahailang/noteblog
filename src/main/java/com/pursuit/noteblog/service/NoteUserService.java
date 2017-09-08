@@ -1,17 +1,18 @@
 package com.pursuit.noteblog.service;
 
 import com.pursuit.noteblog.po.NoteUser;
+import com.pursuit.noteblog.web.NBResult;
 
 public interface NoteUserService {
 	
 	/**
      * 通过id获取用户
      */
-	public String doLogin(String email,String pwd);
+	public NBResult doLogin(String email,String pwd);
 	
-	public boolean doRegister(String emailOrUsername,String pwd,String fromUserId);
+	//public boolean doRegister(String emailOrUsername,String pwd,String fromUserId);
 	
-	public String register(String email,String pwd, String fromUserId);
+	public NoteUser doRegister(String email,String pwd, String fromUserId);
 	
 	/**
      * 通过id获取用户

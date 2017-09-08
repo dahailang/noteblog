@@ -12,11 +12,7 @@ public class  NBResult{
     private String msg;
     
     private Map<String, Object> attributes = null;
-
-    public NBResult() {
-    	
-    }
-    
+   
     public void addAttribute(String key,Object obj){
     	if(null==attributes){
     		attributes = new HashMap<>();

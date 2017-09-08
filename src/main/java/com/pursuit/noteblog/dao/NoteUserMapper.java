@@ -11,6 +11,8 @@ public interface NoteUserMapper {
     int insertSelective(NoteUser record);
 
     NoteUser selectByPrimaryKey(String id);
+    
+    NoteUser selectByEmail(String email);
 
     int updateByPrimaryKeySelective(NoteUser record);
 

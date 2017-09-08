@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pursuit.noteblog.enums.LoginEnum;
 import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.service.NoteUserService;
 import com.pursuit.noteblog.web.NBResult;
@@ -25,23 +24,19 @@ public class AuthController extends BaseController{
 
     @RequestMapping(value = "/doregister", method = RequestMethod.POST)
     public NBResult doRegister(HttpServletRequest request,HttpServletResponse response,@RequestParam("email") String email,@RequestParam("pwd") String pwd,@RequestParam("iu")String fromUserId) {
-    	NoteUser user = new NoteUser();
-    	
-    	user.setEmail(email.toLowerCase());//转为小写存储
-    	user.setPassword(pwd);
-    	String registerResult = noteUserService.register(email,pwd, fromUserId);
-    	userLoginStatusService.addLoginStatus(request, response, "");
+    	NoteUser noteUser =noteUserService.doRegister(email,pwd, fromUserId);
+    	userLoginStatusService.addLoginStatus(request, response, noteUser.getId());
         //注册成功即登录
         return NBResult.ok();
     }
     @RequestMapping(value = "/dologin", method = RequestMethod.POST)
     public NBResult doLogin(HttpServletRequest request,HttpServletResponse response,String email,String pwd,String captcha) {
-    	String userid = noteUserService.doLogin(email, pwd);
-    	if(!LoginEnum.LOGIN_WRONG_USER_OR_PASSWORD.value().equals(userid)){
-    		// 登录成功写入登录状态
-    		userLoginStatusService.addLoginStatus(request, response, userid);
-    		return NBResult.ok();
+    	NBResult result = noteUserService.doLogin(email, pwd);
+    	if(result.isOk()){
+    		// 登录成功写入登录状态 msg为用户id
+    		userLoginStatusService.addLoginStatus(request, response, result.getMsg());
     	}
-    	return NBResult.fail("用户名密码不正确");
+    	
+    	return result;
     }
 }
