@@ -19,14 +19,14 @@ public class NoteController extends BaseController{
 	@Autowired
 	private NoteContentService noteContentService;
 	
-	@RequestMapping("")
+	@RequestMapping("/note")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response,Model model,String noteId){
     	
 		model.addAttribute("title", "Leanote, "+getMessage("moto"));
 		NoteUser user = (NoteUser) request.getAttribute("userInfo");
 		NBResult noteResut = noteContentService.index(user,noteId);
 		model.addAllAttributes(noteResut.getAttributes());
-		return new ModelAndView("/note/note-new");
+		return new ModelAndView("redirect:/html/note/note.html");
 	}
 	
 	//进行分支合并操作
@@ -36,6 +36,6 @@ public class NoteController extends BaseController{
 		NoteUser user = (NoteUser) request.getAttribute("userInfo");
 		NBResult noteResut = noteContentService.index(user,noteId);
 		model.addAllAttributes(noteResut.getAttributes());
-		return new ModelAndView("/note/note-new");
+		return new ModelAndView("/html/note/note.html");
 	}
 }

@@ -9,13 +9,15 @@ import com.pursuit.noteblog.enums.UserStatusEnum;
 import com.pursuit.noteblog.enums.UserTypeEnum;
 import com.pursuit.noteblog.expection.NBException;
 import com.pursuit.noteblog.po.NoteUser;
+import com.pursuit.noteblog.service.NoteBookService;
 import com.pursuit.noteblog.service.NoteUserService;
 import com.pursuit.noteblog.util.IdGenerator;
 import com.pursuit.noteblog.web.NBResult;
 public class NoteUserServiceImpl implements NoteUserService{
 	@Autowired
 	private NoteUserMapper  noteUserMapper;
-
+	@Autowired
+	private NoteBookService noteBookService;
 	@Override
 	public NBResult doLogin(String email, String pwd) {
 		NoteUser noteUser = noteUserMapper.selectByEmail(email);
@@ -45,36 +47,37 @@ public class NoteUserServiceImpl implements NoteUserService{
 		noteUser.setLastUpdateTime(new Date());
 		noteUser.setType(UserTypeEnum.REGULAR_USER.getUserType());
 		noteUser.setAvatar("/");
-		noteUserMapper.insert(noteUser);
+		addNoteUser(noteUser);
+		noteBookService.addUserDefaultBook(noteUser.getId());
 		return noteUser;
 	}
 
 	@Override
 	public NoteUser getUserByUid(String userId) {
-		return null;
+		return noteUserMapper.selectByPrimaryKey(userId);
 	}
 
 	@Override
 	public NoteUser getByEmail(String email) {
-		return null;
+		return noteUserMapper.selectByEmail(email);
 	}
 
 	@Override
 	public NoteUser addNoteUser(NoteUser noteUser) {
-		// TODO Auto-generated method stub
-		return null;
+		noteUserMapper.insert(noteUser);
+		return noteUser;
 	}
 
 	@Override
 	public String updateNoteUser(NoteUser noteUser) {
-		// TODO Auto-generated method stub
-		return null;
+		noteUserMapper.updateByPrimaryKeySelective(noteUser);
+		return noteUser.getId();
 	}
 
 	@Override
 	public String deleteNoteUser(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		noteUserMapper.deleteByPrimaryKey(userId);
+		return userId;
 	}
 
 	@Override

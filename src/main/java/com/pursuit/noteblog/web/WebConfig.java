@@ -35,7 +35,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 			excludePathPatterns("/index.html").
 			excludePathPatterns("/login").
 			excludePathPatterns("/error").
-			excludePathPatterns("/auth/doLogin").
+			excludePathPatterns("/auth/dologin").
 			excludePathPatterns("/auth/doregister").
 			excludePathPatterns("/register");
 		//公共过滤器
