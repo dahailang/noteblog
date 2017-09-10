@@ -5,8 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-
-import com.pursuit.noteblog.util.ConstUtils;
 import com.pursuit.noteblog.web.conversation.UserLoginStatusService;
 
 
