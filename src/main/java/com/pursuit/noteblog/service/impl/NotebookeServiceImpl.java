@@ -32,8 +32,6 @@ public class NotebookeServiceImpl implements NoteBookService {
 	@Override
 	public NBResult getLeftTree(String userId) {
 		List<NoteBook> notebooks = findByUserid(userId);
-		
-		
 		return NBResult.ok(notebooks);
 	}
 	@Override

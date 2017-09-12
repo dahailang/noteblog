@@ -11,7 +11,10 @@ var setting = {
 	},
 	data: {
 		simpleData: {
-			enable: true
+			enable: true,
+			idKey: "id",
+			pIdKey: "pid",
+			rootPId: 0
 		}
 	},
 	callback: {

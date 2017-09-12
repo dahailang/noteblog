@@ -3,7 +3,7 @@
 <mapper namespace="com.pursuit.noteblog.dao.NoteBookMapper">
   <resultMap id="BaseResultMap" type="com.pursuit.noteblog.po.NoteBook">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="p_id" jdbcType="VARCHAR" property="pId" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
     <result column="uid" jdbcType="VARCHAR" property="uid" />
     <result column="is_parent" jdbcType="INTEGER" property="isParent" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -12,7 +12,7 @@
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, p_id, uid, is_parent, name, create_time, last_update_time, status
+    id, pid, uid, is_parent, name, create_time, last_update_time, status
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -31,10 +31,10 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.pursuit.noteblog.po.NoteBook">
-    insert into note_book (id, p_id, uid, 
+    insert into note_book (id, pid, uid, 
       is_parent, name, create_time, 
       last_update_time, status)
-    values (#{id,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
       #{isParent,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUpdateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
   </insert>
@@ -44,8 +44,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="pId != null">
-        p_id,
+      <if test="pid != null">
+        pid,
       </if>
       <if test="uid != null">
         uid,
@@ -71,7 +71,7 @@
         #{id,jdbcType=VARCHAR},
       </if>
       <if test="pid != null">
-        #{pId,jdbcType=VARCHAR},
+        #{pid,jdbcType=VARCHAR},
       </if>
       <if test="uid != null">
         #{uid,jdbcType=VARCHAR},
@@ -97,7 +97,7 @@
     update note_book
     <set>
       <if test="pid != null">
-        pid = #{pId,jdbcType=VARCHAR},
+        pid = #{pid,jdbcType=VARCHAR},
       </if>
       <if test="uid != null">
         uid = #{uid,jdbcType=VARCHAR},
@@ -122,7 +122,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pursuit.noteblog.po.NoteBook">
     update note_book
-    set p_id = #{pId,jdbcType=VARCHAR},
+    set pid = #{pid,jdbcType=VARCHAR},
       uid = #{uid,jdbcType=VARCHAR},
       is_parent = #{isParent,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
