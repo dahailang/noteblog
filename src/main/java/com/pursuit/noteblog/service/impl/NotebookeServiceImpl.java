@@ -9,6 +9,7 @@ import com.pursuit.noteblog.dao.NoteBookMapper;
 import com.pursuit.noteblog.po.NoteBook;
 import com.pursuit.noteblog.service.NoteBookService;
 import com.pursuit.noteblog.util.IdGenerator;
+import com.pursuit.noteblog.vo.TreeNode;
 import com.pursuit.noteblog.web.NBResult;
 
 public class NotebookeServiceImpl implements NoteBookService {
@@ -31,9 +32,9 @@ public class NotebookeServiceImpl implements NoteBookService {
 	@Override
 	public NBResult getLeftTree(String userId) {
 		List<NoteBook> notebooks = findByUserid(userId);
-		NBResult result = NBResult.ok();
-		result.addAttribute("lefttree", notebooks);
-		return result;
+		
+		
+		return NBResult.ok(notebooks);
 	}
 	@Override
 	public List<NoteBook> findByUserid(String userId) {
@@ -47,7 +48,7 @@ public class NotebookeServiceImpl implements NoteBookService {
 		for (String str : initTree) {
 			NoteBook noteBook = new NoteBook();
 			noteBook.setId(IdGenerator.NOTEID.generateSessionId());
-			noteBook.setTitle(str);
+			noteBook.setName(str);
 			noteBook.setUid(uid);
 			noteBook.setPid("0");
 			noteBook.setIsParent(1);
@@ -56,8 +57,23 @@ public class NotebookeServiceImpl implements NoteBookService {
 			noteBook.setLastUpdateTime(new Date());
 			noteBookMapper.insert(noteBook);
 		}
+	}
+
+	@Override
+	public NBResult addNoteBook(String uid, TreeNode node) {
+		NoteBook noteBook = new  NoteBook();
+		noteBook.setId(null!=node.getId()?node.getId():IdGenerator.NOTEID.generateSessionId());
+		noteBook.setPid(node.getPid());
+		noteBook.setUid(uid);
+		noteBook.setName(node.getName());
+		noteBook.setCreateTime(new Date());
+		noteBook.setLastUpdateTime(new Date());
+		noteBook.setStatus(1);
+		noteBook.setIsParent("true"==node.getIsParent()?1:0);
+		noteBookMapper.insert(noteBook);
 		
-		
+		node.setId(noteBook.getId());
+		return NBResult.ok(node);
 	}
 
 }

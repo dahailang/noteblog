@@ -1,5 +1,6 @@
 
 var curMenu = null, zTree_Menu = null,rMenu=null;
+//树配置
 var setting = {
 	view: {
 		showLine: false,
@@ -18,22 +19,6 @@ var setting = {
 		onRightClick: OnRightClick
 	}
 };
-
-var zNodes =[
-	{ id:1, pId:0, name:"文件夹", open:true},
-	{ id:11, pId:1, name:"收件箱"},
-	{ id:111, pId:11, name:"收件箱1"},
-	{ id:112, pId:111, name:"收件箱2"},
-	{ id:113, pId:112, name:"收件箱3"},
-	{ id:114, pId:113, name:"收件箱4"},
-	{ id:12, pId:1, name:"垃圾邮件"},
-	{ id:13, pId:1, name:"草稿"},
-	{ id:14, pId:1, name:"已发送邮件"},
-	{ id:15, pId:1, name:"已删除邮件"},
-	{ id:3, pId:0, name:"快速视图"},
-	{ id:31, pId:3, name:"文档"},
-	{ id:32, pId:3, name:"照片"}
-];
 
 function addDiyDom(treeId, treeNode) {
 	var spaceWidth = 5;
@@ -62,20 +47,26 @@ function OnRightClick(event, treeId, treeNode) {
 		showRMenu("root", event.clientX, event.clientY);
 	} else if (treeNode && !treeNode.noR) {
 		zTree_Menu.selectNode(treeNode);
-		showRMenu("node", event.clientX, event.clientY);
+		showRMenu("node",treeNode,event.clientX, event.clientY);
 	}
 }
-function showRMenu(type, x, y) {
+function showRMenu(type,treeNode,x, y) {
+	
+	var ulDiv =$("#rMenu ul").html("");
+	var addTreeNodeBook="<li id='m_add'>增加子笔记本</li>";
+	var addTreeNode="<li id='m_add' onclick='addTreeNode();'>增加笔记</li>";
+	var removeTreeNode="<li id='m_del' onclick='removeTreeNode();'>删除节点</li>";
+	var checkTreeNode ="<li id='m_check' onclick=’checkTreeNode(true);'>Check节点</li>";
+	ulDiv.append(addTreeNodeBook);
+	ulDiv.append(addTreeNode);
+	ulDiv.append(removeTreeNode);
+	ulDiv.append(checkTreeNode);
+	
+	$("#m_add").click(function(){
+		addTreeNodeFun(treeNode);
+	});
+	
 	$("#rMenu ul").show();
-	if (type=="root") {
-		$("#m_del").hide();
-		$("#m_check").hide();
-		$("#m_unCheck").hide();
-	} else {
-		$("#m_del").show();
-		$("#m_check").show();
-		$("#m_unCheck").show();
-	}
 	rMenu.css({"top":y+"px", "left":x+"px", "visibility":"visible"});
 
 	$("body").bind("mousedown", onBodyMouseDown);
@@ -89,16 +80,41 @@ function onBodyMouseDown(event){
 		rMenu.css({"visibility" : "hidden"});
 	}
 }
-var addCount = 1;
-function addTreeNode() {
+function addTreeNodeFun(treeNode) {
 	hideRMenu();
-	var newNode = { name:"增加" + (addCount++)};
-	if (zTree_Menu.getSelectedNodes()[0]) {
-		newNode.checked = zTree_Menu.getSelectedNodes()[0].checked;
-		zTree_Menu.addNodes(zTree_Menu.getSelectedNodes()[0], newNode);
-	} else {
-		zTree_Menu.addNodes(null, newNode);
-	}
+	var treeNode = treeNode;
+	dialog({
+		title: '消息',
+		width:490,
+		height:"auto",
+		content: '<div id="titileDiv"><h4>请输入名称</h4><input id="newBook" width="450" /></div>',
+		okValue: '确 定',
+		ok: function () {
+			var newBookName=$("#newBook").val();
+			if(""==newBookName){
+				$("#titileDiv").append("<font colar='red'>请输入笔记名称</font>");
+				return false
+			}
+			var newNode = {pid:treeNode.id, name:newBookName,isParent:"true"};
+			
+			noteBlogAjax("/tree/addnotebook",newNode,function(data){
+				if (zTree_Menu.getSelectedNodes()[0]) {
+					newNode.checked = zTree_Menu.getSelectedNodes()[0].checked;
+					zTree_Menu.addNodes(zTree_Menu.getSelectedNodes()[0], newNode);
+				} else {
+					zTree_Menu.addNodes(null, newNode);
+				}
+				return true;
+			},function(){
+				$("#titileDiv").append("<font colar='red'>服务异常</font>");
+				return false;
+			});
+
+			
+		},
+		cancelValue: '取消',
+		cancel: function () {}
+	}).showModal();
 }
 function removeTreeNode() {
 	hideRMenu();
@@ -123,7 +139,7 @@ function checkTreeNode(checked) {
 }
 function resetTree() {
 	hideRMenu();
-	$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+	sendAjax("../../tree/lefttree");
 }
 function sendAjax(url){
 	$.ajax({
@@ -133,12 +149,10 @@ function sendAjax(url){
 		dataType : 'json',
 		data:{},
 		success: function(data, textStatus, jqXHR){
-			var zNodes = data.attributes.lefttree;
+			var zNodes = data;
 			var treeObj = $("#treeDemo");
 			$.fn.zTree.init(treeObj, setting, zNodes);
 			zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
-			curMenu = zTree_Menu.getNodes()[0].children[0].children[0];
-			zTree_Menu.selectNode(curMenu);
 			treeObj.hover(function () {
 				if (!treeObj.hasClass("showIcon")) {
 					treeObj.addClass("showIcon");
@@ -152,12 +166,34 @@ function sendAjax(url){
 		}
 	});
 }
-
-
+function noteBlogAjax(url,param,sucessFun,failFun){
+	$.ajax({
+		type : 'POST',
+		url: url,
+		async : false,
+		dataType : 'json',
+		data:param,
+		success: function(data, textStatus, jqXHR){
+			//window.location.reload(); 
+			sucessFun(data)
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			dialog({
+				title: '错误',
+				content: '服务请求失败',
+				okValue: '确 定',
+				ok: function () {
+					return true;
+				},
+				cancelValue: '取消',
+				cancel: function () {}
+			}).show();
+		}
+	});
+}
 
 $(document).ready(function(){
 	var treeObj = $("#treeDemo");
 	rMenu = $("#rMenu");
-	//sendAjax("./zNodes.json");
 	sendAjax("../../tree/lefttree");
 });

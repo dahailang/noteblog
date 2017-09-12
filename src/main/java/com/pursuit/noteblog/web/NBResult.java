@@ -10,6 +10,8 @@ public class  NBResult{
     private boolean ok;
 	// 响应消息
     private String msg;
+    // 内部数据
+    private Object info;
     
     private Map<String, Object> datas = null;
    
@@ -25,6 +27,9 @@ public class  NBResult{
     public static NBResult ok() {
         return new NBResult(200,true,"OK");
     }
+    public static NBResult ok(Object obj) {
+    	return new NBResult(200,true,"OK",obj);
+    }
     public static NBResult ok(String msg) {
     	return new NBResult(200,true,msg);
     }
@@ -39,6 +44,12 @@ public class  NBResult{
         this.ok = ok;
         this.msg = msg;
     }
+    public NBResult(Integer status, boolean ok,String msg,Object obj) {
+    	this.status = status;
+    	this.ok = ok;
+    	this.msg = msg;
+    	this.info = obj;
+    }
     public NBResult(Integer status, boolean ok,String msg,Map<String,Object> map) {
     	this.status = status;
     	this.ok = ok;
@@ -49,11 +60,6 @@ public class  NBResult{
     public Integer getStatus() {
         return status;
     }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public String getMsg() {
         return msg;
     }
@@ -65,5 +71,8 @@ public class  NBResult{
 	}
 	public void setOk(boolean ok) {
 		this.ok = ok;
+	}
+	public Object getInfo() {
+		return info;
 	}
 }

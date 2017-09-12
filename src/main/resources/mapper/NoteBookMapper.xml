@@ -3,16 +3,16 @@
 <mapper namespace="com.pursuit.noteblog.dao.NoteBookMapper">
   <resultMap id="BaseResultMap" type="com.pursuit.noteblog.po.NoteBook">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="p_id" jdbcType="VARCHAR" property="pId" />
     <result column="uid" jdbcType="VARCHAR" property="uid" />
     <result column="is_parent" jdbcType="INTEGER" property="isParent" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, pid, uid, is_parent, title, create_time, last_update_time, status
+    id, p_id, uid, is_parent, name, create_time, last_update_time, status
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -31,11 +31,11 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.pursuit.noteblog.po.NoteBook">
-    insert into note_book (id, pid, uid, 
-      is_parent, title, create_time, 
+    insert into note_book (id, p_id, uid, 
+      is_parent, name, create_time, 
       last_update_time, status)
-    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
-      #{isParent,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+      #{isParent,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{lastUpdateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.pursuit.noteblog.po.NoteBook">
@@ -44,8 +44,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="pid != null">
-        pid,
+      <if test="pId != null">
+        p_id,
       </if>
       <if test="uid != null">
         uid,
@@ -53,8 +53,8 @@
       <if test="isParent != null">
         is_parent,
       </if>
-      <if test="title != null">
-        title,
+      <if test="name != null">
+        name,
       </if>
       <if test="createTime != null">
         create_time,
@@ -71,7 +71,7 @@
         #{id,jdbcType=VARCHAR},
       </if>
       <if test="pid != null">
-        #{pid,jdbcType=VARCHAR},
+        #{pId,jdbcType=VARCHAR},
       </if>
       <if test="uid != null">
         #{uid,jdbcType=VARCHAR},
@@ -79,8 +79,8 @@
       <if test="isParent != null">
         #{isParent,jdbcType=INTEGER},
       </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -97,7 +97,7 @@
     update note_book
     <set>
       <if test="pid != null">
-        pid = #{pid,jdbcType=VARCHAR},
+        pid = #{pId,jdbcType=VARCHAR},
       </if>
       <if test="uid != null">
         uid = #{uid,jdbcType=VARCHAR},
@@ -105,8 +105,8 @@
       <if test="isParent != null">
         is_parent = #{isParent,jdbcType=INTEGER},
       </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -122,10 +122,10 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pursuit.noteblog.po.NoteBook">
     update note_book
-    set pid = #{pid,jdbcType=VARCHAR},
+    set p_id = #{pId,jdbcType=VARCHAR},
       uid = #{uid,jdbcType=VARCHAR},
       is_parent = #{isParent,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER}

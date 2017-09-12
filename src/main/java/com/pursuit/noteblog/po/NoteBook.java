@@ -5,7 +5,7 @@ import java.util.Date;
 public class NoteBook {
     private String id;
 
-    private String pid;
+    private String pId;
 
     private String uid;
 
@@ -27,12 +27,12 @@ public class NoteBook {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getPid() {
-        return pid;
+    public String getPId() {
+        return pId;
     }
 
     public void setPid(String pid) {
-        this.pid = pid == null ? null : pid.trim();
+        this.pId = pId == null ? null : pId.trim();
     }
 
     public String getUid() {
@@ -55,7 +55,7 @@ public class NoteBook {
         return name;
     }
 
-    public void setTitle(String name) {
+    public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
 
@@ -96,7 +96,7 @@ public class NoteBook {
         }
         NoteBook other = (NoteBook) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getPid() == null ? other.getPid() == null : this.getPid().equals(other.getPid()))
+            && (this.getPId() == null ? other.getPId() == null : this.getPId().equals(other.getPId()))
             && (this.getUid() == null ? other.getUid() == null : this.getUid().equals(other.getUid()))
             && (this.getIsParent() == null ? other.getIsParent() == null : this.getIsParent().equals(other.getIsParent()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
@@ -110,7 +110,7 @@ public class NoteBook {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getPid() == null) ? 0 : getPid().hashCode());
+        result = prime * result + ((getPId() == null) ? 0 : getPId().hashCode());
         result = prime * result + ((getUid() == null) ? 0 : getUid().hashCode());
         result = prime * result + ((getIsParent() == null) ? 0 : getIsParent().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());

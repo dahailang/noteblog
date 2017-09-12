@@ -230,7 +230,7 @@
 		<profile>
 			<id>online</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<build>
 				<filters>
@@ -241,7 +241,7 @@
 		<profile>
 			<id>local</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<build>
 				<filters>
