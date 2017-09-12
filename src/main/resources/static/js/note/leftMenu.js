@@ -132,9 +132,8 @@ function sendAjax(url){
 		async : false,
 		dataType : 'json',
 		data:{},
-		//timeout:120000,
 		success: function(data, textStatus, jqXHR){
-			var zNodes = data.zNodes;
+			var zNodes = data.attributes.lefttree;
 			var treeObj = $("#treeDemo");
 			$.fn.zTree.init(treeObj, setting, zNodes);
 			zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
@@ -159,5 +158,6 @@ function sendAjax(url){
 $(document).ready(function(){
 	var treeObj = $("#treeDemo");
 	rMenu = $("#rMenu");
-	sendAjax("./zNodes.json");
+	//sendAjax("./zNodes.json");
+	sendAjax("../../tree/lefttree");
 });

@@ -22,7 +22,6 @@ public class WordTest {
 	
 	public static void readAndWriterTest4() throws IOException {
         File file = new File(filepath);
-        String str = "";
         try {
             FileInputStream fis = new FileInputStream(file);
             System.out.println(file.exists()+"++"+file.getPath());
@@ -30,6 +29,7 @@ public class WordTest {
             XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);
             String doc1 = extractor.getText();
             System.out.println(doc1);
+            extractor.close();
             fis.close();
         } catch (Exception e) {
             e.printStackTrace();

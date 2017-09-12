@@ -9,6 +9,7 @@ import com.pursuit.noteblog.dao.NoteBookMapper;
 import com.pursuit.noteblog.po.NoteBook;
 import com.pursuit.noteblog.service.NoteBookService;
 import com.pursuit.noteblog.util.IdGenerator;
+import com.pursuit.noteblog.web.NBResult;
 
 public class NotebookeServiceImpl implements NoteBookService {
 	
@@ -27,6 +28,13 @@ public class NotebookeServiceImpl implements NoteBookService {
 		return notebook;
 	}
 
+	@Override
+	public NBResult getLeftTree(String userId) {
+		List<NoteBook> notebooks = findByUserid(userId);
+		NBResult result = NBResult.ok();
+		result.addAttribute("lefttree", notebooks);
+		return result;
+	}
 	@Override
 	public List<NoteBook> findByUserid(String userId) {
 		return noteBookMapper.selectByUid(userId);
@@ -51,4 +59,5 @@ public class NotebookeServiceImpl implements NoteBookService {
 		
 		
 	}
+
 }

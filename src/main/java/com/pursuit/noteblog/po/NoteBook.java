@@ -11,7 +11,7 @@ public class NoteBook {
 
     private Integer isParent;
 
-    private String title;
+    private String name;
 
     private Date createTime;
 
@@ -51,12 +51,12 @@ public class NoteBook {
         this.isParent = isParent;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+    public void setTitle(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     public Date getCreateTime() {
@@ -99,7 +99,7 @@ public class NoteBook {
             && (this.getPid() == null ? other.getPid() == null : this.getPid().equals(other.getPid()))
             && (this.getUid() == null ? other.getUid() == null : this.getUid().equals(other.getUid()))
             && (this.getIsParent() == null ? other.getIsParent() == null : this.getIsParent().equals(other.getIsParent()))
-            && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getLastUpdateTime() == null ? other.getLastUpdateTime() == null : this.getLastUpdateTime().equals(other.getLastUpdateTime()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()));
@@ -113,7 +113,7 @@ public class NoteBook {
         result = prime * result + ((getPid() == null) ? 0 : getPid().hashCode());
         result = prime * result + ((getUid() == null) ? 0 : getUid().hashCode());
         result = prime * result + ((getIsParent() == null) ? 0 : getIsParent().hashCode());
-        result = prime * result + ((getTitle() == null) ? 0 : getTitle().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getLastUpdateTime() == null) ? 0 : getLastUpdateTime().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());

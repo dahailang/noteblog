@@ -16,8 +16,6 @@ public class PoiDemo {
 	
 	public static void createExcel() throws IOException{
 		
-		
-		
 		//excel 又叫做工作簙 
 		HSSFWorkbook workBook=new HSSFWorkbook();
 		
@@ -30,14 +28,14 @@ public class PoiDemo {
 		//添加表的第一行
 		HSSFRow row=sheet.createRow(0);
 		HSSFRow row2=sheet.createRow(1);
-		HSSFRow row3=sheet.createRow(2);
-		HSSFRow row4=sheet.createRow(2);
+//		HSSFRow row3=sheet.createRow(2);
+//		HSSFRow row4=sheet.createRow(2);
 
 		//设置单元格式
 		HSSFCellStyle style=workBook.createCellStyle();
 		
 		//单元格格式居中
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+//		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		
 		//设置单元格日期格式
 		style.setDataFormat(dataFormat.getFormat("yyyy-MM-dd HH:mm:ss"));
@@ -69,7 +67,7 @@ public class PoiDemo {
 		FileOutputStream fos= new FileOutputStream(file);
 		
 		workBook.write(fos);
-		
+		workBook.close();
 		fos.close();
 		
 	}

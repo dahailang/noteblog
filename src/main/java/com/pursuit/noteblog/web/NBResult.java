@@ -11,16 +11,16 @@ public class  NBResult{
 	// 响应消息
     private String msg;
     
-    private Map<String, Object> attributes = null;
+    private Map<String, Object> datas = null;
    
     public void addAttribute(String key,Object obj){
-    	if(null==attributes){
-    		attributes = new HashMap<>();
+    	if(null==datas){
+    		datas = new HashMap<>();
     	}
-    	attributes.put(key, obj);
+    	datas.put(key, obj);
     }
     public Map<String, Object> getAttributes(){
-    	return attributes;
+    	return datas;
     }
     public static NBResult ok() {
         return new NBResult(200,true,"OK");
@@ -43,7 +43,7 @@ public class  NBResult{
     	this.status = status;
     	this.ok = ok;
     	this.msg = msg;
-    	this.attributes = map;
+    	this.datas = map;
     }
 
     public Integer getStatus() {
@@ -57,15 +57,12 @@ public class  NBResult{
     public String getMsg() {
         return msg;
     }
-
     public void setMsg(String msg) {
         this.msg = msg;
     }
-
     public boolean isOk() {
 		return ok;
 	}
-
 	public void setOk(boolean ok) {
 		this.ok = ok;
 	}
