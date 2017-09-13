@@ -16,7 +16,7 @@ import com.pursuit.noteblog.web.NBResult;
 public class NoteBookController extends BaseController{
 	@Autowired
 	NoteBookService noteBookService;
-	@RequestMapping(value="/lefttree",produces={"application/json;charset=UTF-8"})
+	@RequestMapping(value="/lefttree",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
 	public Object getLeftTree(HttpServletRequest request){
 		String uid = getUid(request);
 		NBResult leftTree = noteBookService.getLeftTree(uid);

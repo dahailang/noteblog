@@ -145,7 +145,7 @@ function resetTree() {
 }
 function sendAjax(url){
 	$.ajax({
-		type : 'GET',
+		type : 'POST',
 		url: url,
 		async : false,
 		dataType : 'json',
