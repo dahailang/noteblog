@@ -1,4 +1,3 @@
-
 var curMenu = null, zTree_Menu = null,rMenu=null;
 //树配置
 var setting = {
