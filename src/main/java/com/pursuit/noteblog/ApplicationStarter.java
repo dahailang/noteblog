@@ -19,7 +19,6 @@ public class ApplicationStarter {
 		SpringApplication app = new SpringApplication(ApplicationStarter.class);
         app.setAdditionalProfiles();
         app.setBannerMode(Banner.Mode.LOG);
-        //System.out.println(System.getProperty("java.awt.headless", Boolean.toString(true)));
         app.run(args);
         logger.info("系统启动完成："+Desktop.isDesktopSupported());
         
