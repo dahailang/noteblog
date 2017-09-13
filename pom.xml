@@ -150,6 +150,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -235,6 +236,15 @@
                 	<include>**/*.ttf</include>
 		        </includes>
 		    </resource>
+		    
+		    <resource>
+				<targetPath>${project.build.directory}</targetPath>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.sh</include>
+				</includes>
+			</resource>
 		</resources>
 	</build>
 	<profiles>
