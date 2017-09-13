@@ -24,7 +24,13 @@
     select 
     <include refid="Base_Column_List" />
     from note_book
-    where uid = #{uid,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=VARCHAR} and status=1
+  </select>
+  <select id="selectByPid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from note_book
+    where pid = #{pid,jdbcType=VARCHAR} and status=1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from note_book

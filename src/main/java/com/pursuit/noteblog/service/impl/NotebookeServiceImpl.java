@@ -1,9 +1,12 @@
 package com.pursuit.noteblog.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pursuit.noteblog.dao.NoteBookMapper;
 import com.pursuit.noteblog.po.NoteBook;
@@ -72,6 +75,37 @@ public class NotebookeServiceImpl implements NoteBookService {
 		
 		node.setId(noteBook.getId());
 		return NBResult.ok(node);
+	}
+
+	@Override
+	@Transactional
+	public NBResult deleteNoteBook(String nid) {
+		List<NoteBook>  container = new ArrayList<>();
+		List<NoteBook> children = getAllChild(nid, container);
+		
+		NoteBook recoder = new NoteBook();
+		recoder.setId(nid);
+		recoder.setStatus(0);
+		noteBookMapper.updateByPrimaryKey(recoder);
+		for (NoteBook notebook: children) {
+			notebook.setStatus(0);
+			noteBookMapper.updateByPrimaryKey(notebook);
+		}
+		
+		return NBResult.ok();
+	}
+	
+	
+	private List<NoteBook> getAllChild(String nid,List<NoteBook> notebook ){
+		List<NoteBook> child= noteBookMapper.selectByPid(nid);
+		if(null!=child&&child.size()>0){
+			for (NoteBook boot : child) {
+				getAllChild(boot.getId(), notebook);
+			}
+			notebook.addAll(child);
+		}
+		return notebook;
+		
 	}
 
 }

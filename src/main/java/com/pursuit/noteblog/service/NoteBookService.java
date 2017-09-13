@@ -9,9 +9,11 @@ import com.pursuit.noteblog.web.NBResult;
 public interface NoteBookService {
 	public void addUserDefaultBook(String uid);
 	public NBResult addNoteBook(String uid,TreeNode node);
+	public NBResult deleteNoteBook(String nid);
+	public NoteBook renameNoteBook(NoteBook notebook);
   	
+	
 	public NBResult getLeftTree(String userId);
 	public NoteBook addNoteBook(NoteBook notebook);
-	public NoteBook renameNoteBook(NoteBook notebook);
 	public List<NoteBook> findByUserid(String userId);
 }

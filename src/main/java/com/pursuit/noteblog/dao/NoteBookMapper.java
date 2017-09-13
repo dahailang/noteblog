@@ -15,6 +15,8 @@ public interface NoteBookMapper {
     NoteBook selectByPrimaryKey(String id);
     
     List<NoteBook> selectByUid(String uid);
+    
+    List<NoteBook> selectByPid(String pid);
 
     int updateByPrimaryKeySelective(NoteBook record);
 
