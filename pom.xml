@@ -28,9 +28,10 @@
 		<spring-cloud-task.version>1.0.3.RELEASE</spring-cloud-task.version>
 		<spring-cloud.version>Brixton.SR7</spring-cloud.version>
 		<!-- common -->
-		<commons-lang.version>2.3</commons-lang.version>
+		<commons-lang.version>2.6</commons-lang.version>
 		<!-- Maven -->
 		<maven.surefire.plugin>2.16</maven.surefire.plugin>
+		<mail.version>1.4.6</mail.version>
 	</properties>
 
 	<dependencies>
@@ -56,6 +57,10 @@
 		   			<artifactId>mybatis-spring</artifactId>
 		    	</exclusion>
 		    </exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
 		</dependency>
 		 <dependency>
 		   <groupId>org.mybatis</groupId>
@@ -106,6 +111,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<!-- javax.mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>${mail.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
