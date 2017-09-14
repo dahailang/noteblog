@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -27,28 +26,7 @@ import net.sourceforge.pinyin4j.PinyinHelper;
  */
 public class StringUtil {
     
-    /**
-     * 列表转为字符串(用逗号分隔)
-     * @param list
-     * @param separator
-     * @return
-     */
-    public static String simpleListJoinToStrWithSeparator(List<String> list, String separator) {
-        if (list == null || list.isEmpty()) {
-            return "";
-        }
-        StringBuilder finalEmailStr = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            if (i != 0) {
-                finalEmailStr.append(separator);
-            }
-            finalEmailStr.append(list.get(i));
-        }
-        return finalEmailStr.toString();
-    }
-    
-    
- // time format
+	// time format
  	public static final String DATE_FORMAT = "yyyy-MM-dd";
  	public static final String DATE_FORMAT_1 = "yyyy/MM/dd";
  	public static final String DATE_FORMAT_2 = "dd/MM/yyyy";
@@ -73,17 +51,6 @@ public class StringUtil {
  	public static final String EMAIL_ADDRESS_PATTERN 
  			= "^(\\w+([-+.]\\w+)*@\\w+([-]\\w+)*.\\w+)$|^(\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+).\\w+$";
 
- 	private static Hashtable htmlEntityTable = null;
- 	private static final String[] HTML_ENTITIES = {
- 		">", "&gt;",
- 		"<", "&lt;",
- 		"&", "&amp;",
- 		"\"", "&quot;",
- 		"'", "&#039;",
- 		"//", "&#092;",
- 		"\u00a9", "&copy;",
- 		"\u00ae", "&reg;"};
- 	
  	//BSC00015P
  	private static final String beginFormula = "{#";
  	private static final String endFormula = "}";
@@ -116,7 +83,25 @@ public class StringUtil {
  		final Matcher matcher = pattern.matcher(str);
  		return matcher.matches();
  	}
-
+    /**
+     * 列表转为字符串(用逗号分隔)
+     * @param list
+     * @param separator
+     * @return
+     */
+    public static String simpleListJoinToStrWithSeparator(List<String> list, String separator) {
+        if (list == null || list.isEmpty()) {
+            return "";
+        }
+        StringBuilder finalEmailStr = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            if (i != 0) {
+                finalEmailStr.append(separator);
+            }
+            finalEmailStr.append(list.get(i));
+        }
+        return finalEmailStr.toString();
+    }
  	/**
  	 * 将浮点型数据保留小数点后K位.
  	 * 
@@ -309,7 +294,7 @@ public class StringUtil {
  			return null;
  		}
  		final StringTokenizer st = new StringTokenizer(str, token);
- 		final ArrayList strlist = new ArrayList();
+ 		final ArrayList<String> strlist = new ArrayList<String>();
  		for (; st.hasMoreElements(); strlist.add(st.nextToken())) {
  		}
  		final String strarr[] = new String[strlist.size()];
@@ -373,12 +358,12 @@ public class StringUtil {
  	 *            (分隔符)
  	 * @return
  	 */
- 	public static List getStrList(final String str, final String token) {
+ 	public static List<String> getStrList(final String str, final String token) {
  		if (StringUtil.isNull(str)) {
  			return null;
  		}
  		final StringTokenizer st = new StringTokenizer(str, token);
- 		final ArrayList strlist = new ArrayList();
+ 		final ArrayList<String> strlist = new ArrayList<String>();
  		for (; st.hasMoreElements(); strlist.add(st.nextToken())) {
  		}
  		return strlist;
@@ -557,11 +542,11 @@ public class StringUtil {
  	 *            the params
  	 * @return true, if is empty
  	 */
- 	public static boolean isEmpty(final Map params) {
+ 	public static boolean isEmpty(final Map<?, ?> params) {
  		if ((params == null) || (params.size() == 0)) {
  			return true;
  		}
- 		final Iterator iter = params.keySet().iterator();
+ 		final Iterator<?> iter = params.keySet().iterator();
  		int count = 0;
  		while (iter.hasNext()) {
  			final String key = (String) iter.next();
@@ -591,7 +576,6 @@ public class StringUtil {
  	 * 判断一个字符是否是以下字符（"0-9"，".","/","()"）
  	 */
  	private static boolean isFixedStr(final char c) {
- 		// TODO 自动生成方法存根
  		return ((c >= '0') && (c <= '9')) || (c == '.') || (c == '-')
  				|| (c == '/') || (c == '(') || (c == ')');
  	}
@@ -896,30 +880,6 @@ public class StringUtil {
  		}
  		buff.append(org);
  		return buff.toString();
- 	}
-
- 	/**
- 	 * 切分字符串.
- 	 * 
- 	 * @param source
- 	 *            源字符串
- 	 * @param str
- 	 *            拆分标识字符串如：，：或、等
- 	 * @return the string[] 源字符串为null时，返回长度为0的字符串数组
- 	 */
- 	public static String[] split(String source, final String str) {
- 		if (source == null) {
- 			return new String[0];
- 		}
- 		final List temp = new ArrayList();
- 		int index = source.indexOf(str);
- 		while (index != -1) {
- 			temp.add(source.substring(0, index));
- 			source = source.substring(index + str.length());
- 			index = source.indexOf(str);
- 		}
- 		temp.add(source);
- 		return (String[]) temp.toArray(new String[temp.size()]);
  	}
 
  	/** 从一行line获得字符串的数组，没有数据返回null */
@@ -1542,44 +1502,6 @@ public class StringUtil {
  	   result.append( aInput.substring(startIdx) );
  	   return result.toString();
  	}
- 	
- 	/**
- 	 * return a string arraylist separator by Separator of input. 
- 	 * @param aSeparator
- 	 * @param aInput
- 	 * @return
- 	 */
- 	public static ArrayList strSplit(final String aSeparator, final String aInput)
- 	{
- 		ArrayList token = new ArrayList();
- 		
- 		if (aSeparator == null || aSeparator.equals("")) {
- 			token.add(aInput);
- 			return token;
- 		}
- 		if (aInput == null || aInput.equals("")) {
- 			return token;
- 		}
-
-// 		final StringBuffer result = new StringBuffer();
- 		//startIdx and idxOld delimit various chunks of aInput; these
- 		//chunks always end where aOldPattern begins
- 		int startIdx = 0;
- 		int idxOld = 0;
- 		while ((idxOld = aInput.indexOf(aSeparator, startIdx)) >= 0) {
- 		  //grab a part of aInput which does not include aOldPattern
- 		  
- 		  token.add( aInput.substring(startIdx, idxOld) );
- 		  //reset the startIdx to just after the current match, to see
- 		  //if there are any further matches
- 		  startIdx = idxOld + aSeparator.length();
- 		}
- 		//the final chunk will go to the end of aInput
- 		token.add( aInput.substring(startIdx) );
-
- 		return token;
- 	}
- 	
  	/**
  	 * return string show file size .
  	 * @param size
@@ -1596,82 +1518,6 @@ public class StringUtil {
  		} else {
  			return "0 B";
  		}
- 	}
- 	
-
- 	/***
- 	 * Converts entity array to hashtable
- 	 */
- 	private static synchronized void buildEntityTable()
- 	{
- 		htmlEntityTable = new Hashtable(HTML_ENTITIES.length);
-
- 		for (int i = 0; i < HTML_ENTITIES.length; i += 2)
- 		{
- 			if (!htmlEntityTable.containsKey(HTML_ENTITIES[i]))
- 			{
- 				htmlEntityTable.put(HTML_ENTITIES[i], HTML_ENTITIES[i + 1]);
- 			}
- 		}
- 	}
-
- 	/***
- 	 * Converts a single character to HTML
- 	 */
- 	private static String encodeSingleChar(String ch)
- 	{
- 		return (String) htmlEntityTable.get(ch);
- 	}
-
- 	/***
- 	 * Converts a String to HTML by converting all special characters to HTML-entities.
- 	 */
- 	public final static String encodeHTML(String s)
- 	{
- 		final String CR = "<BR>";
- 		
- 		if (htmlEntityTable == null)
- 		{
- 			buildEntityTable();
- 		}
- 		if (s == null)
- 		{
- 			return "";
- 		}
- 		StringBuffer sb = new StringBuffer(s.length() * 2);
-
- 		char ch;
- 		for (int i = 0; i < s.length(); ++i)
- 		{
- 			ch = s.charAt(i);
- 			if ((ch >= 63 && ch <= 90) || (ch >= 97 && ch <= 122) || (ch == ' '))
- 			{
- 				sb.append(ch);
- 			}
- 			else if (ch == '\n')
- 			{
- 				sb.append(CR);
- 			}
- 			else
- 			{
- 				String chEnc = encodeSingleChar(String.valueOf(ch));
- 				if (chEnc != null)
- 				{
- 					sb.append(chEnc);
- 				}
- 				else
- 				{
- 					sb.append(ch);
- /*
- 					// Not 7 Bit use the unicode system
- 					sb.append("&#");
- 					sb.append(new Integer(ch).toString());
- 					sb.append(';');
- */
- 				}
- 			}
- 		}
- 		return sb.toString();
  	}
  	
  	/**
@@ -1712,33 +1558,6 @@ public class StringUtil {
  		}
  		return pathName ;
  	}
- 	
- 	/**
- 	 * change the sql string in statement using prepared SQL .
- 	 * @param fieldName
- 	 * @param values
- 	 * @return the string is fit for prepared sqlstatement.
- 	 */
- 	public static String concatForPreparedSQL(String fieldName , ArrayList values ){
- 		String result = "";
- 		if ( (values == null) || (values.size() == 0 )){
- 			return " (1=1) ";
- 		}
- 		
- 		/*   can't use the statment to optimize 
- 		if (values.size() == 1){
- 			return " " + fieldName + " = '" + null2Str((String)values.get(0)) + "'";  
- 		}
- 		*/
- 		for (int i = 0 ; i < values.size() ; i++ ){
- 			result += "?,";
- 		}
- 		result = result.substring(0,result.length()-1);
- 		result = " " + fieldName + " in ( " + result + " ) " ; 
- 		return result;
- 	}
- 	
-
  	
  	/**
  	 * return string of year , using 'YY' format
@@ -1923,22 +1742,6 @@ public class StringUtil {
  		return matcher.replaceFirst("").trim();	
  	}
  	
- 	/**
- 	 * SQL Injection Charator checking . 
- 	 * @param str
- 	 * @return
- 	 */
- 	public static boolean sql_inj(String str) {
- 		String inj_str = "'|and|exec|insert|select|delete|update|count|*|%|chr|mid|master|truncate|char|declare|;|or|-|+|,";
- 	  	ArrayList inj_stra = strSplit(inj_str,"|");
- 		for (int i=0 ; i < inj_stra.size(); i++ ) {
- 			if (str.indexOf((String) inj_stra.get(i))>=0) {
- 				return true;
- 		  	}
- 	  	}
- 		return false;
- 	}
- 	
  	public static boolean getValidIdentityNo ( String xidentityno ){
  		if(xidentityno.length()!=18){
  			throw new IllegalArgumentException("身份证长度不符");
@@ -2062,42 +1865,6 @@ public class StringUtil {
  		return Pattern.matches(pattern,sourceStr);
  	}
  	
- 	/**
- 	 * 多选的参数，转换为SP输入的parameter
- 	 * @param para
- 	 * @return
- 	 */
- 	public static String strMulti2Parameter(String para){
- 		
- 		ArrayList array = StringUtil.strSplit(";",para);
- 		StringBuffer retString = new StringBuffer();
- 		int size = array.size();
- 		if (size > 0){
- 			for (int i = 0 ; i < size ; i ++) {
- 				if ( i != 0 ) retString.append(",");
- 				retString.append("'''" + (String)array.get(i) +"'''");
- 			}
- 		}
- 		return retString.toString();
- 	}
- 	/**
- 	 * 多选的参数，转换为SP输入的parameter
- 	 * @param para
- 	 * @return
- 	 */
- 	public static String strMulti2ParameterForSQL(String para){
- 	
- 		ArrayList array = StringUtil.strSplit(";",para);
- 		StringBuffer retString = new StringBuffer();
- 		int size = array.size();
- 		if (size > 0){
- 			for (int i = 0 ; i < size ; i ++) {
- 				if ( i != 0 ) retString.append(",");
- 				retString.append("'" + array.get(i) +"'");
- 			}
- 		}
- 		return retString.toString();
- 	}
  	/**
  	 * 字符串替换
  	 * @param regex

@@ -38,7 +38,17 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>  
+		      <exclusion>  
+		        <groupId>org.springframework.boot</groupId>  
+		        <artifactId>spring-boot-starter-tomcat</artifactId>  
+		      </exclusion>  
+		    </exclusions>
 		</dependency>
+		<dependency>  
+		    <groupId>org.springframework.boot</groupId>  
+		    <artifactId>spring-boot-starter-jetty</artifactId>  
+		  </dependency>  
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
@@ -198,6 +208,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.2</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
 				</configuration>
@@ -234,38 +245,19 @@
 		        </excludes>
 		    </resource>
 		
-		    <resource>
+		    <!-- <resource>
 		        <directory>${project.basedir}/src/main/resources</directory>
 		        <filtering>false</filtering>
 		        <includes>
-		            <!-- <include>static/fonts/**</include> -->
+		            <include>static/fonts/**</include>
 		            <include>**/*.woff</include>
                 	<include>**/*.ttf</include>
 		        </includes>
-		    </resource>
-		    
-		    <resource>
-				<targetPath>${project.build.directory}</targetPath>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-				<includes>
-					<include>**/*.sh</include>
-				</includes>
-			</resource>
+		    </resource> -->
+
 		</resources>
 	</build>
 	<profiles>
-		<profile>
-			<id>online</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<build>
-				<filters>
-					<filter>${project.basedir}/src/main/swap/online.properties</filter>
-				</filters>
-			</build>
-		</profile>
 		<profile>
 			<id>local</id>
 			<activation>
@@ -275,6 +267,34 @@
 				<filters>
 					<filter>${project.basedir}/src/main/swap/local.properties</filter>
 				</filters>
+			</build>
+		</profile>
+		<profile>
+			<id>online</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<filters>
+					<filter>${project.basedir}/src/main/swap/online.properties</filter>
+				</filters>
+				<resources>
+				    <resource>
+						<targetPath>${project.build.directory}</targetPath>
+						<directory>src/main/resources</directory>
+						<filtering>true</filtering>
+						<includes>
+							<include>**/*.sh</include>
+						</includes>
+					</resource>
+				   <resource>
+				        <directory>${project.basedir}/src/main/resources</directory>
+				        <filtering>true</filtering>
+				        <excludes>
+				            <exclude>static/**/*</exclude>
+				        </excludes>
+				    </resource>
+				</resources>
 			</build>
 		</profile>
 	</profiles>
