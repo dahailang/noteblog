@@ -249,9 +249,9 @@
 					<resource>
 				        <directory>${project.basedir}/src/main/resources</directory>
 				        <filtering>true</filtering>
-				        <includes>
+				        <!-- <includes>
 				        	<include>application.properties</include>
-				        </includes>
+				        </includes> -->
 				    </resource>
 				</resources>
 			</build>
