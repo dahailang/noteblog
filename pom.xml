@@ -296,6 +296,14 @@
 						<directory>src/main/resources/static</directory>
 						<filtering>false</filtering>
 					</resource>
+					<resource>
+				        <directory>${project.basedir}/src/main/resources</directory>
+				        <filtering>false</filtering>
+				        <includes>
+				            <include>**/*.woff</include>
+		                	<include>**/*.ttf</include>
+				        </includes>
+				    </resource>
 				</resources>
 			</build>
 		</profile>

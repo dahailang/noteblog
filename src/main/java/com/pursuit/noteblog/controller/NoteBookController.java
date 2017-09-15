@@ -30,9 +30,7 @@ public class NoteBookController extends BaseController{
 	}
 	@RequestMapping(value="/renameNoteBook",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
 	public Object renameNoteBook(HttpServletRequest request,TreeNode node){
-		String uid = getUid(request);
-		NBResult result = noteBookService.addNoteBook(uid, node);
-		return result.getInfo();
+		return noteBookService.renameNoteBook(node);
 	}
 	@RequestMapping(value="/deleteNoteBook",method=RequestMethod.POST,produces={"application/json;charset=UTF-8"})
 	public Object deleteNoteBook(HttpServletRequest request,TreeNode node){

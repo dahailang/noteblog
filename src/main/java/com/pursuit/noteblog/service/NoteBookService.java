@@ -10,8 +10,7 @@ public interface NoteBookService {
 	public void addUserDefaultBook(String uid);
 	public NBResult addNoteBook(String uid,TreeNode node);
 	public NBResult deleteNoteBook(String nid);
-	public NoteBook renameNoteBook(NoteBook notebook);
-  	
+	public NoteBook renameNoteBook(TreeNode node);
 	
 	public NBResult getLeftTree(String userId);
 	public NoteBook addNoteBook(NoteBook notebook);

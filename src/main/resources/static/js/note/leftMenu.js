@@ -57,10 +57,12 @@ function showRMenu(type,treeNode,x, y) {
 	var ulDiv =$("#rMenu ul").html("");
 	var addTreeNodeBook="<li id='m_add'>增加子笔记本</li>";
 	var addTreeNode="<li id='m_add' onclick='addTreeNode();'>增加笔记</li>";
+	var renameTreeNode="<li id='m_rename'>重命名</li>";
 	var removeTreeNode="<li id='m_del'>删除节点</li>";
 	var checkTreeNode ="<li id='m_check' onclick=’checkTreeNode(true);'>Check节点</li>";
 	ulDiv.append(addTreeNodeBook);
 	ulDiv.append(addTreeNode);
+	ulDiv.append(renameTreeNode);
 	ulDiv.append(removeTreeNode);
 	ulDiv.append(checkTreeNode);
 	
@@ -69,6 +71,9 @@ function showRMenu(type,treeNode,x, y) {
 	});
 	$("#m_del").click(function(){
 		removeTreeNodeFun(treeNode);
+	});
+	$("#m_rename").click(function(){
+		renameTreeNodeFun(treeNode);
 	});
 	
 	$("#rMenu ul").show();
@@ -121,17 +126,48 @@ function addTreeNodeFun(treeNode) {
 		cancel: function () {}
 	}).showModal();
 }
-function removeTreeNodeFun(treeNode) {
+function renameTreeNodeFun(treeNode) {
 	hideRMenu();
 	var treeNode = treeNode;
 	dialog({
 		title: '确认消息',
 		width:490,
 		height:"auto",
+		content: '<div id="titileDiv"><h4>请输入重命名名称</h4><input id="rename" width="450" /></div>',
+		okValue: '确 定',
+		ok: function () {
+			var newName = $("#rename").val();
+			var newNode = {id:treeNode.id,name:newName};
+			noteBlogAjax("/tree/renameNoteBook",newNode,function(data){
+				treeNode.name=newName;
+				zTree_Menu.updateNode(data);
+				if (zTree_Menu.getSelectedNodes()[0]) {
+					zTree_Menu.getSelectedNodes()[0].updateNode(data);
+				} else {
+					
+				}
+				return true;
+			},function(){
+				$("#titileDiv").append("<font colar='red'>服务异常</font>");
+				return false;
+			});
+			
+		},
+		cancelValue: '取消',
+		cancel: function () {}
+	}).showModal();
+}
+function removeTreeNodeFun(treeNode) {
+	hideRMenu();
+	var treeNode = treeNode;
+	dialog({
+		title: '重命名',
+		width:490,
+		height:"auto",
 		content: '要删除的节点是父节点，如果删除将连同子节点一起删掉。\n\n请确认！',
 		okValue: '确 定',
 		ok: function () {
-
+			
 			var newNode = {id:treeNode.id};
 			noteBlogAjax("/tree/deleteNoteBook",newNode,function(data){
 				zTree_Menu.removeNode(treeNode);
@@ -157,59 +193,55 @@ function resetTree() {
 	hideRMenu();
 	sendAjax("../../tree/lefttree");
 }
-function sendAjax(url){
-	$.ajax({
-		type : 'POST',
-		url: url,
-		async : false,
-		dataType : 'json',
-		data:{},
-		success: function(data, textStatus, jqXHR){
-			var zNodes = data;
-			var treeObj = $("#treeDemo");
-			$.fn.zTree.init(treeObj, setting, zNodes);
-			zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
-			treeObj.hover(function () {
-				if (!treeObj.hasClass("showIcon")) {
-					treeObj.addClass("showIcon");
-				}
-			}, function() {
-				treeObj.removeClass("showIcon");
-			});
-		},
-		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			alert(XMLHttpRequest);
-		}
-	});
-}
+
 function noteBlogAjax(url,param,sucessFun,failFun){
 	$.ajax({
 		type : 'POST',
 		url: url,
-		async : false,
+		async : true,
 		dataType : 'json',
 		data:param,
 		success: function(data, textStatus, jqXHR){
-			//window.location.reload(); 
 			sucessFun(data)
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			dialog({
-				title: '错误',
-				content: '服务请求失败',
-				okValue: '确 定',
-				ok: function () {
-					return true;
-				},
-				cancelValue: '取消',
-				cancel: function () {}
-			}).show();
+			showDialog("错误",'服务请求失败','确 定','取消',function(){
+				return true;
+			});
 		}
 	});
+}
+
+
+function showDialog(title,content,okValue,cancelValue,successFun,failFun){
+	dialog({
+		title: title,
+		content: content,
+		okValue: okValue,
+		ok: function () {
+			successFun();
+		},
+		cancelValue: '取消',
+		cancel: function () {
+			failFun();
+		}
+	}).show();
 }
 
 $(document).ready(function(){
 	var treeObj = $("#treeDemo");
 	rMenu = $("#rMenu");
-	sendAjax("../../tree/lefttree");
+	noteBlogAjax("../../tree/lefttree",{},function(data){
+		var zNodes = data;
+		var treeObj = $("#treeDemo");
+		$.fn.zTree.init(treeObj, setting, zNodes);
+		zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");
+		treeObj.hover(function () {
+			if (!treeObj.hasClass("showIcon")) {
+				treeObj.addClass("showIcon");
+			}
+		}, function() {
+			treeObj.removeClass("showIcon");
+		});
+	});
 });

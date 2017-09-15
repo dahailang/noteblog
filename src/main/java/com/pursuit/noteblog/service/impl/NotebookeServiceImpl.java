@@ -26,9 +26,12 @@ public class NotebookeServiceImpl implements NoteBookService {
 	}
 
 	@Override
-	public NoteBook renameNoteBook(NoteBook notebook) {
-		noteBookMapper.updateByPrimaryKey(notebook);
-		return notebook;
+	public NoteBook renameNoteBook(TreeNode node) {
+		NoteBook notebook = new NoteBook();
+		notebook.setId(node.getId());
+		notebook.setName(node.getName());
+		noteBookMapper.updateByPrimaryKeySelective(notebook);
+		return noteBookMapper.selectByPrimaryKey(node.getId());
 	}
 
 	@Override
