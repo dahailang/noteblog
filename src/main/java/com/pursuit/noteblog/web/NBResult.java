@@ -27,8 +27,8 @@ public class  NBResult{
     public static NBResult ok() {
         return new NBResult(200,true,"OK");
     }
-    public static NBResult ok(Object obj) {
-    	return new NBResult(200,true,"OK",obj);
+    public static NBResult ok(Object info) {
+    	return new NBResult(200,true,"OK",info);
     }
     public static NBResult ok(String msg) {
     	return new NBResult(200,true,msg);
@@ -44,11 +44,11 @@ public class  NBResult{
         this.ok = ok;
         this.msg = msg;
     }
-    public NBResult(Integer status, boolean ok,String msg,Object obj) {
+    public NBResult(Integer status, boolean ok,String msg,Object info) {
     	this.status = status;
     	this.ok = ok;
     	this.msg = msg;
-    	this.info = obj;
+    	this.info = info;
     }
     public NBResult(Integer status, boolean ok,String msg,Map<String,Object> map) {
     	this.status = status;

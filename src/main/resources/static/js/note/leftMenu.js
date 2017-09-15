@@ -105,9 +105,9 @@ function addTreeNodeFun(treeNode) {
 			noteBlogAjax("/tree/addnotebook",newNode,function(data){
 				if (zTree_Menu.getSelectedNodes()[0]) {
 					newNode.checked = zTree_Menu.getSelectedNodes()[0].checked;
-					zTree_Menu.addNodes(zTree_Menu.getSelectedNodes()[0], newNode);
+					zTree_Menu.addNodes(zTree_Menu.getSelectedNodes()[0], data);
 				} else {
-					zTree_Menu.addNodes(null, newNode);
+					zTree_Menu.addNodes(null, data);
 				}
 				return true;
 			},function(){

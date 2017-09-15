@@ -63,7 +63,7 @@ public class NotebookeServiceImpl implements NoteBookService {
 	public NBResult addNoteBook(String uid, TreeNode node) {
 		NoteBook noteBook = new  NoteBook();
 		noteBook.setId(null!=node.getId()?node.getId():IdGenerator.NOTEID.generateSessionId());
-		noteBook.setPid(node.getPid());
+		noteBook.setPid(null==node.getPid()?"0":node.getPid());
 		noteBook.setUid(uid);
 		noteBook.setName(node.getName());
 		noteBook.setCreateTime(new Date());

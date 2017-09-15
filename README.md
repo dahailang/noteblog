@@ -1,6 +1,7 @@
 # noteblog
 博客笔记
 
+http://qzixia.com:10100/
 ###mongodb
 * show dbs
 * use leanote
