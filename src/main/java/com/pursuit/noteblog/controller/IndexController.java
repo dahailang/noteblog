@@ -14,7 +14,11 @@ import com.pursuit.noteblog.util.ConstUtils;
 @Controller
 @RequestMapping(value = "/")
 public class IndexController extends BaseController{
-	
+
+	@RequestMapping(value = "")
+	public ModelAndView defaultPage(){
+		return new ModelAndView("redirect:/html/auth/login.html");
+	}
     @RequestMapping(value = "/index")
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response, Model model){
     	//主页是否是管理员的博客页
