@@ -85,12 +85,11 @@ public class NotebookeServiceImpl implements NoteBookService {
 		NoteBook recoder = new NoteBook();
 		recoder.setId(nid);
 		recoder.setStatus(0);
-		noteBookMapper.updateByPrimaryKey(recoder);
+		noteBookMapper.updateByPrimaryKeySelective(recoder);
 		for (NoteBook notebook: children) {
 			notebook.setStatus(0);
-			noteBookMapper.updateByPrimaryKey(notebook);
+			noteBookMapper.updateByPrimaryKeySelective(notebook);
 		}
-		
 		return NBResult.ok();
 	}
 	

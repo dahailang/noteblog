@@ -24,7 +24,7 @@ CREATE TABLE `note_book` (
   `pid` varchar(40) NOT NULL COMMENT '父节点id',
   `uid` varchar(40) NOT NULL COMMENT '用户id',
    is_parent int(2)  NOT NULL COMMENT '是否是目录节点',
-  `title` varchar(255) DEFAULT NULL COMMENT '笔记本标题',
+  `name` varchar(255) DEFAULT NULL COMMENT '笔记本标题',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `last_update_time` datetime DEFAULT NULL COMMENT '最后更新时间',
   `status` int(4) NOT NULL COMMENT '配置状态 0 正常 1 回收站 ',

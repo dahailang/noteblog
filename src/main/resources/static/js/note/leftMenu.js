@@ -57,7 +57,7 @@ function showRMenu(type,treeNode,x, y) {
 	var ulDiv =$("#rMenu ul").html("");
 	var addTreeNodeBook="<li id='m_add'>增加子笔记本</li>";
 	var addTreeNode="<li id='m_add' onclick='addTreeNode();'>增加笔记</li>";
-	var removeTreeNode="<li id='m_del' onclick='removeTreeNode();'>删除节点</li>";
+	var removeTreeNode="<li id='m_del'>删除节点</li>";
 	var checkTreeNode ="<li id='m_check' onclick=’checkTreeNode(true);'>Check节点</li>";
 	ulDiv.append(addTreeNodeBook);
 	ulDiv.append(addTreeNode);
@@ -66,6 +66,9 @@ function showRMenu(type,treeNode,x, y) {
 	
 	$("#m_add").click(function(){
 		addTreeNodeFun(treeNode);
+	});
+	$("#m_del").click(function(){
+		removeTreeNodeFun(treeNode);
 	});
 	
 	$("#rMenu ul").show();
@@ -118,19 +121,30 @@ function addTreeNodeFun(treeNode) {
 		cancel: function () {}
 	}).showModal();
 }
-function removeTreeNode() {
+function removeTreeNodeFun(treeNode) {
 	hideRMenu();
-	var nodes = zTree_Menu.getSelectedNodes();
-	if (nodes && nodes.length>0) {
-		if (nodes[0].children && nodes[0].children.length > 0) {
-			var msg = "要删除的节点是父节点，如果删除将连同子节点一起删掉。\n\n请确认！";
-			if (confirm(msg)==true){
-				zTree_Menu.removeNode(nodes[0]);
-			}
-		} else {
-			zTree_Menu.removeNode(nodes[0]);
-		}
-	}
+	var treeNode = treeNode;
+	dialog({
+		title: '确认消息',
+		width:490,
+		height:"auto",
+		content: '要删除的节点是父节点，如果删除将连同子节点一起删掉。\n\n请确认！',
+		okValue: '确 定',
+		ok: function () {
+
+			var newNode = {id:treeNode.id};
+			noteBlogAjax("/tree/deleteNoteBook",newNode,function(data){
+				zTree_Menu.removeNode(treeNode);
+				return true;
+			},function(){
+				$("#titileDiv").append("<font colar='red'>服务异常</font>");
+				return false;
+			});
+			
+		},
+		cancelValue: '取消',
+		cancel: function () {}
+	}).showModal();
 }
 function checkTreeNode(checked) {
 	var nodes = zTree.getSelectedNodes();

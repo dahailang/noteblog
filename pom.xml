@@ -249,10 +249,18 @@
 					<resource>
 				        <directory>${project.basedir}/src/main/resources</directory>
 				        <filtering>true</filtering>
-				        <!-- <excludes>
+				        <excludes>
 				            <exclude>**/*.woff</exclude>
 		                	<exclude>**/*.ttf</exclude>
-				        </excludes> -->
+				        </excludes>
+				    </resource>
+				   	<resource>
+				        <directory>${project.basedir}/src/main/resources</directory>
+				        <filtering>false</filtering>
+				        <includes>
+				            <include>**/*.woff</include>
+		                	<include>**/*.ttf</include>
+				        </includes>
 				    </resource>
 				</resources>
 			</build>
@@ -292,6 +300,4 @@
 			</build>
 		</profile>
 	</profiles>
-
-
 </project>
