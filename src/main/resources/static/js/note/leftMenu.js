@@ -1,4 +1,6 @@
 var curMenu = null, zTree_Menu = null,rMenu=null;
+
+
 //树配置
 var setting = {
 	view: {
@@ -48,12 +50,11 @@ function OnRightClick(event, treeId, treeNode) {
 		zTree_Menu.cancelSelectedNode();
 		showRMenu("root", event.clientX, event.clientY);
 	} else if (treeNode && !treeNode.noR) {
-		zTree_Menu.selectNode(treeNode);
+		//zTree_Menu.selectNode(treeNode);
 		showRMenu("node",treeNode,event.clientX, event.clientY);
 	}
 }
 function showRMenu(type,treeNode,x, y) {
-	
 	var ulDiv =$("#rMenu ul").html("");
 	var addTreeNodeBook="<li id='m_add'>增加子笔记本</li>";
 	var addTreeNode="<li id='m_add' onclick='addTreeNode();'>增加笔记</li>";
@@ -108,12 +109,8 @@ function addTreeNodeFun(treeNode) {
 			var newNode = {pid:treeNode.id, name:newBookName,isParent:"true"};
 			
 			noteBlogAjax("/tree/addnotebook",newNode,function(data){
-				if (zTree_Menu.getSelectedNodes()[0]) {
-					newNode.checked = zTree_Menu.getSelectedNodes()[0].checked;
-					zTree_Menu.addNodes(zTree_Menu.getSelectedNodes()[0], data);
-				} else {
-					zTree_Menu.addNodes(null, data);
-				}
+				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+				zTree.addNodes(treeNode, data);
 				return true;
 			},function(){
 				$("#titileDiv").append("<font colar='red'>服务异常</font>");
@@ -139,13 +136,9 @@ function renameTreeNodeFun(treeNode) {
 			var newName = $("#rename").val();
 			var newNode = {id:treeNode.id,name:newName};
 			noteBlogAjax("/tree/renameNoteBook",newNode,function(data){
-				treeNode.name=newName;
-				zTree_Menu.updateNode(data);
-				if (zTree_Menu.getSelectedNodes()[0]) {
-					zTree_Menu.getSelectedNodes()[0].updateNode(data);
-				} else {
-					
-				}
+				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+				treeNode.name=data.name;
+				zTree.updateNode(treeNode);
 				return true;
 			},function(){
 				$("#titileDiv").append("<font colar='red'>服务异常</font>");
