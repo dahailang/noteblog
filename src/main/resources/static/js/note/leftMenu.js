@@ -110,7 +110,9 @@ function addTreeNodeFun(treeNode) {
 			
 			noteBlogAjax("/tree/addnotebook",newNode,function(data){
 				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-				zTree.addNodes(treeNode, data);
+				var idc = treeNode.id;
+				var level = treeNode.level;
+				zTree.addNodes(treeNode,data);
 				return true;
 			},function(){
 				$("#titileDiv").append("<font colar='red'>服务异常</font>");
