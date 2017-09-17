@@ -10,10 +10,14 @@
     <title>note</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="../../libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/style.css" />  
+    <link title="blue" href="../../css/dermadefault.css" rel="stylesheet" type="text/css"/>
+	<link title="green" href="../../css/dermagreen.css" rel="stylesheet" type="text/css" disabled="disabled"/>
+	<link title="orange" href="../../css/dermaorange.css" rel="stylesheet" type="text/css" disabled="disabled"/>
+    
     <link rel="stylesheet" href="../../editormd/css/editormd.css" />  
     <link rel="stylesheet" href="../../libs/ztree/css/zTreeStyle.css" >
     <link rel="stylesheet" href="../../libs/dialog/dialog.css" >
-    <link rel="stylesheet" href="../../css/style.css" />  
     
   </head>
   <body>	
@@ -170,46 +174,61 @@
 	  </div>    
     
     </nav>
-    <div class="container-fluid main block">
-      <div class="row">
-        <div class="col-sm-3 ">
-            <div class="row">
-              <div class="col-sm-5  sidebarid='sidebar'"  >
-              	<ul id="treeDemo" class="ztree showIcon" style='border:1px solid blue;' >
-                </ul>
-	 			<div id="rMenu">
-	 				<ul></ul>
-	 			</div>
-              </div>
-              <div class="col-sm-7  main-content" style='margin:0; border:1px solid red;height:100%'></div>
-            </div>
+<div class="down-main">
+  <div class="left-main left-full">
+    <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+    <div class="subNavBox">
+      <div class="sBox">
+       <div class="subNav sublist-down"><span class="title-icon glyphicon glyphicon-chevron-down"></span><span class="sublist-title">笔记本</span>
         </div>
-        <!-- 主编辑区 -->
-        <div class="col-sm-9 block">
-          <div class="row">
-            <!--  <div class="col-sm-12" style="height:50px;">工具条</div> -->
-            <!-- <div class="btns">
-                 CTRL+L 实现此功能   <p >跳转到第<input type="text" class='line'>行<button id="goto-line-btn">确定</button></p>
-                <button id="show-btn">显示编辑器</button>
-                此功能无意义 <button id="noteEditor_btn">隐藏编辑器</button>
-                <button id="get-md-btn">获取Markdown文本</button>
-                <button id="get-html-btn">获取html内容</button>
-                <button id="watch-btn">预览效果</button>
-                <button id="watch-btn">隐藏效果</button>
-                <button id="preview-btn">Preview HTML (Press Shift + ESC cancel)</button>
-                <button id="fullscreen-btn">Fullscreen (Press ESC cancel)</button>
-                <button id="show-toolbar-btn">显示工具栏</button>
-                <button id="close-toolbar-btn">隐藏工具栏</button>
-                <button id="toc-menu-btn">ToC Dropdown menu</button>
-                <button id="toc-default-btn">ToC default</button>
-            </div> -->
-            <div class="col-sm-12" id="editormd"></div>
-          </div>
+        <ul id="treeDemo" class="ztree navContent"></ul>
+      </div>
+      <div class="sBox">
+       <div class="subNav sublist-down"><span class="title-icon glyphicon glyphicon-chevron-down"></span><span class="sublist-title">用户中心</span>
         </div>
+        <ul class="navContent" style="display:block">
+          <li class="active">
+            <div class="showtitle" style="width:100px;"><img src="img/leftimg.png" />账号管理</div>
+            <a href="userInfo.html"><span class="sublist-icon glyphicon glyphicon-user"></span><span class="sub-title">账号管理</span></a> </li>
+          <li>
+            <div class="showtitle" style="width:100px;"><img src="img/leftimg.png" />消息中心</div>
+            <a href="message.html"><span class="sublist-icon glyphicon glyphicon-envelope"></span><span class="sub-title">消息中心</span></a> </li>
+          <li>
+            <div class="showtitle" style="width:100px;"><img src="img/leftimg.png" />短信</div>
+            <a href="smsInfo.html"><span class="sublist-icon glyphicon glyphicon-bullhorn"></span><span class="sub-title">短信</span></a></li>
+          <li>
+            <div class="showtitle" style="width:100px;"><img src="img/leftimg.png" />实名认证</div>
+            <a href="identify.html"><span class="sublist-icon glyphicon glyphicon-credit-card"></span><span class="sub-title">实名认证</span></a></li>
+        </ul>
+      </div>
+      <div class="sBox">
+        <div class="subNav sublist-up"><span class="title-icon glyphicon glyphicon-chevron-up"></span><span class="sublist-title">关于我们</span></div>
+        <ul class="navContent" style="display:none">
+          <li>
+            <div class="showtitle" style="width:100px;"><img src="img/leftimg.png" />添加新闻</div>
+            <a href="#"><span class="sublist-icon glyphicon glyphicon-user"></span><span class="sub-title">添加新闻</span></a></li>
+          <li>
+            <div class="showtitle" style="width:100px;"><img src="img/leftimg.png" />添加新闻</div>
+            <a href="#"><span class="sublist-icon glyphicon glyphicon-user"></span><span class="sub-title">新闻管理</span></a></li>
+          <li>
+            <div class="showtitle" style="width:100px;"><img src="img/leftimg.png" />添加新闻</div>
+            <a href="#"><span class="sublist-icon glyphicon glyphicon-user"></span><span class="sub-title">添加新闻</span></a></li>
+          <li>
+            <div class="showtitle" style="width:100px;"><img src="img/leftimg.png" />新闻管理</div>
+            <a href="#"><span class="sublist-icon glyphicon glyphicon-user"></span><span class="sub-title">新闻管理</span></a></li>
+        </ul>
       </div>
     </div>
-
+  </div>
+  <div class="right-product my-index right-full">
+     <div class="container-fluid">
+	   <div class="info-center">
+   		<div class="col-sm-12" id="editormd"></div>
+	 </div>
+  </div>
+</div>
     <script src="../../libs/jquery/jquery.min.js"></script>
+    <script src="../../libs/jquery/jquery.cookie.js"></script>
     <script src="../../libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../editormd/editormd.js"></script>   
     <script src="../../libs/ztree/js/jquery.ztree.all.js"></script>
@@ -387,5 +406,73 @@
         ];
     }
     </script>
+    <script type="text/javascript">
+$(function(){
+/*换肤*/
+$(".dropdown .changecolor li").click(function(){
+	var style = $(this).attr("id");
+    $("link[title!='']").attr("disabled","disabled"); 
+	$("link[title='"+style+"']").removeAttr("disabled"); 
+
+	$.cookie('mystyle', style, { expires: 7 }); // 存储一个带7天期限的 cookie 
+})
+var cookie_style = $.cookie("mystyle"); 
+if(cookie_style!=null){ 
+    $("link[title!='']").attr("disabled","disabled"); 
+	$("link[title='"+cookie_style+"']").removeAttr("disabled"); 
+} 
+/*左侧导航栏显示隐藏功能*/
+$(".subNav").click(function(){				
+			/*显示*/
+			if($(this).find("span:first-child").attr('class')=="title-icon glyphicon glyphicon-chevron-down")
+			{
+				$(this).find("span:first-child").removeClass("glyphicon-chevron-down");
+			    $(this).find("span:first-child").addClass("glyphicon-chevron-up");
+			    $(this).removeClass("sublist-down");
+				$(this).addClass("sublist-up");
+			}
+			/*隐藏*/
+			else
+			{
+				$(this).find("span:first-child").removeClass("glyphicon-chevron-up");
+				$(this).find("span:first-child").addClass("glyphicon-chevron-down");
+				$(this).removeClass("sublist-up");
+				$(this).addClass("sublist-down");
+			}	
+		// 修改数字控制速度， slideUp(500)控制卷起速度
+	    $(this).next(".navContent").slideToggle(300).siblings(".navContent").slideUp(300);
+	})
+/*左侧导航栏缩进功能*/
+$(".left-main .sidebar-fold").click(function(){
+
+	if($(this).parent().attr('class')=="left-main left-full")
+	{
+		$(this).parent().removeClass("left-full");
+		$(this).parent().addClass("left-off");
+		
+		$(this).parent().parent().find(".right-product").removeClass("right-full");
+		$(this).parent().parent().find(".right-product").addClass("right-off");
+		
+		}
+	else
+	{
+		$(this).parent().removeClass("left-off");
+		$(this).parent().addClass("left-full");
+		
+		$(this).parent().parent().find(".right-product").removeClass("right-off");
+		$(this).parent().parent().find(".right-product").addClass("right-full");
+		
+		}
+	})	
+ 
+  /*左侧鼠标移入提示功能*/
+		$(".sBox ul li").mouseenter(function(){
+			if($(this).find("span:last-child").css("display")=="none")
+			{$(this).find("div").show();}
+			}).mouseleave(function(){$(this).find("div").hide();})	
+})
+</script>
+    
+    
   </body>
 </html>
