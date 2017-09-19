@@ -45,7 +45,6 @@ editorMode.prototype.init = function() {
 	this.changeMode(this.isWritingMode);
 	var self = this;
 	$(".toggle-editor-mode").click(function(e) {
-		//阻止默认动作
 		e.preventDefault();
 		saveBookmark();
 		var $a = $(this).find("a");
@@ -674,7 +673,7 @@ function hideMask () {
 
 //--------------
 // 调用之
-$(function() {
+// $(function() {
 	LEA.s3 = new Date();
 	console.log('initing...');
 	
@@ -884,7 +883,7 @@ $(function() {
 	
 	// 手机端?
 	Mobile.init();
-});
+//});
 
 //------------
 // pjax
@@ -1518,7 +1517,6 @@ function getTopInfoSrc (callback) {
 // note.html调用
 // 实始化页面
 function initPage() {
-	//嵌入iframe 时候执行
 	initLeanoteIfrPlugin();
 	if (LEA.topInfo) {
 		getTopInfoSrc(function (src) {
@@ -1555,9 +1553,7 @@ function _initPage(srcNote, isTop) {
 		Share.firstRenderShareNote(curSharedUserId, curSharedNoteNotebookId, curNoteId);
 	// 初始打开的是我的笔记
 	} else {
-		if(noteContentJson){
-			Note.setNoteCache(noteContentJson);
-		}
+		Note.setNoteCache(noteContentJson);
 		// 判断srcNote是否在notes中
 		var isExists = false;
 		if (isTop && srcNote && notes) {
