@@ -26,7 +26,7 @@ public class NoteController extends BaseController{
 		NoteUser user = (NoteUser) request.getAttribute("userInfo");
 		NBResult noteResut = noteContentService.index(user,noteId);
 		model.addAllAttributes(noteResut.getAttributes());
-		return new ModelAndView("redirect:/html/note/note.html");
+		return new ModelAndView("redirect:/html/note/note-new.html");
 	}
 	
 	//进行分支合并操作
