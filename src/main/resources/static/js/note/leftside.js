@@ -23,7 +23,7 @@ var LeftSide=function (){
 	init:function(url){
 		noteBlogAjax(url,{},function(data){
 			$.fn.zTree.init($("#treeDemo"), this.setting, data);
-			var treeObj = $("#treeDemo");
+//		var treeObj = $("#treeDemo");
 //			treeObj.hover(function () {
 //				if (!treeObj.hasClass("showIcon")) {
 //					treeObj.addClass("showIcon");
