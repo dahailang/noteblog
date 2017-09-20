@@ -1,11 +1,12 @@
-var LeftSide=function (){
+var LeftSide={
 	setting:{
 			view: {
 				showLine: false,
 				showIcon: false,
-				selectedMulti: false,
+				//selectedMulti: false,//是否允许同时选中多个节点 CTRL+
 				dblClickExpand: false,
-				addDiyDom: addDiyDom
+				addDiyDom: addDiyDom,
+				fontCss:{color:"#FFFFFF"}
 			},
 			data: {
 				simpleData: {
@@ -21,16 +22,9 @@ var LeftSide=function (){
 			}
 	},
 	init:function(url){
+		var self =this;
 		noteBlogAjax(url,{},function(data){
-			$.fn.zTree.init($("#treeDemo"), this.setting, data);
-//		var treeObj = $("#treeDemo");
-//			treeObj.hover(function () {
-//				if (!treeObj.hasClass("showIcon")) {
-//					treeObj.addClass("showIcon");
-//				}
-//			}, function() {
-//				treeObj.removeClass("showIcon");
-//			});
+			$.fn.zTree.init($("#treeDemo"), self.setting, data);
 		});
 	},
 	createRightMenu:function(treeNode){
@@ -43,8 +37,6 @@ var LeftSide=function (){
 //		var removeTreeNode="<li id='m_del'>删除节点</li>";
 //		var checkTreeNode ="<li id='m_check' onclick=’checkTreeNode(true);'>Check节点</li>";
 	}
-		
-		
 }
 
 function addDiyDom(treeId, treeNode) {
@@ -101,7 +93,7 @@ function showRMenu(type,treeNode,x, y) {
 	});
 	
 	$("#rMenu ul").show();
-	rMenu.css({"top":y+"px", "left":x+"px", "visibility":"visible"});
+	//rMenu.css({"top":y+"px", "left":x+"px", "visibility":"visible"});
 
 	$("body").bind("mousedown", onBodyMouseDown);
 }
@@ -214,6 +206,5 @@ function resetTree() {
 
 
 $(document).ready(function(){
-	new LeftSide.init("../../tree/lefttree");
-	//LeftSide.init("zNodes.json");
+	LeftSide.init("../../tree/lefttree");
 });
