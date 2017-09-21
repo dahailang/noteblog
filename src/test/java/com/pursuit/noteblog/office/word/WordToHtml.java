@@ -1,4 +1,4 @@
-package com.pursuit.noteblog.office.word;
+/*package com.pursuit.noteblog.office.word;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,29 +31,29 @@ import org.apache.poi.hwpf.usermodel.TableCell;
 import org.apache.poi.hwpf.usermodel.TableIterator;
 import org.apache.poi.hwpf.usermodel.TableRow;  
 
-/**
+*//**
  *
 
  * @Description:Word试卷文档模型化解析
 
  * @author <a href="mailto:thoslbt@163.com">Thos</a> 42  * @ClassName: WordToHtml 44  * @version V1.0
  *
- */
+ *//*
 public class WordToHtml {
 
-    /**
+    *//**
      * 回车符ASCII码
-     */
+     *//*
     private static final short ENTER_ASCII = 13;
 
-    /**
+    *//**
      * 空格符ASCII码
-     */
+     *//*
     private static final short SPACE_ASCII = 32;
 
-    /**
+    *//**
      * 水平制表符ASCII码
-     */
+     *//*
     private static final short TABULATION_ASCII = 9;
 
     public static String htmlText = "";
@@ -78,30 +78,30 @@ public class WordToHtml {
         }
     }
 
-    /**
+    *//**
      * word文档图片存储路径
      * @return
-     */
+     *//*
     public static String wordImageFilePath(){
 
         return  "D:/"+"wordImage/"+ DateFormatUtils.format(new Date(),"yyyyMMdd");
     }
 
-    /**
+    *//**
      *  word文档图片Web访问路径
      * @return
-     */
+     *//*
     public static String wordImgeWebPath(){
 
         return  "D:/"+"wordImage/"+ DateFormatUtils.format(new Date(),"yyyyMMdd")+"/";
     }
 
-    /**
+    *//**
      * 读取每个文字样式
      * 
      * @param fileName
      * @throws Exception
-     */
+     *//*
 
 
     public static void getWordAndStyle(String fileName) throws Exception {
@@ -201,13 +201,13 @@ public class WordToHtml {
         System.out.println("------------WordToHtml模型化成功----------------");
     }
 
-    /**
+    *//**
      * 读写文档中的表格
      * 
      * @param pTable
      * @param cr
      * @throws Exception
-     */
+     *//*
     public static void readTable(TableIterator it, Range rangetbl) throws Exception {
 
         htmlTextTbl="";
@@ -256,13 +256,13 @@ public class WordToHtml {
         } //end while 
     }    
 
-    /**
+    *//**
      * 读写文档中的图片
      * 
      * @param pTable
      * @param cr
      * @throws Exception
-     */
+     *//*
     public static void readPicture(PicturesTable pTable, CharacterRun cr) throws Exception {
         // 提取图片
         Picture pic = pTable.extractPicture(cr, false);
@@ -289,7 +289,7 @@ public class WordToHtml {
         return flag;
     }
 
-    /*** 字体颜色模块start ********/
+    *//*** 字体颜色模块start ********//*
     public static int red(int c) {  
         return c & 0XFF;  
     }  
@@ -322,13 +322,13 @@ public class WordToHtml {
         int rgb = rgb(color);  
         return "#" + rgbToSix(Integer.toHexString(rgb));  
     }  
-    /** 字体颜色模块end ******/
+    *//** 字体颜色模块end ******//*
 
-    /**
+    *//**
      * 写文件
      * 
      * @param s
-     */
+     *//*
     public static void writeFile(String s) {
         FileOutputStream fos = null;
         BufferedWriter bw = null;
@@ -353,10 +353,10 @@ public class WordToHtml {
 
     }
 
-    /**
+    *//**
      * 分析html
      * @param s
-     */
+     *//*
     public static void analysisHtmlString(String s){
 
         String q[] = s.split("<br/>");
@@ -382,7 +382,7 @@ public class WordToHtml {
         int fillingNum = 0;
         int judgeNum = 0;
         int askNum = 0;
-        /***********试卷基础数据赋值*********************/
+        *//***********试卷基础数据赋值*********************//*
         for (int i = 0; i < ws.length; i++) {
             String delHtml=ws[i].toString().replaceAll("</?[^>]+>","").trim();//去除html
             if(delHtml.contains("、单选题")){
@@ -408,7 +408,7 @@ public class WordToHtml {
             }
 
         }
-        /**************word试卷数据模型化****************/
+        *//**************word试卷数据模型化****************//*
         List<Map<String, Object>> bigTiMaps = new ArrayList<Map<String,Object>>();
         List<Map<String, Object>> smalMaps = new ArrayList<Map<String,Object>>();
         List<Map<String, Object>> sleMaps = new ArrayList<Map<String,Object>>();
@@ -511,4 +511,4 @@ public class WordToHtml {
         }
         return iso;
     }
-}
+}*/

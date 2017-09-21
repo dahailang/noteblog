@@ -4,7 +4,8 @@ public class CPUTest {
     //定义时间片大小（毫秒）  
     public static final double TIME = 1000;  
     //画直线方法  
-    private static void lineGraph(double rate) throws InterruptedException{  
+    @SuppressWarnings("unused")
+	private static void lineGraph(double rate) throws InterruptedException{  
         while (true){  
             doSomeSimpleWork(rate * TIME);  
             Thread.sleep((long) (TIME - rate * TIME));  
