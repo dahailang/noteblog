@@ -3,7 +3,7 @@ $(function() {
 	$.get('test.md', function(md) {
 		noteEditor = editormd("editormd", {
 			width : "100%",
-			height : 500,
+			height : "100%",
 			path : "../../editormd/lib/",
 			// theme : "dark",//标题题头
 			// previewTheme : "dark",//预览效果
