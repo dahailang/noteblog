@@ -1,5 +1,14 @@
 var LeftSide = function(){
 	this.setting={
+			edit: {
+				enable: true,
+				showRemoveBtn: false,
+				showRenameBtn: false,
+				drag: {
+					isCopy: true,
+					isMove: false
+				}
+			},		
 			view: {
 				showLine: false,
 				showIcon: false,
@@ -64,7 +73,9 @@ var LeftSide = function(){
 					$("#rightMenu").css({"top":(y-50)+"px", "left":x+"px", "visibility":"visible"});
 					
 					$("body").bind("mousedown", onBodyMouseDown);
-				}
+				},
+				beforeDrag: beforeDrag,
+				beforeDrop: beforeDrop
 			}
 	};
 	this.init=function(url){
@@ -182,7 +193,17 @@ function resetTree() {
 	hideRMenu();
 	sendAjax("../../tree/lefttree");
 }
-
+function beforeDrag(treeId, treeNodes) {
+	for (var i=0,l=treeNodes.length; i<l; i++) {
+		if (treeNodes[i].drag === false) {
+			return false;
+		}
+	}
+	return true;
+}
+function beforeDrop(treeId, treeNodes, targetNode, moveType) {
+	return targetNode ? targetNode.drop !== false : true;
+}
 $(document).ready(function(){
 	var leftside = new LeftSide();
 	leftside.init("../../tree/lefttree");

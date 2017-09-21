@@ -20,7 +20,7 @@ display: inline-block;line-height: 16px;vertical-align: top;text-align: center;}
 .li-border{border-right: 1px solid #008fbf;}
 /*左侧导航选中样式*/
 .sBox ul .active{ background-color:#09C;}
-.treeBox>.ztree ul li a.curSelectedNode {background-color:#09C;border:0;height:40px;}
+/* .treeBox>.ztree ul li a.curSelectedNode {background-color:#09C;border:0;height:40px;} */
 
 /*搜索*/
 .dropdown .search-dropdown{left:auto; right:0px; padding:0px; width:280px;border: 2px solid #008fbf;}
