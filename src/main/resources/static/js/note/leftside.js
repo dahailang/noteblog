@@ -1,11 +1,21 @@
-var LeftSide={
-	setting:{
+var LeftSide = function(){
+	this.setting={
 			view: {
 				showLine: false,
 				showIcon: false,
-				//selectedMulti: false,//是否允许同时选中多个节点 CTRL+
+				selectedMulti: false,//是否允许同时选中多个节点 CTRL+
 				dblClickExpand: false,
-				addDiyDom: addDiyDom,
+				addDiyDom: function (treeId, treeNode) {
+					var spaceWidth = 5;
+					var switchObj = $("#" + treeNode.tId + "_switch"),
+					icoObj = $("#" + treeNode.tId + "_ico");
+					switchObj.remove();
+					icoObj.before(switchObj);
+					if (treeNode.level > 1) {
+						var spaceStr = "<span style='display: inline-block;width:" + (spaceWidth * treeNode.level)+ "px'></span>";
+						switchObj.before(spaceStr);
+					}
+				},
 				fontCss:{color:"#FFFFFF"}
 			},
 			data: {
@@ -17,93 +27,62 @@ var LeftSide={
 				}
 			},
 			callback: {
-				beforeClick: beforeClick,
-				onRightClick: OnRightClick
+				beforeClick: function(treeId, treeNode) {
+					if (treeNode.isParent) {
+						//取消已选中节点样式
+						$(".treeBox>.ztree li a.curSelectedNode").removeClass("curSelectedNode");
+						//展开 闭合 目录节点
+						var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+						zTree.expandNode(treeNode);
+						return false;
+					}
+					return true;
+				},
+				onRightClick: function(event, treeId, treeNode) {
+					var x= event.clientX;
+					var y= event.clientY;
+					var rmenu = $("#rightMenu ul");
+					if(treeNode.level > 1){
+						rmenu.html("<li id='addNote'>增加笔记</li>"+
+								"<li id='renameNode'>重命名</li>"+
+								"<li id='delNode'>删除节点</li>");
+					}else{
+						rmenu.html("<li id='addNote'>增加笔记本</li>"+
+								"<li id='renameNode'>重命名</li>"+
+						"<li id='delNode'>删除节点</li>");
+					}
+					$("#addNote").click(function(){
+						addTreeNodeFun(treeNode);
+					});
+					$("#renameNode").click(function(){
+						removeTreeNodeFun(treeNode);
+					});
+					$("#delNode").click(function(){
+						removeTreeNodeFun(treeNode);
+					});
+					
+					$("#rightMenu").css({"top":(y-50)+"px", "left":x+"px", "visibility":"visible"});
+					
+					$("body").bind("mousedown", onBodyMouseDown);
+				}
 			}
-	},
-	init:function(url){
+	};
+	this.init=function(url){
 		var self =this;
 		noteBlogAjax(url,{},function(data){
 			$.fn.zTree.init($("#treeDemo"), self.setting, data);
 		});
-	},
-	createRightMenu:function(treeNode){
-		$('<div id="rightMenu"><ul><li id="addNote">增加笔记本</li><li id="addNote">增加笔记</li></ul></div>')
-		if(treeNode.level<2){
-			
-		}
-//		rightMenuhtml：'<div id="rightMenu"><ul><li id="addNote">增加笔记本</li><li id="addNote">增加笔记</li></ul></div>',
-//		var renameTreeNode="<li id='renameNode'>重命名</li>";
-//		var removeTreeNode="<li id='m_del'>删除节点</li>";
-//		var checkTreeNode ="<li id='m_check' onclick=’checkTreeNode(true);'>Check节点</li>";
-	}
-}
-
-function addDiyDom(treeId, treeNode) {
-	var spaceWidth = 5;
-	var switchObj = $("#" + treeNode.tId + "_switch"),
-	icoObj = $("#" + treeNode.tId + "_ico");
-	switchObj.remove();
-	icoObj.before(switchObj);
-
-	if (treeNode.level > 1) {
-		var spaceStr = "<span style='display: inline-block;width:" + (spaceWidth * treeNode.level)+ "px'></span>";
-		switchObj.before(spaceStr);
-	}
-}
-
-function beforeClick(treeId, treeNode) {
-	if (treeNode.level == 0 ) {
-		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-		zTree.expandNode(treeNode);
-		return false;
-	}
-	return true;
-}
-function OnRightClick(event, treeId, treeNode) {
-	if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
-		zTree_Menu.cancelSelectedNode();
-		showRMenu("root", event.clientX, event.clientY);
-	} else if (treeNode && !treeNode.noR) {
-		//zTree_Menu.selectNode(treeNode);
-		showRMenu("node",treeNode,event.clientX, event.clientY);
-	}
-}
-function showRMenu(type,treeNode,x, y) {
-	var ulDiv =$("#rMenu ul").html("");
-	var addTreeNodeBook="<li id='m_add'>增加子笔记本</li>";
-	var addTreeNode="<li id='m_add' onclick='addTreeNode();'>增加笔记</li>";
-	var renameTreeNode="<li id='m_rename'>重命名</li>";
-	var removeTreeNode="<li id='m_del'>删除节点</li>";
-	var checkTreeNode ="<li id='m_check' onclick=’checkTreeNode(true);'>Check节点</li>";
-	ulDiv.append(addTreeNodeBook);
-	ulDiv.append(addTreeNode);
-	ulDiv.append(renameTreeNode);
-	ulDiv.append(removeTreeNode);
-	ulDiv.append(checkTreeNode);
-	
-	$("#m_add").click(function(){
-		addTreeNodeFun(treeNode);
-	});
-	$("#m_del").click(function(){
-		removeTreeNodeFun(treeNode);
-	});
-	$("#m_rename").click(function(){
-		renameTreeNodeFun(treeNode);
-	});
-	
-	$("#rMenu ul").show();
-	//rMenu.css({"top":y+"px", "left":x+"px", "visibility":"visible"});
-
-	$("body").bind("mousedown", onBodyMouseDown);
+	};
 }
 function hideRMenu() {
-	if (rMenu) rMenu.css({"visibility": "hidden"});
+	if ($(("#rightMenu"))){
+		 $("#rightMenu").css({"visibility": "hidden"});
+	}
 	$("body").unbind("mousedown", onBodyMouseDown);
 }
 function onBodyMouseDown(event){
-	if (!(event.target.id == "rMenu" || $(event.target).parents("#rMenu").length>0)) {
-		rMenu.css({"visibility" : "hidden"});
+	if (!(event.target.id == "rightMenu" || $(event.target).parents("#rightMenu").length>0)) {
+		$("#rightMenu").css({"visibility" : "hidden"});
 	}
 }
 function addTreeNodeFun(treeNode) {
@@ -204,7 +183,7 @@ function resetTree() {
 	sendAjax("../../tree/lefttree");
 }
 
-
 $(document).ready(function(){
-	LeftSide.init("../../tree/lefttree");
+	var leftside = new LeftSide();
+	leftside.init("../../tree/lefttree");
 });
