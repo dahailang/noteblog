@@ -33,7 +33,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 
 
 /*左侧导航栏*/
-.down-main{position: absolute;width:100%;height:100%;overflow:auto;top: 50px;bottom: 0px;z-index: 100;}
+.down-main{width:100%;height:100%;overflow:auto;top: 50px;bottom: 0px;z-index: 100;}
 .left-full{ width:160px; display:block;}
 .right-full{ left:410px;}
 .left-off{ width:48px; display:block;}
@@ -42,14 +42,20 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 .sidebar-fold{ height: 30px;width: 100%;background: #394555;color: #aeb9c2;text-align: center; height:30px; font-size: 12px;cursor: pointer;}
 .sidebar-fold span{ line-height:30px;}
 .left-main{ bottom: 0px; top:50px; z-index:100; position:fixed; background-color:#293038;}
+/* 右侧编辑区 */
+.content-all{ width:100%;height:100%; top:50px; position: fixed;margin:0px 0px 0px 0px;padding:0px; }
 .mid-full{ width:250px; display:block;}
+#layout {width:100%;height:100%; margin:0px 0px 0px 0px;padding:0px;}
+
+
+.subNavBox{height:100%;overflow-y: auto;}
+.subNavBox .subNav{ height:40px; line-height:40px; color: #fff;}
+.subNavBox .subNav .title-icon{ width:48px; text-align:center;}
 
 .sBox ul li{ list-style-type:none; position:relative;}
 .sBox ul{ padding:0px; position: relative; margin:0px;}
 .sBox ul li a{display: block;width: 100%;height: 40px;line-height: 40px;overflow: hidden; text-decoration:none; color:#FFF;}
 .sBox .sublist-icon{ width:48px; text-align:center;}
-.subNavBox .subNav{ height:40px; line-height:40px; color: #fff;}
-.subNavBox .subNav .title-icon{ width:48px; text-align:center;}
 .sBox .sublist-down{ background-color:#22282e;}
 .sBox .sublist-up{ background-color:#37424f;}
 .sBox .sublist-up ul{ display:none;}
@@ -62,11 +68,9 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 .left-off .sBox .sublist-title{ display:none;}
 .left-off .treeBox ul li .sub-title{ display:none;}
 .left-off .treeBox .sublist-title{ display:none;}
-.content-all{ width:100%;height:100%; margin:0px 0px 0px 0px;padding:0px; }
-#layout {width:100%;height:100%; margin:0px 0px 0px 0px;padding:0px;}
+
 
 /*笔记本目录树*/
-.treeBox{height:300px;overflow-y: auto;}
 .treeBox>.ztree {margin: 0;padding: 0px;}
 .treeBox>.ztree li ul{ margin:0; padding:0}
 .treeBox>.ztree li {line-height:40px;}
