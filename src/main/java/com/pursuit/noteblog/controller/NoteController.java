@@ -38,4 +38,5 @@ public class NoteController extends BaseController{
 		model.addAllAttributes(noteResut.getAttributes());
 		return new ModelAndView("/html/note/note.html");
 	}
+
 }
