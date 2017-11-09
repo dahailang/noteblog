@@ -33,7 +33,9 @@
 	  <div class="collapse navbar-collapse">
 	    <ul class="nav navbar-nav">
 	      <li class="li-border"><a id="noteblog" class="mystyle-color" href="#">NOTEBLOG</a></li>
-	      	      <li class="dropdown li-border"><a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">工具包<span class="caret"></span></a>
+	      
+	      
+	      	<li class="dropdown li-border"><a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">工具包<span class="caret"></span></a>
 	        <!----下拉框选项---->
 	         <div class="dropdown-menu topbar-nav-list">
 	             <div class="topbar-nav-col">
@@ -126,17 +128,8 @@
 	             </div>
 	         </div>
 	      </li>
-	    </ul>
-	    
-	    <ul class="nav navbar-nav pull-right">
-	       <li class="li-border">
-	          <a href="#" class="mystyle-color">
-	            <span class="glyphicon glyphicon-bell"></span>
-	            <span class="topbar-num">0</span>
-	          </a>
-	      </li>
-	       <li class="li-border dropdown"><a href="#" class="mystyle-color" data-toggle="dropdown">
-	      <span class="glyphicon glyphicon-search"></span> 搜索</a>
+	      <li class="li-border dropdown"><a href="#" class="mystyle-color" data-toggle="dropdown">
+	         <span class="glyphicon glyphicon-search"></span> 搜索</a>
 	         <div class="dropdown-menu search-dropdown">
 	            <div class="input-group">
 	                <input type="text" class="form-control">
@@ -146,29 +139,62 @@
 	            </div>
 	         </div>
 	      </li>
-	      <li class="dropdown li-border"><a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">帮助与文档<span class="caret"></span></a>
-	        <ul class="dropdown-menu">
-	          <li><a href="#">帮助与文档</a></li>
-	          <li class="divider"></li>
-	          <li><a href="#">论坛</a></li>
-	          <li class="divider"></li>
-	          <li><a href="#">博客</a></li>
-	        </ul>
+	    </ul>
+	    
+	    <ul class="nav navbar-nav pull-right">
+	       <li class="li-border">
+	          <a href="#" class="mystyle-color">
+	            <span class="glyphicon glyphicon-play"></span>
+	            <span class="topbar-num">预览</span>
+	          </a>
 	      </li>
-
-
-	      <li class="dropdown"><a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">换肤<span class="caret"></span></a>
-	        <ul class="dropdown-menu changecolor">
-	          <li id="blue"><a href="#">蓝色</a></li>
-	          <li class="divider"></li>
-	          <li id="green"><a href="#">绿色</a></li>
-	          <li class="divider"></li>
-	          <li id="orange"><a href="#">橙色</a></li>
-	        </ul>
+	      <li class="li-border">
+	          <a href="#" class="mystyle-color">
+	            <span class="glyphicon glyphicon-bell"></span>
+	            <span class="">消息</span>
+	            <span class="topbar-num">0</span>
+	          </a>
 	      </li>
-	      <li class="dropdown li-border"><a id="useremail" href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">00000000@qq.com<span class="caret"></span></a>
+	      <li class="dropdown li-border">
+	      	<a  href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">
+	      		<span id="useremail">00000000@qq.com</span>
+	      		<span class="caret"></span>
+	          </a>
+	      	</a>
 	        <ul class="dropdown-menu">
-	          <li><a id="masterlaylout" href="#">退出</a></li>
+	          	<li class="topbar-nav-col">
+	               <p class="topbar-nav-item-title">换肤</p>
+	               <ul class="changecolor">
+	                 <li id="blue" >
+	                 	<a href="#">
+	                     <span class="glyphicon glyphicon-road"></span> 
+	                     <span class="">蓝色</span> 
+	                 	</a>
+	                 </li>
+	                  <li id="green">
+	                  	<a  href="#">
+	                     <span class="glyphicon glyphicon-picture"></span> 
+	                     <span class="">绿色</span> 
+	                 	</a>
+	                 </li>
+	                  <li id="orange" >
+	                  	 <a href="#">
+	                     <span class="glyphicon glyphicon-gift"></span> 
+	                     <span class="">橙色</span> 
+	                 	 </a>
+	                  </li>
+	                </ul>
+	             </li>
+	          	<li class="topbar-nav-col">
+	               <p class="topbar-nav-item-title">帮助和文档</p>
+	               <ul class="changecolor">
+	                  <li><a href="#">帮助与文档</a></li>
+			          <li><a href="#">论坛</a></li>
+			          <li><a href="#">博客</a></li>
+	                </ul>
+	            </li>
+	            <li class="divider"></li>
+	            <li><a id="masterlaylout" href="#">退出</a></li>
 	        </ul>
 	      </li>
 	    </ul>
@@ -226,7 +252,7 @@
   <div class="content-all">
 	  <div class="mid-main"></div>
 	  <div class="right-product my-index right-full">
-		<div id="layout" class="info-center">
+		<div id="editormd-view" class="info-center">
 	   		<!-- <div id="editormd"></div> -->
 	  	</div>
    </div>
