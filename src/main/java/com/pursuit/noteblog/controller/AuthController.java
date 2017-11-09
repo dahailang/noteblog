@@ -12,15 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.service.NoteUserService;
 import com.pursuit.noteblog.web.NBResult;
-import com.pursuit.noteblog.web.conversation.UserLoginStatusService;
 @RestController
 @RequestMapping("/auth")
 public class AuthController extends BaseController{
 
     @Autowired
     private NoteUserService noteUserService;
-    @Autowired
-    private UserLoginStatusService userLoginStatusService;
 
     @RequestMapping(value = "/doregister", method = RequestMethod.POST)
     public NBResult doRegister(HttpServletRequest request,HttpServletResponse response,@RequestParam("email") String email,@RequestParam("pwd") String pwd,@RequestParam("iu")String fromUserId) {

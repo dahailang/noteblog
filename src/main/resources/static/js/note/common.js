@@ -23,9 +23,24 @@ function noteBlogAjax(url,param,sucessFun,failFun){
 			sucessFun(data)
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			showDialog("错误",'服务请求失败','确 定','取消',function(){
-				return true;
-			});
+			if(typeof failFun  == "function" ){
+				failFun(XMLHttpRequest)
+			}else{
+				showDialog("错误",failFun,'确 定','取消',function(){
+					return true;
+				});
+			}
+		}
+	});
+}
+function simpleAjax(url,sucessFun){
+	$.ajax({
+		type : 'POST',
+		url: url,
+		async : true,
+		dataType : 'json',
+		success: function(data, textStatus, jqXHR){
+			sucessFun(data)
 		}
 	});
 }

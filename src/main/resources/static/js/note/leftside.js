@@ -82,7 +82,7 @@ var LeftSide = function(){
 		var self =this;
 		noteBlogAjax(url,{},function(data){
 			$.fn.zTree.init($("#treeDemo"), self.setting, data);
-		});
+		},"菜单树加载失败");
 	};
 }
 function hideRMenu() {

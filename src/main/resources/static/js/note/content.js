@@ -1,5 +1,17 @@
 $(function() {
 	//1.初始化数据获取
+	noteBlogAjax("/master/allinfo",{},function(data){
+		$("#useremail").text(data.attributes.userinfo.email);
+	},"获取全局信息失败");
+	$("#masterlaylout").click(function(){
+		simpleAjax("/master/layout",function(data){
+			if(data.ok){
+				window.location.href="/html/auth/login.html";
+			}
+			
+		});
+	});
+	
 	//2.左侧菜单树展开
 
 	//3.默认目录区域选项

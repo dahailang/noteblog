@@ -22,7 +22,7 @@ import com.pursuit.noteblog.web.i18n.LocaleMessageSourceUtil;
 public class BaseController {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
-    private UserLoginStatusService userLoginStatusService;
+    protected UserLoginStatusService userLoginStatusService;
     @Autowired
     private NoteUserService noteUserService;
     @Autowired
@@ -33,6 +33,11 @@ public class BaseController {
     	return userId;
     }
     public NoteUser getUserInfo(String userId) {
+    	NoteUser user = noteUserService.getUserByUid(userId);
+    	return user;
+    }
+    public NoteUser getUserInfo(HttpServletRequest request) {
+    	String userId = userLoginStatusService.getUserIdFromLoginStatus(request);
     	NoteUser user = noteUserService.getUserByUid(userId);
     	return user;
     }
