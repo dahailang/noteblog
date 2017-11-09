@@ -21,15 +21,21 @@ $(function() {
 		$("#editormd-view").html("<div id='editormd'></div>");
 		noteEditor = editormd("editormd", {
 			markdown : "### 动态创建 Editor.md\r\n\r\nDynamic create Editor.md",
-			//readOnly:true,
 			watch:false,
+			toolbarIcons : function() {
+                return [
+                    "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
+                    "h1", "h2", "h3", "h4", "h5", "h6", "|", 
+                    "list-ul", "list-ol", "hr", "|",
+                    "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "pagebreak"]
+            },
 			path : '../../editormd/lib/',
 			onload: function() {
 				this.previewing();
 			}
 		});
 	});
-    
+    //1.
 	function expandleft(treeid){
 	    var zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");  
 	    var node = zTree_Menu.getNodeByParam("id",pid);  
