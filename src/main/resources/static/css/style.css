@@ -33,7 +33,10 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 
 
 /*左侧导航栏*/
-.down-main{width:100%;height:100%;overflow:auto;top: 50px;bottom: 0px;z-index: 100;}
+.down-main{
+	width:100%;
+	margin-top: 50px;
+}
 .left-full{ width:160px; display:block;}
 .right-full{ left:410px;}
 .left-off{ width:48px; display:block;}
