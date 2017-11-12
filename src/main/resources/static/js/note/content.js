@@ -31,10 +31,41 @@ $(function() {
             },
 			path : '../../editormd/lib/',
 			onload: function() {
-				this.previewing();
 			}
 		});
+		$("#previewingMode").click(function(){
+			noteEditor.previewing();
+		});
+		$("#fullscreenMode").click(function(){
+			noteEditor.fullscreen();
+		});
+		$("#watchingMode").click(function(){
+			if(noteEditor.settings.watch){
+				noteEditor.unwatch();
+			}else{
+				noteEditor.watch();
+			}
+			
+		});
+		$("#undoButton").click(function(){
+			noteEditor.cm.undo();
+		});
+		$("#redoButton").click(function(){
+			noteEditor.cm.redo();
+		});
+		$("#saveButton").click(function(){
+			console.log(noteEditor.getMarkdown());
+		});
+		
+		//显示工具栏
+		//$("#buttion").showToolbar();
+		//隐藏工具栏
+		//$("#buttion").hideToolbar();
+		//$("#buttion").getMarkdown();
+		//$("#buttion").getHTML();
+		
 	});
+	
     //1.
 	function expandleft(treeid){
 	    var zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");  

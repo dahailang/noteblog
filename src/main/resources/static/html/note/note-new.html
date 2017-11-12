@@ -143,30 +143,32 @@
 	    
 	    <ul class="nav navbar-nav pull-right">
 	       <li class="li-border">
-	          <a href="#" class="mystyle-color">
+	          <a href="#" id="undoButton" class="mystyle-color">
 	            <span class="topbar-num">撤销(CTRL+Z)</span>
 	            <span class="glyphicon glyphicon-backward"></span>
 	          </a>
 	      </li>
 	       <li class="li-border">
-	          <a href="#" class="mystyle-color">
+	          <a href="#" id="redoButton" class="mystyle-color">
 	            <span class="glyphicon glyphicon-forward"></span>
 	            <span class="topbar-num">恢复(CTRL+Y)</span>
 	          </a>
 	      </li>
 	       <li class="li-border">
-	          <a href="#" class="mystyle-color">
+	          <a href="#" id="saveButton"  class="mystyle-color">
 	            <span class="glyphicon glyphicon-floppy-save"></span>
 	            <span class="topbar-num">保存</span>
 	          </a>
 	      </li>
-	     <li class="dropdown li-border"><a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown">浏览模式<span class="caret"></span></a>
+	     <li class="dropdown li-border"><a href="#" class="dropdown-toggle mystyle-color" data-toggle="dropdown"><span>浏览模式<span><span class="caret"></span></a>
 	        <ul class="dropdown-menu">
-	          <li><a href="#">预览</a></li>
+	          <li><a id="watchingMode"  href="#">实时预览</a></li>
 	          <li class="divider"></li>
-	          <li><a href="#">全屏预览</a></li>
+	          <li><a id="previewingMode" href="#">效果预览</a></li>
 	          <li class="divider"></li>
-	          <li><a href="#">实时预览</a></li>
+	          <li><a id="fullscreenMode" href="#">全屏预览</a></li>
+	         <!--  <li class="divider"></li>
+	          <li><a id="readonlyMode" href="#">只读模式</a></li> -->
 	        </ul>
 	      </li>
 	      <li class="li-border">
