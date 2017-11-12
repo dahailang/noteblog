@@ -266,3 +266,24 @@ div#rightMenu ul li{
 
 }
 .line{outline:none} 
+
+/*导航样式*/
+.mystyle-div{
+	padding: 15px;
+}
+.topbar-num:hover {
+	background-color:#0087b4; 
+	color:#FFF;
+}
+.topbar-num {
+    font-size: 12px;
+    color: #fff;
+    background: #f90;
+    border-radius: 5px;
+    padding: 2px 5px;
+    display: inline-block;
+    line-height: 16px;
+    vertical-align: top;
+    text-align: center;
+}
+

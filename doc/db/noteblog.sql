@@ -14,6 +14,7 @@ CREATE TABLE `note_user` (
   `type` int(2) NOT NULL DEFAULT '1' COMMENT '用户类型 0 管理员 1 普通用户',
   `avatar` varchar(255) NOT NULL COMMENT '用户头像',
   `status` int(4) NOT NULL COMMENT '配置状态 0 正常 1 回收站 ',
+  `last_editor_noteid` varchar(40) COMMENT '上次编辑笔记本id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
 
@@ -76,4 +77,6 @@ INSERT INTO `tb_content` VALUES (28,89,'标题2','标题3','标题1','http://www
 /*!40000 ALTER TABLE `tb_content` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
+//20171113 添加字段
+ALTER TABLE `note_user`
+ADD COLUMN `last_editor_noteid`  varchar(40) NULL AFTER `status`;

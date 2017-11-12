@@ -11,9 +11,10 @@
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="last_editor_noteid" jdbcType="VARCHAR" property="lastEditorNoteid" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, email, password, nickname, create_time, last_update_time, type, avatar, status
+    id, email, password, nickname, create_time, last_update_time, type, avatar, status,last_editor_noteid
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -34,11 +35,11 @@
   <insert id="insert" parameterType="com.pursuit.noteblog.po.NoteUser">
     insert into note_user (id, email, password, 
       nickname, create_time, last_update_time, 
-      type, avatar, status
+      type, avatar, status,last_editor_noteid
       )
     values (#{id,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{nickname,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
-      #{type,jdbcType=INTEGER}, #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
+      #{type,jdbcType=INTEGER}, #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},#{lastEditorNoteid,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.pursuit.noteblog.po.NoteUser">
@@ -100,6 +101,9 @@
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
+      <if test="lastEditorNoteid != null">
+        #{lastEditorNoteid,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.pursuit.noteblog.po.NoteUser">
@@ -129,6 +133,9 @@
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="lastEditorNoteid != null">
+        #{lastEditorNoteid,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -141,7 +148,8 @@
       last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
       type = #{type,jdbcType=INTEGER},
       avatar = #{avatar,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=INTEGER},
+      last_editor_noteid = #{lastEditorNoteid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

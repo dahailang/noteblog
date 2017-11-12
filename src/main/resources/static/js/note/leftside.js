@@ -37,6 +37,7 @@ var LeftSide = function(){
 			},
 			callback: {
 				beforeClick: function(treeId, treeNode) {
+					$("#curNotebookForNewNote").text(treeNode.name).attr("notebookId",treeNode.id);
 					if (treeNode.isParent) {
 						//取消已选中节点样式
 						$(".treeBox>.ztree li a.curSelectedNode").removeClass("curSelectedNode");
@@ -75,16 +76,40 @@ var LeftSide = function(){
 					$("body").bind("mousedown", onBodyMouseDown);
 				},
 				beforeDrag: beforeDrag,
-				beforeDrop: beforeDrop
+				beforeDrop: beforeDrop,
+				onAsyncSuccess:function(event, treeId, treeNode, msg){
+
+				}
 			}
 	};
 	this.init=function(url){
 		var self =this;
 		noteBlogAjax(url,{},function(data){
 			$.fn.zTree.init($("#treeDemo"), self.setting, data);
+			
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			var node;
+			if($("#useremail").attr("lasteditornoteid")){
+				node = zTree.getNodeByParam("id",$("#useremail").attr("lasteditornoteid"));
+				var parentNode = zTree.getNodeByParam("id",note.pid);  
+			}else{
+				note =getFirstLeafNode(zTree.getNodes()[0]);
+			}
+			var parentNode = zTree.getNodeByParam("id",note.pid);  
+			zTree.expandNode(parentNode, true, true,true);
+			$("#curNotebookForNewNote").text(parentNode.name).attr("notebookId",parentNode.id);
+			
 		},"菜单树加载失败");
 	};
 }
+
+function getFirstLeafNode(node){
+	if(node.isParent){
+		return getFirstLeafNode(node.children[0]);
+	}
+	return node
+}
+
 function hideRMenu() {
 	if ($(("#rightMenu"))){
 		 $("#rightMenu").css({"visibility": "hidden"});
@@ -204,62 +229,6 @@ function beforeDrag(treeId, treeNodes) {
 function beforeDrop(treeId, treeNodes, targetNode, moveType) {
 	return targetNode ? targetNode.drop !== false : true;
 }
-$(document).ready(function(){
-	var leftside = new LeftSide();
-	leftside.init("../../tree/lefttree");
-
-	/*换肤*/
-	$(".dropdown .changecolor li").click(function(){
-		var style = $(this).attr("id");
-	    $("link[title!=''][role='skin']").attr("disabled","disabled"); 
-		$("link[title='"+style+"']").removeAttr("disabled"); 
-
-		$.cookie('mystyle', style, { expires: 7 }); // 存储一个带7天期限的 cookie 
-	})
-	var cookie_style = $.cookie("mystyle"); 
-	if(cookie_style!=null){ 
-	    $("link[title!=''][role='skin']").attr("disabled","disabled"); 
-		$("link[title='"+cookie_style+"']").removeAttr("disabled"); 
-	} 
-	/*左侧导航栏显示隐藏功能*/
-	$(".subNav").click(function(){				
-		/*显示*/
-		if($(this).find("span:first-child").attr('class')=="title-icon glyphicon glyphicon-chevron-down"){
-			$(this).find("span:first-child").removeClass("glyphicon-chevron-down");
-		    $(this).find("span:first-child").addClass("glyphicon-chevron-up");
-		    $(this).removeClass("sublist-down");
-			$(this).addClass("sublist-up");
-		}else{/*隐藏*/
-			$(this).find("span:first-child").removeClass("glyphicon-chevron-up");
-			$(this).find("span:first-child").addClass("glyphicon-chevron-down");
-			$(this).removeClass("sublist-up");
-			$(this).addClass("sublist-down");
-		}	
-		// 修改数字控制速度， slideUp(500)控制卷起速度
-	    $(this).next(".navContent").slideToggle(300).siblings(".navContent").slideUp(300);
-	});
-	/*左侧导航栏缩进功能*/
-	$(".left-main .sidebar-fold").click(function(){
-		if($(this).parent().attr('class')=="left-main left-full"){
-			$(this).parent().removeClass("left-full");
-			$(this).parent().addClass("left-off");
-			$(this).parent().parent().find(".right-product").removeClass("right-full");
-			$(this).parent().parent().find(".right-product").addClass("right-off");
-		}else{
-			$(this).parent().removeClass("left-off");
-			$(this).parent().addClass("left-full");
-			$(this).parent().parent().find(".right-product").removeClass("right-off");
-			$(this).parent().parent().find(".right-product").addClass("right-full");
-		}
-	});	
-	 
-	/*左侧鼠标移入提示功能*/
-	$(".sBox ul li").mouseenter(function(){
-		if($(this).find("span:last-child").css("display")=="none"){
-			$(this).find("div").show();
-		}
-	}).mouseleave(function(){$(this).find("div").hide();})	
-});
 
 
 

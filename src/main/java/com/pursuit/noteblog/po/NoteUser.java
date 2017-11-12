@@ -20,6 +20,8 @@ public class NoteUser {
     private String avatar;
 
     private Integer status;
+    
+    private String lastEditorNoteid;
 
     public String getId() {
         return id;
@@ -93,7 +95,15 @@ public class NoteUser {
         this.status = status;
     }
 
-    @Override
+    public String getLastEditorNoteid() {
+		return lastEditorNoteid;
+	}
+
+	public void setLastEditorNoteid(String lastEditorNoteid) {
+		this.lastEditorNoteid = lastEditorNoteid;
+	}
+
+	@Override
     public boolean equals(Object that) {
         if (this == that) {
             return true;

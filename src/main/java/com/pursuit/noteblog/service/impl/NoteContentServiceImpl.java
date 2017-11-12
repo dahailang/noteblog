@@ -64,4 +64,10 @@ public class NoteContentServiceImpl implements NoteContentService {
 		return noteContentMapper.selectByPrimaryKey(noteId);
 	}
 
+	@Override
+	public NBResult saveContent(String noteId, String noteBookId, String content) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

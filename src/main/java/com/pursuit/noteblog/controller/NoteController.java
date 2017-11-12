@@ -38,5 +38,11 @@ public class NoteController extends BaseController{
 		model.addAllAttributes(noteResut.getAttributes());
 		return new ModelAndView("/html/note/note.html");
 	}
+	
+	@RequestMapping("/note/savecontent")
+	public NBResult saveContent(HttpServletRequest request,String content,String noteId,String noteBookId){
+		//noteContentService.
+		return noteContentService.saveContent(noteId,noteBookId,content);
+	}
 
 }
