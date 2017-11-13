@@ -14,6 +14,12 @@ public class ConstUtils {
      * 表示空字符串
      */
     public static final String EMPTY = "";
+    /**
+     * 真值
+     */
+    public static final String TRUE = "true";
+    
+    public static final String FALSE = "false";
     
     /**
      * cookie登录方式所需要的域

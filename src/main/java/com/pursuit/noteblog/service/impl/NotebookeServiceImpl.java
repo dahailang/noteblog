@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pursuit.noteblog.dao.NoteBookMapper;
+import com.pursuit.noteblog.dao.NoteContentMapper;
 import com.pursuit.noteblog.po.NoteBook;
+import com.pursuit.noteblog.po.NoteContent;
 import com.pursuit.noteblog.service.NoteBookService;
+import com.pursuit.noteblog.util.ConstUtils;
 import com.pursuit.noteblog.util.IdGenerator;
 import com.pursuit.noteblog.vo.TreeNode;
 import com.pursuit.noteblog.web.NBResult;
@@ -18,6 +21,9 @@ public class NotebookeServiceImpl implements NoteBookService {
 	
 	@Autowired
 	NoteBookMapper noteBookMapper;
+	
+	@Autowired
+	NoteContentMapper noteContentMapper;
 
 	@Override
 	public NoteBook addNoteBook(NoteBook notebook) {
@@ -72,10 +78,22 @@ public class NotebookeServiceImpl implements NoteBookService {
 		noteBook.setCreateTime(new Date());
 		noteBook.setLastUpdateTime(new Date());
 		noteBook.setStatus(1);
-		noteBook.setIsParent("true"==node.getIsParent()?1:0);
+		noteBook.setIsParent(ConstUtils.TRUE.equalsIgnoreCase(node.getIsParent())?1:0);
 		noteBookMapper.insert(noteBook);
 		
 		node.setId(noteBook.getId());
+		if(!ConstUtils.TRUE.equalsIgnoreCase(node.getIsParent())){
+			NoteContent noteContent = new NoteContent();
+			noteContent.setId(noteBook.getId());
+			noteContent.setContent("这是一个新的笔记");
+			noteContent.setUid(uid);
+			noteContent.setLastUpdatedUid(uid);
+			noteContent.setLastUpdateTime(new Date());
+			noteContent.setStatus(1);
+			noteContentMapper.insert(noteContent);
+			node.setContent(noteContent.getContent());
+		}
+		
 		return NBResult.ok(node);
 	}
 

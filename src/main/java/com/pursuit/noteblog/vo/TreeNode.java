@@ -6,6 +6,8 @@ public class TreeNode {
 	private String pid;
 	private String noR;
 	private String isParent;
+	private String content;
+	
 	public String getId() {
 		return id;
 	}
@@ -36,6 +38,10 @@ public class TreeNode {
 	public void setIsParent(String isParent) {
 		this.isParent = isParent;
 	}
-	
-	
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 }

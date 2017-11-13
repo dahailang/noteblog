@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pursuit.noteblog.po.NoteContent;
 import com.pursuit.noteblog.po.NoteUser;
 import com.pursuit.noteblog.service.NoteContentService;
 import com.pursuit.noteblog.web.NBResult;
@@ -43,6 +45,16 @@ public class NoteController extends BaseController{
 	public NBResult saveContent(HttpServletRequest request,String content,String noteId,String noteBookId){
 		//noteContentService.
 		return noteContentService.saveContent(noteId,noteBookId,content);
+	}
+	@RequestMapping("/note/content/{noteId}")
+	@ResponseBody
+	public NBResult getContent(HttpServletRequest request,@PathVariable("noteId")String noteId){
+		NoteContent noteContent = noteContentService.getNoteContent(noteId);
+		if(null!=noteContent){
+			return NBResult.ok(noteContent);
+		}else{
+			return NBResult.fail("未找到匹配笔记");
+		}
 	}
 
 }

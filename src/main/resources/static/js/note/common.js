@@ -10,7 +10,7 @@ function showDialog(title,content,okValue,cancelValue,successFun,failFun){
 		cancel: function () {
 			failFun();
 		}
-	}).show();
+	}).showModal();
 }
 function noteBlogAjax(url,param,sucessFun,failFun){
 	$.ajax({
