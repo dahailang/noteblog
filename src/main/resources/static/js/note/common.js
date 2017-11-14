@@ -3,13 +3,9 @@ function showDialog(title,content,okValue,cancelValue,successFun,failFun){
 		title: title,
 		content: content,
 		okValue: okValue,
-		ok: function () {
-			successFun();
-		},
+		ok: successFun,
 		cancelValue: '取消',
-		cancel: function () {
-			failFun();
-		}
+		cancel: failFun,
 	}).showModal();
 }
 function noteBlogAjax(url,param,sucessFun,failFun){

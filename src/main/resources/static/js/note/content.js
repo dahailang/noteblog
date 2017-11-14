@@ -185,7 +185,9 @@ $(function() {
 								if("200"==data.status){
 									updatecontent(data.info.content);
 								}else{
-									showDialog("错误提示",data.msg);
+									showDialog("错误提示",data.msg,'确 定','取消',function(){
+										return true;
+									});
 								}
 								return true;
 							},"加载笔记服务异常")
@@ -364,11 +366,10 @@ $(function() {
 			content: '要删除的节点是父节点，如果删除将连同子节点一起删掉。\n\n请确认！',
 			okValue: '确 定',
 			ok: function () {
-				
 				var newNode = {id:treeNode.id};
 				noteBlogAjax("/tree/deleteNoteBook",newNode,function(data){
-					resetTree();
-					//$.fn.zTree.getZTreeObj("treeDemo").removeNode(treeNode);
+					$.fn.zTree.getZTreeObj("treeDemo").removeNode(treeNode);
+					$.fn.zTree.getZTreeObj("treeDemo").refresh();
 					return true;
 				},function(){
 					$("#titileDiv").append("<font colar='red'>服务异常</font>");
@@ -377,7 +378,7 @@ $(function() {
 				
 			},
 			cancelValue: '取消',
-			cancel: function () {}
+			cancel: function () {return true;}
 		}).showModal();
 	}
 	function checkTreeNode(checked) {

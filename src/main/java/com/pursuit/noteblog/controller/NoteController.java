@@ -53,6 +53,7 @@ public class NoteController extends BaseController{
 		if(null!=noteContent){
 			return NBResult.ok(noteContent);
 		}else{
+			logger.error("笔记noteId："+noteId);
 			return NBResult.fail("未找到匹配笔记");
 		}
 	}
