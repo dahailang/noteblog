@@ -246,11 +246,13 @@ $(function() {
 					            },
 								path : '../../editormd/lib/',
 								onload: function() {
-									
+									this.previewing();
 								}
 							});	
 						});
-						
+						$("#curNoteInfo").click(function(){
+							noteEditor.previewing();
+						});
 						$("#previewingMode").click(function(){
 							noteEditor.previewing();
 						});
