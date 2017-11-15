@@ -53,6 +53,8 @@ $(document).ready(function(){
 });
 
 $(function() {
+	var noteContent;
+	var noteEditor;
 	//1.初始化数据获取
 	noteBlogAjax("/master/allinfo",{},function(data){
 		$("#useremail").text(data.attributes.userinfo.email).
@@ -60,41 +62,26 @@ $(function() {
 		//2.加载左侧菜单树
 		var leftside = new LeftSide();
 		leftside.init("../../tree/lefttree");
+		$.getScript("../../editormd/editormd.js", function() {
+			//新建编辑器容器html
+			$("#editormd-view").html("<div id='editormd'></div>");
+			noteEditor = editormd("editormd", {
+				markdown : noteContent,
+				watch:false,
+				toolbarIcons : function() {
+	                return [
+	                    "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
+	                    "h1", "h2", "h3", "h4", "h5", "h6", "|", 
+	                    "list-ul", "list-ol", "hr", "|",
+	                    "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "pagebreak"]
+	            },
+				path : '../../editormd/lib/',
+				onload: function() {
+					
+				}
+			});	
+		});
 		
-	},"获取全局信息失败");
-	$("#masterlaylout").click(function(){
-		simpleAjax("/master/layout",function(data){
-			if(data.ok){
-				window.location.href="/html/auth/login.html";
-			}
-			
-		});
-	});
-	function updatecontent(content){
-		noteEditor.clear();
-		noteEditor.appendMarkdown(content);
-	}
-	//2.左侧菜单树展开
-
-	//3.默认目录区域选项
-	//4.内容区域初始化
-	var noteEditor;
-	$.getScript("../../editormd/editormd.js", function() {
-		$("#editormd-view").html("<div id='editormd'></div>");
-		noteEditor = editormd("editormd", {
-			markdown : "### 动态创建 Editor.md\r\n\r\nDynamic create Editor.md",
-			watch:false,
-			toolbarIcons : function() {
-                return [
-                    "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
-                    "h1", "h2", "h3", "h4", "h5", "h6", "|", 
-                    "list-ul", "list-ol", "hr", "|",
-                    "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "pagebreak"]
-            },
-			path : '../../editormd/lib/',
-			onload: function() {
-			}
-		});
 		$("#previewingMode").click(function(){
 			noteEditor.previewing();
 		});
@@ -118,15 +105,27 @@ $(function() {
 		$("#saveButton").click(function(){
 			console.log(noteEditor.getMarkdown());
 		});
-	});
+		
+	},"获取全局信息失败");
 	
-    //1.
-	function expandleft(treeid){
-	    var zTree_Menu = $.fn.zTree.getZTreeObj("treeDemo");  
-	    var node = zTree_Menu.getNodeByParam("id",pid);  
-	    zTree_Menu.selectNode(node,true);//指定选中ID的节点  
-	    zTree_Menu.expandNode(node, true, false);//指定选中ID节点展开  
+	//绑定退出登录事件
+	$("#masterlaylout").click(function(){
+		simpleAjax("/master/layout",function(data){
+			if(data.ok){
+				window.location.href="/html/auth/login.html";
+			}
+			
+		});
+	});
+
+	function updatecontent(content){
+		noteEditor.clear();
+		noteEditor.appendMarkdown(content);
 	}
+	//2.左侧菜单树展开
+
+	//3.默认目录区域选项
+	//4.内容区域初始化
 	
 	var LeftSide = function(){
 		this.setting={
@@ -158,6 +157,9 @@ $(function() {
 					fontCss:{color:"#FFFFFF"}
 				},
 				data: {
+					keep: {
+						parent: true
+					},
 					simpleData: {
 						enable: true,
 						idKey: "id",
@@ -168,9 +170,9 @@ $(function() {
 				callback: {
 					beforeClick: function(treeId, treeNode) {
 						if(treeNode.level > 1){
-							$("#curNotebookForN ewNote").text(treeNode.name).attr("notebookId",treeNode.id);
+							$("#curNotebookForNewNote").text(treeNode.name).attr("notebookId",treeNode.id);
 						}else{
-							$("#curNotebookForN ewNote").text(treeNode.name).attr("notebookId",treeNode.id);
+							$("#curNotebookForNewNote").text(treeNode.name).attr("notebookId",treeNode.id);
 						}
 						if (treeNode.isParent) {
 							//取消已选中节点样式
@@ -178,11 +180,13 @@ $(function() {
 							//展开 闭合 目录节点
 							var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 							zTree.expandNode(treeNode);
+							//不选中节点,不触发click事件
 							return false;
 						}else{
 							//请求获取笔记文本内容
 							noteBlogAjax("/note/content/"+treeNode.id,{},function(data){
 								if("200"==data.status){
+									$("#curNoteInfo").attr("curnoteid",treeNode.id).text(treeNode.name);
 									updatecontent(data.info.content);
 								}else{
 									showDialog("错误提示",data.msg,'确 定','取消',function(){
@@ -191,6 +195,7 @@ $(function() {
 								}
 								return true;
 							},"加载笔记服务异常")
+							//选中节点,触发click事件
 							return true;
 						}
 					},
@@ -233,6 +238,7 @@ $(function() {
 		};
 		this.init=function(url){
 			var self =this;
+			//加载左侧菜单树数据
 			noteBlogAjax(url,{},function(data){
 				$.fn.zTree.init($("#treeDemo"), self.setting, data);
 				
@@ -243,16 +249,24 @@ $(function() {
 				}else{
 					note =getFirstLeafNode(zTree.getNodes()[0]);
 				}
-				zTree.expandNode(note, true, true,true);
-				$("#curNotebookForNewNote").text(note.name).attr("notebookId",note.id);
-				
+				$("#curNotebookForNewNote").text(note.getParentNode().name).attr("notebookId",note.pid);
+				$("#curNoteInfo").text(note.name).attr("curnoteid",note.id);
+				zTree.expandNode(note.getParentNode(), true, true,true);
 				$("#newNoteButton").click(function(){
 					var notebookId = $("#curNotebookForNewNote").attr("notebookId");
 					var notebooknode = zTree.getNodeByParam("id",notebookId);
 					addTreeNodeFun(notebooknode);
 				});
-				
-				
+				//请求获取笔记文本内容
+				noteBlogAjax("/note/content/"+note.id,{},function(data){
+					if("200"==data.status){
+						noteContent = data.info.content; 		
+					}else{
+						showDialog("错误提示",data.msg,'确 定','取消',function(){
+							return true;
+						});
+					}
+				},"加载笔记服务异常")
 			},"菜单树加载失败");
 		};
 	}
@@ -268,7 +282,7 @@ $(function() {
 		return targetNode ? targetNode.drop !== false : true;
 	}
 	function getFirstLeafNode(node){
-		if(node.isParent&&node.children[0]&&node.children[0].isParent){
+		if(node.isParent&&(!!node.children)){
 			return getFirstLeafNode(node.children[0]);
 		}
 		return node
@@ -285,7 +299,6 @@ $(function() {
 		}
 	}
 	function addTreeNodeFun(treeNode) {
-		var treeNode = treeNode;
 		var isParent;
 		if(treeNode.level>0){
 			isParent=false;
@@ -296,7 +309,7 @@ $(function() {
 		dialog({
 			title: '消息',
 			width:490,
-			height:"auto",
+			height:'auto',
 			content: '<div id="titileDiv"><h4>请输入名称</h4><input id="newBook" width="450" /></div>',
 			okValue: '确 定',
 			ok: function () {
@@ -309,14 +322,10 @@ $(function() {
 				
 				noteBlogAjax("/tree/addnotebook",newNode,function(data){
 					var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-					var idc = treeNode.id;
-					var level = treeNode.level;
 					zTree.addNodes(treeNode,data);
-					
-					$("#curNotebookForNewNote").attr("curnoteid",data.id);
-					
+					$("#curNoteInfo").attr("curnoteid",data.id).text(data.name);
+					//更新笔记本内容
 					updatecontent(data.content);
-					
 					return true;
 				},function(){
 					$("#titileDiv").append("<font colar='red'>服务异常</font>");
@@ -388,10 +397,5 @@ $(function() {
 		}
 		hideRMenu();
 	}
-	function resetTree() {
-		hideRMenu();
-		sendAjax("../../tree/lefttree");
-	}
 
-	
 });  
