@@ -10,5 +10,5 @@ public interface NoteContentService{
 	public NBResult index(NoteUser noteUser,String noteId);
 	public List<NoteContent> findByUserId(String userId);
 	public NoteContent getNoteContent(String noteId);
-	public NBResult saveContent(String noteId,String noteBookId,String content);
+	public NBResult saveContent(NoteContent noteContent);
 }

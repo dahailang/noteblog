@@ -1,5 +1,6 @@
 package com.pursuit.noteblog.controller;
 
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -42,9 +43,15 @@ public class NoteController extends BaseController{
 	}
 	
 	@RequestMapping("/note/savecontent")
+	@ResponseBody
 	public NBResult saveContent(HttpServletRequest request,String content,String noteId,String noteBookId){
 		//noteContentService.
-		return noteContentService.saveContent(noteId,noteBookId,content);
+		NoteContent noteContent = new NoteContent();
+		noteContent.setId(noteId);
+		noteContent.setContent(content);
+		noteContent.setLastUpdatedUid(getUid(request));
+		noteContent.setLastUpdateTime(new Date());
+		return noteContentService.saveContent(noteContent);
 	}
 	@RequestMapping("/note/content/{noteId}")
 	@ResponseBody

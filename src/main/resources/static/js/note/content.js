@@ -62,48 +62,17 @@ $(function() {
 		//2.加载左侧菜单树
 		var leftside = new LeftSide();
 		leftside.init("../../tree/lefttree");
-		$.getScript("../../editormd/editormd.js", function() {
-			//新建编辑器容器html
-			$("#editormd-view").html("<div id='editormd'></div>");
-			noteEditor = editormd("editormd", {
-				markdown : noteContent,
-				watch:false,
-				toolbarIcons : function() {
-	                return [
-	                    "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
-	                    "h1", "h2", "h3", "h4", "h5", "h6", "|", 
-	                    "list-ul", "list-ol", "hr", "|",
-	                    "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "pagebreak"]
-	            },
-				path : '../../editormd/lib/',
-				onload: function() {
-					
-				}
-			});	
-		});
 		
-		$("#previewingMode").click(function(){
-			noteEditor.previewing();
-		});
-		$("#fullscreenMode").click(function(){
-			noteEditor.fullscreen();
-		});
-		$("#watchingMode").click(function(){
-			if(noteEditor.settings.watch){
-				noteEditor.unwatch();
-			}else{
-				noteEditor.watch();
-			}
-			
-		});
-		$("#undoButton").click(function(){
-			noteEditor.cm.undo();
-		});
-		$("#redoButton").click(function(){
-			noteEditor.cm.redo();
-		});
 		$("#saveButton").click(function(){
-			console.log(noteEditor.getMarkdown());
+			var noteId = $("#curNoteInfo").attr("curnoteid");
+			var notebookId = $("#curNotebookForNewNote").attr("notebookId");
+			
+			var param = {noteId:noteId,
+					noteBookId:notebookId,
+					content:noteEditor.getMarkdown()};
+			noteBlogAjax("/note/savecontent",param,function(data){
+				
+			},"内容保存失败");
 		});
 		
 	},"获取全局信息失败");
@@ -260,7 +229,49 @@ $(function() {
 				//请求获取笔记文本内容
 				noteBlogAjax("/note/content/"+note.id,{},function(data){
 					if("200"==data.status){
-						noteContent = data.info.content; 		
+						noteContent = data.info.content;
+						
+						//加载editor信息
+						$.getScript("../../editormd/editormd.js", function() {
+							//新建编辑器容器html
+							$("#editormd-view").html("<div id='editormd'></div>");
+							noteEditor = editormd("editormd", {
+								markdown : noteContent,
+								watch:false,
+								toolbarIcons : function() {
+					                return [
+					                    "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
+					                    "h1", "h2", "h3", "h4", "h5", "h6", "|", 
+					                    "list-ul", "list-ol", "hr", "|",
+					                    "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "pagebreak"]
+					            },
+								path : '../../editormd/lib/',
+								onload: function() {
+									
+								}
+							});	
+						});
+						
+						$("#previewingMode").click(function(){
+							noteEditor.previewing();
+						});
+						$("#fullscreenMode").click(function(){
+							noteEditor.fullscreen();
+						});
+						$("#watchingMode").click(function(){
+							if(noteEditor.settings.watch){
+								noteEditor.unwatch();
+							}else{
+								noteEditor.watch();
+							}
+							
+						});
+						$("#undoButton").click(function(){
+							noteEditor.cm.undo();
+						});
+						$("#redoButton").click(function(){
+							noteEditor.cm.redo();
+						});
 					}else{
 						showDialog("错误提示",data.msg,'确 定','取消',function(){
 							return true;

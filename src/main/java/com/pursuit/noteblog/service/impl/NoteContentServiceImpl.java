@@ -65,9 +65,9 @@ public class NoteContentServiceImpl implements NoteContentService {
 	}
 
 	@Override
-	public NBResult saveContent(String noteId, String noteBookId, String content) {
-		// TODO Auto-generated method stub
-		return null;
+	public NBResult saveContent(NoteContent noteContent) {
+		noteContentMapper.updateByPrimaryKeySelective(noteContent);
+		return NBResult.ok();
 	}
 
 }
