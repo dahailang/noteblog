@@ -14,3 +14,5 @@ http://qzixia.com:10100/
 前端组件
 1. ztree
 2. editor.md
+3. jquery
+4. jquery.validate.js

@@ -27,16 +27,20 @@
                     	<div  class="">注册页面</div>
                     </div> 
                     <div  id="registerErrorMsg" class="error none"></div>
-                    <form class="form-signin">
-                        <label for="inputEmail">Email 地址</label>
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Email 地址" required autofocus>
-                        <label for="inputPassword" >密码</label>
-                        <input type="password" id="inputPassword" class="form-control" placeholder="密码" required>
-                        
-                        <label for="confirmPassword" >确认密码</label>
-                        <input type="password" id="confirmPassword" class="form-control" placeholder="确认密码" required>
-
-                        <div class="">
+                    <form class="form-signin" id='form-signin' name='form-signin'>
+                    	<div class='over'>
+                    		<label for="inputEmail">Email 地址</label>
+                        	<input type="email" id="inputEmail" class="form-control email" name='email' placeholder="Email 地址" >
+                    	</div>
+                        <div class='over'>
+                        	<label for="password" >密码</label>
+                        	<input type="password" id="inputPassword" name='password' class="form-control" placeholder="密码" >
+                        </div>
+                        <div class='over'>
+                        	<label for="againpassword" >确认密码</label>
+                        	<input type="password" id="againpassword" name='againpassword' class="form-control" placeholder="确认密码" >
+                        </div>
+                        <div class="over">
                             <button id="registerBtn" class="btn btn-default btn-primary" type="submit">注册</button>
                         </div>
                         <div class="line line-dashed"></div>
@@ -54,74 +58,78 @@
     <script src="../../libs/jquery/jquery.min.js"></script>
     <script src="../../libs/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../js/msg/msg_zh.js"></script>
-    <script type="text/javascript">
-
- 
-$(function() {
-	$("#inputEmail").focus();
-	
-	function showMsg(msg, id) {
-		$("#registerErrorMsg").html(msg).show();
-		if(id) {
-			$("#" + id).focus();
-		}
-	}
-	function hideMsg() {
-		$("#loginMsg").hide();
-	}
-	$("#registerBtn").click(function(e){
-		e.preventDefault();
-		var email = $("#inputEmail").val();
-		var pwd = $("#inputPassword").val();
-		var pwd2 = $("#confirmPassword").val();
-		if(!email) {
-			showMsg(getMsg("inputEmail"), "email");
-			return;
-		} else {
-			var myreg = /^([a-zA-Z0-9]+[_|\_|\.|\-]?)*[a-zA-Z0-9\-_]+@([a-zA-Z0-9\-]+[_|\_|\.|\-]?)*[a-zA-Z0-9\-]+\.[0-9a-zA-Z]{2,6}$/;
-			if(!myreg.test(email)) {
-				showMsg(getMsg("wrongEmail"), "email");
-				return;
-			}
-		}
-		if(!pwd) {
-			showMsg(getMsg("inputPassword"), "pwd");
-			return;
-		} else {
-			if(pwd.length < 6) {
-				showMsg(getMsg("notGoodPassword"), "pwd");
-				return;
-			}
-		}
-		if(!pwd2) {
-			showMsg(getMsg("inputPassword2"), "pwd2");
-			return;
-		} else {
-			if(pwd != pwd2) {
-				showMsg(getMsg("confirmPassword"), "pwd2");
-				return;
-			}
-		}
-		
-		$("#registerBtn").html(getMsg("ing")).addClass("disabled");
-		
-		var iu = "token";
-		
-		$.post("/auth/doregister", {email: email, pwd: pwd, iu: iu}, function(e) {
-			$("#registerBtn").html(getMsg("register")).removeClass("disabled");
-			if(e.ok) {
-				$("#registerBtn").html(getMsg("registerSuccessAndRdirectToNote"));
-				var from = $("#from").val() ||  "/note";
-				location.href = from;
-			} else {
-				showMsg(e.msg, "email");
-			}
-		}).error(function(e){
-			alert("回调失败");
+    <script src='../../libs/jquery/jquery.validate.min.js'></script>
+	<script>
+		$(function(){
+			//进入页面，光标焦点
+			$("#inputEmail").focus();
 			
+			$("#form-signin").validate({
+				// 设置错误提示元素，默认为label
+            	errorElement: 'p',
+            	// 设置错误提示类名
+            	errorClass: 'error-info',
+            	// 验证错误时，默认选中，false为取消
+            	focusInvalid: false,
+            	// 验证规则
+				rules:{
+		 			email:{
+	                    required:true,
+	                    email:true,
+	                },
+	                password:{
+	                	required:true,
+                    	regexPassword:true,
+	                },
+	                againpassword:{
+	                	required:true,
+	                	equalTo:"#inputPassword"
+	                }
+		 		},
+		 		messages:{
+		 			email:{	
+		 				email:"请输入正确的邮箱",
+		 			},
+		 			password:{
+		 				required:"密码不能为空",	
+		 			},
+		 			againpassword:{
+		 				required:"请重新输入密码",
+		 				equalTo:"俩次输入的密码不一致"
+		 			}
+		 		},
+				submitHandler: function (form) {
+					$("#registerBtn").html(getMsg("ing")).addClass("disabled");
+					//e.preventDefault();
+				        $.ajax({
+				            type: "POST",
+				            url: "/auth/doregister",
+				            data: {
+				                email: $("#inputEmail").val(),
+				                pwd: $("#inputPassword").val(),
+				                iu: 'token',
+				            },
+				            async: true,
+				            success: function (e) {
+				            	$("#registerBtn").html(getMsg("register")).removeClass("disabled");
+								if(e.ok) {
+									$("#registerBtn").html(getMsg("registerSuccessAndRdirectToNote"));
+									var from = $("#from").val() ||  "/note";
+									location.href = from;
+								} else {
+									showMsg(e.msg, "email");
+								}
+				            },
+						});
+				},
+				invalidHandler: function (form) {
+				     console.log("系统异常");
+				}
+			});
+            //自定义方法
+			$.validator.addMethod("regexPassword", function(value, element) {  
+	          	return this.optional(element) || /^(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(value);  
+	        }, "请输入至少一大写字母和一个小写字母");
 		});
-		
-	});
-});
-</script>
+	</script>
 </html>

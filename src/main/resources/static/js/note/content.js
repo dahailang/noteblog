@@ -91,8 +91,55 @@ $(function() {
 	});
 
 	function updatecontent(content){
-		noteEditor.clear();
-		noteEditor.appendMarkdown(content);
+		if(noteEditor!=undefined){
+			noteEditor.clear();
+			noteEditor.appendMarkdown(content);
+		}else{
+			//加载editor信息
+			$.getScript("../../editormd/editormd.js", function() {
+				//新建编辑器容器html
+				$("#editormd-view").html("<div id='editormd'></div>");
+				noteEditor = editormd("editormd", {
+					markdown : content,
+					watch:false,
+					toolbarIcons : function() {
+		                return [
+		                    "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
+		                    "h1", "h2", "h3", "h4", "h5", "h6", "|", 
+		                    "list-ul", "list-ol", "hr", "|",
+		                    "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "pagebreak"]
+		            },
+					path : '../../editormd/lib/',
+					onload: function() {
+						this.previewing();
+					}
+				});	
+			});
+			$("#curNoteInfo").click(function(){
+				noteEditor.previewing();
+			});
+			$("#previewingMode").click(function(){
+				noteEditor.previewing();
+			});
+			$("#fullscreenMode").click(function(){
+				noteEditor.fullscreen();
+			});
+			$("#watchingMode").click(function(){
+				if(noteEditor.settings.watch){
+					noteEditor.unwatch();
+				}else{
+					noteEditor.watch();
+				}
+				
+			});
+			$("#undoButton").click(function(){
+				noteEditor.cm.undo();
+			});
+			$("#redoButton").click(function(){
+				noteEditor.cm.redo();
+			});
+			
+		}
 	}
 	
 	var LeftSide = function(){
@@ -217,7 +264,8 @@ $(function() {
 				}else{
 					note =getFirstLeafNode(zTree.getNodes()[0]);
 				}
-				$("#curNotebookForNewNote").text(note.getParentNode().name).attr("notebookId",note.pid);
+				var parentName = note.getParentNode()!=null?note.getParentNode().name:'root';
+				$("#curNotebookForNewNote").text(parentName).attr("notebookId",note.pid);
 				$("#curNoteInfo").text(note.name).attr("curnoteid",note.id);
 				zTree.expandNode(note.getParentNode(), true, true,true);
 				$("#newNoteButton").click(function(){
@@ -228,51 +276,8 @@ $(function() {
 				//请求获取笔记文本内容
 				noteBlogAjax("/note/content/"+note.id,{},function(data){
 					if("200"==data.status){
-						noteContent = data.info.content;
-						
-						//加载editor信息
-						$.getScript("../../editormd/editormd.js", function() {
-							//新建编辑器容器html
-							$("#editormd-view").html("<div id='editormd'></div>");
-							noteEditor = editormd("editormd", {
-								markdown : noteContent,
-								watch:false,
-								toolbarIcons : function() {
-					                return [
-					                    "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
-					                    "h1", "h2", "h3", "h4", "h5", "h6", "|", 
-					                    "list-ul", "list-ol", "hr", "|",
-					                    "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "pagebreak"]
-					            },
-								path : '../../editormd/lib/',
-								onload: function() {
-									this.previewing();
-								}
-							});	
-						});
-						$("#curNoteInfo").click(function(){
-							noteEditor.previewing();
-						});
-						$("#previewingMode").click(function(){
-							noteEditor.previewing();
-						});
-						$("#fullscreenMode").click(function(){
-							noteEditor.fullscreen();
-						});
-						$("#watchingMode").click(function(){
-							if(noteEditor.settings.watch){
-								noteEditor.unwatch();
-							}else{
-								noteEditor.watch();
-							}
-							
-						});
-						$("#undoButton").click(function(){
-							noteEditor.cm.undo();
-						});
-						$("#redoButton").click(function(){
-							noteEditor.cm.redo();
-						});
+						//加载笔记
+						updatecontent(data.info.content)
 					}else{
 						showDialog("错误提示",data.msg,'确 定','取消',function(){
 							return true;
